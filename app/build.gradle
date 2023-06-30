@@ -26,14 +26,9 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            applicationIdSuffix 'release'
-            matchingFallbacks = []
         }
         debug {
             versionNameSuffix 'debug'
-        }
-        stableRelease {
-            minifyEnabled true
         }
     }
     compileOptions {
