@@ -684,7 +684,190 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
     }
     val module3 = when (page) {
         1 -> {
-            "kotlin pagina 1"
+            """
+                La orientación a objetos es un paradigma de programación que se basa en la creación de objetos y su interacción para resolver problemas. En Kotlin, puedes utilizar la orientación a objetos para crear clases, objetos, herencia y polimorfismo.
+            """.trimIndent()
+        }
+        2 -> {
+            """
+                1. Clases y objetos:
+
+                En Kotlin, puedes crear clases utilizando la palabra clave class. Una clase es una plantilla o un plano que define propiedades y comportamientos de un tipo de objeto.
+                Puedes crear objetos o instancias de una clase utilizando el operador new o simplemente llamando al constructor de la clase.
+            """.trimIndent()
+        }
+        3 -> {
+            """
+                Ejemplo:
+                
+                class Persona {
+                    var nombre: String = ""
+                    var edad: Int = 0
+
+                    fun saludar() {
+                        println("¡Hola, soy $$nombre!")
+                    }
+                }
+
+                val persona = Persona()
+                persona.nombre = "Juan"
+                persona.edad = 25
+                persona.saludar()
+
+            """.trimIndent()
+        }
+        4 -> {
+            """
+                2. Herencia:
+
+                En Kotlin, puedes crear jerarquías de clases utilizando la herencia. Una clase puede heredar propiedades y comportamientos de otra clase utilizando la palabra clave :.
+                La clase que se hereda se denomina clase base o superclase, y la clase que hereda se denomina clase derivada o subclase.
+            """.trimIndent()
+        }
+        5 -> {
+            """
+                Ejemplo:
+                
+                open class Animal {
+                    open fun hacerSonido() {
+                        println("El animal hace un sonido.")
+                    }
+                }
+
+                class Perro : Animal() {
+                    override fun hacerSonido() {
+                        println("El perro hace 'guau guau'.")
+                    }
+                }
+
+                val perro = Perro()
+                perro.hacerSonido()
+
+            """.trimIndent()
+        }
+        6 -> {
+            """
+                3. Polimorfismo:
+
+                El polimorfismo te permite tratar objetos de diferentes clases de manera uniforme.
+                En Kotlin, puedes lograr el polimorfismo mediante la creación de funciones o propiedades en una superclase y sobrescribiéndolas en las subclases según sea necesario.
+            """.trimIndent()
+        }
+        7 -> {
+            """
+                Ejemplo:
+                
+                open class Figura {
+                    open fun dibujar() {
+                        println("Dibujando una figura genérica.")
+                    }
+                }
+
+                class Circulo : Figura() {
+                    override fun dibujar() {
+                        println("Dibujando un círculo.")
+                    }
+                }
+
+                class Cuadrado : Figura() {
+                    override fun dibujar() {
+                        println("Dibujando un cuadrado.")
+                    }
+                }
+
+                val figuras = arrayOf(Circulo(), Cuadrado())
+                for (figura in figuras) {
+                    figura.dibujar()
+                }
+
+            """.trimIndent()
+        }
+        8 -> {
+            """
+                Modificadores de acceso:
+
+                Los modificadores de acceso en Kotlin te permiten controlar la visibilidad y el alcance de las propiedades y funciones de una clase.
+                Los modificadores de acceso más comunes son public, private, protected e internal.
+                
+                public: Accesible desde cualquier parte del código.
+                private: Accesible solo dentro de la misma clase.
+                protected: Accesible dentro de la misma clase y sus subclases.
+                internal: Accesible dentro del mismo módulo.
+            """.trimIndent()
+        }
+        9 -> {
+            """
+                Ejemplo: 
+                
+                class Persona {
+                    public var nombre: String = ""
+                    private var edad: Int = 0
+                    protected var direccion: String = ""
+                    internal var telefono: String = ""
+                }
+
+            """.trimIndent()
+        }
+        10 -> {
+            """
+                Interfaces:
+
+                Una interfaz en Kotlin define un conjunto de propiedades y funciones que una clase puede implementar.
+                Las interfaces se utilizan para establecer un contrato que una clase debe seguir.
+                Puedes implementar múltiples interfaces en una clase y proporcionar implementaciones para sus funciones.
+            """.trimIndent()
+        }
+        11 -> {
+            """
+                Ejemplo:
+                
+                interface Reproducible {
+                    fun reproducir()
+                    fun detener()
+                }
+
+                class Musica : Reproducible {
+                    override fun reproducir() {
+                        println("Reproduciendo música...")
+                    }
+
+                    override fun detener() {
+                        println("Deteniendo reproducción de música.")
+                    }
+                }
+
+            """.trimIndent()
+        }
+        12 -> {
+            """
+                Sobrecarga de operadores:
+
+                Kotlin permite sobrecargar operadores, lo que significa que puedes proporcionar implementaciones personalizadas para operadores como +, -, *, /, entre otros.
+                Para sobrecargar un operador, debes definir una función con el nombre especial correspondiente al operador.
+            """.trimIndent()
+        }
+        13 -> {
+            """
+                Ejemplo:
+                
+                data class Punto(val x: Int, val y: Int) {
+                    operator fun plus(punto: Punto): Punto {
+                        return Punto(x + punto.x, y + punto.y)
+                    }
+                }
+
+                val punto1 = Punto(2, 3)
+                val punto2 = Punto(4, 5)
+                val suma = punto1 + punto2
+
+            """.trimIndent()
+        }
+        14 -> {
+            """
+                Haz finalizado el módulo 3!
+                
+                Ya puedes hacer el exámen final para comprobar lo que aprendiste  :D
+            """.trimIndent()
         }
 
         else -> {
