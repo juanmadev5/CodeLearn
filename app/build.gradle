@@ -23,12 +23,12 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
         debug {
             versionNameSuffix 'debug'
+        }
+        'stable-release' {
+            applicationIdSuffix 'release'
+            minifyEnabled true
         }
     }
     compileOptions {
