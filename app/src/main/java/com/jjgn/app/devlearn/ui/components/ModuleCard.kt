@@ -7,6 +7,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -14,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -81,8 +85,14 @@ fun ModuleCardContent1(
 }
 
 @Composable
-fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel) {
+fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel, moduleViewModel: ModuleViewModel) {
     val currentProgress by progress.collectAsState()
+    var tit by remember { mutableStateOf("Termina el módulo 1 para seguir.") }
+    var desc by remember { mutableStateOf("") }
+    if (moduleViewModel.unlockModule2()) {
+        tit = "Funciones y arreglos"
+        desc = "Aprende a usar las funciones y las listas."
+    }
     val pages by when (viewModel.currentState.value) {
         is Current.KT -> viewModel.ktm2.collectAsState()
         is Current.JV -> viewModel.jvm2.collectAsState()
@@ -93,14 +103,14 @@ fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel)
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (title, description, progressBar, image) = createRefs()
         Text(
-            text = "Funciones y arreglos",
+            text = tit,
             Modifier.constrainAs(title) {
                 top.linkTo(parent.top, 24.dp)
                 start.linkTo(parent.start, 24.dp)
             }
         )
         Text(
-            text = "",
+            text = desc,
             Modifier.constrainAs(description) {
                 top.linkTo(title.bottom, 10.dp)
                 start.linkTo(parent.start, 24.dp)
@@ -121,8 +131,14 @@ fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel)
 }
 
 @Composable
-fun ModuleCardContent3(progress: MutableStateFlow<Int>, viewModel: AppViewModel) {
+fun ModuleCardContent3(progress: MutableStateFlow<Int>, viewModel: AppViewModel, moduleViewModel: ModuleViewModel) {
     val currentProgress by progress.collectAsState()
+    var tit by remember { mutableStateOf("Termina el módulo 2 para seguir.") }
+    var desc by remember { mutableStateOf("") }
+    if (moduleViewModel.unlockModule2()) {
+        tit = "Programacion orientada a objetos"
+        desc = ""
+    }
     val pages by when (viewModel.currentState.value) {
         is Current.KT -> viewModel.ktm3.collectAsState()
         is Current.JV -> viewModel.jvm3.collectAsState()
@@ -133,14 +149,14 @@ fun ModuleCardContent3(progress: MutableStateFlow<Int>, viewModel: AppViewModel)
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (title, description, progressBar, image) = createRefs()
         Text(
-            text = "Orientado a objetos",
+            text = tit,
             Modifier.constrainAs(title) {
                 top.linkTo(parent.top, 24.dp)
                 start.linkTo(parent.start, 24.dp)
             }
         )
         Text(
-            text = "",
+            text = desc,
             Modifier.constrainAs(description) {
                 top.linkTo(title.bottom, 10.dp)
                 start.linkTo(parent.start, 24.dp)

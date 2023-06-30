@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
@@ -40,6 +41,7 @@ import com.jjgn.app.devlearn.viewmodel.AppViewModel
 @Composable
 fun HomeContent(
     viewModel: AppViewModel,
+    moduleViewModel: ModuleViewModel,
     navController: NavController,
     context: Context
 ) {
@@ -145,12 +147,14 @@ fun HomeContent(
                 .height(600.dp)
                 .clip(RoundedCornerShape(14.dp))
                 .clickable {
-                    viewModel.selectedModule(2)
-                    viewModel.loader()
-                    navController.navigate(NavigationRoutes.InCourse.route)
+                    if (moduleViewModel.unlockModule2()) {
+                        viewModel.selectedModule(2)
+                        viewModel.loader()
+                        navController.navigate(NavigationRoutes.InCourse.route)
+                    }
                 }
         ) {
-            ModuleCardContent2(m2Progress, viewModel)
+            ModuleCardContent2(m2Progress, viewModel, moduleViewModel)
         }
         Spacer(Modifier.padding(top = 20.dp))
         Card(
@@ -159,12 +163,14 @@ fun HomeContent(
                 .height(400.dp)
                 .clip(RoundedCornerShape(14.dp))
                 .clickable {
-                    viewModel.selectedModule(3)
-                    viewModel.loader()
-                    navController.navigate(NavigationRoutes.InCourse.route)
+                    if (moduleViewModel.unlockModule3()) {
+                        viewModel.selectedModule(3)
+                        viewModel.loader()
+                        navController.navigate(NavigationRoutes.InCourse.route)
+                    }
                 }
         ) {
-            ModuleCardContent3(m3Progress, viewModel)
+            ModuleCardContent3(m3Progress, viewModel, moduleViewModel)
         }
     }
 }

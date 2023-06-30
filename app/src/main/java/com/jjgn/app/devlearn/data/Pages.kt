@@ -26,7 +26,7 @@ fun getTotalPages(
         is Current.KT -> {
             ktm1.value = 45
             ktm2.value = 9
-            ktm3.value = 30
+            ktm3.value = 14
         }
         is Current.JV -> {
             jvm1.value = 30
@@ -52,7 +52,7 @@ fun getTotalPages(
             when (currentMState.value) {
                 is Module.KTM1 -> 45
                 is Module.KTM2 -> 9
-                is Module.KTM3 -> 20
+                is Module.KTM3 -> 14
                 else -> 1
             }
         }
