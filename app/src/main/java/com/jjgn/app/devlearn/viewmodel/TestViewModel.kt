@@ -5,7 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PracticeViewModel @Inject constructor(
+class TestViewModel @Inject constructor(
     private val appViewModel: AppViewModel
 ) : ViewModel() {
 // implementación pendiente

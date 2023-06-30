@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.jjgn.app.devlearn.viewmodel.PracticeViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
-fun Container1(practiceViewModel: PracticeViewModel) {
+fun Container1(testViewModel: TestViewModel) {
     Spacer(Modifier.padding(top = 16.dp))
     Card(
         Modifier
@@ -21,6 +21,6 @@ fun Container1(practiceViewModel: PracticeViewModel) {
             .height(300.dp)
             .clip(RoundedCornerShape(14.dp))
     ) {
-        KotlinM1Task1(practiceViewModel)
+        KotlinM1Task1(testViewModel)
     }
 }

@@ -16,11 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jjgn.app.devlearn.ui.components.Container1
-import com.jjgn.app.devlearn.viewmodel.PracticeViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
 fun PracticeScreen() {
-    val viewModel = hiltViewModel<PracticeViewModel>()
+    val viewModel = hiltViewModel<TestViewModel>()
     Column(
         Modifier
             .fillMaxSize()

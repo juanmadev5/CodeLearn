@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.jjgn.app.devlearn.viewmodel.PracticeViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 /**
  * Cada modulo de cada curso tiene una cantidad de tareas para realizar.
@@ -25,7 +25,7 @@ import com.jjgn.app.devlearn.viewmodel.PracticeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KotlinM1Task1(practiceViewModel: PracticeViewModel) {
+fun KotlinM1Task1(testViewModel: TestViewModel) {
     var textvalue1 by remember { mutableStateOf("") }
     var show by remember {
         mutableStateOf(false)
@@ -67,7 +67,7 @@ fun KotlinM1Task1(practiceViewModel: PracticeViewModel) {
         )
         if (show) {
             Text(
-                text = if (textvalue1 == practiceViewModel.r1) {
+                text = if (textvalue1 == testViewModel.r1) {
                     "Correcto. \nResultado: Hola mundo"
                 } else {
                     "Incorrecto. \nSe esperaba: Hola mundo"
