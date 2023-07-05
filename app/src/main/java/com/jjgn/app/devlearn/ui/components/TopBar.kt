@@ -34,7 +34,8 @@ fun TopBar(
     page: Int,
     viewModel: AppViewModel,
     context: Context,
-    showZoomState: MutableState<Boolean>
+    textSizeState: MutableState<Boolean>,
+    txtSize: Int
 ) {
     Card(
         Modifier
@@ -50,12 +51,13 @@ fun TopBar(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                "Página $page",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontWeight = FontWeight.Bold
-            )
+
+            if (textSizeState.value) {
+                TextSizeState(textSizeState, txtSize)
+            } else {
+                CurrentPage(page)
+            }
+
             Box(
                 Modifier
                     .fillMaxHeight()
@@ -70,7 +72,7 @@ fun TopBar(
                         onClick = {
                             if (viewModel.textSize.value < 20) {
                                 viewModel.textSize.value++
-                                showZoomState.value = true
+                                textSizeState.value = true
                             }
                             viewModel.zoomStateSaver(context)
                         }
@@ -85,7 +87,7 @@ fun TopBar(
                         onClick = {
                             if (viewModel.textSize.value > 0) {
                                 viewModel.textSize.value--
-                                showZoomState.value = true
+                                textSizeState.value = true
                             }
                             viewModel.zoomStateSaver(context)
                         }
@@ -100,4 +102,14 @@ fun TopBar(
             }
         }
     }
+}
+
+@Composable
+fun CurrentPage(page: Int) {
+    Text(
+        "Página $page",
+        fontSize = 14.sp,
+        color = MaterialTheme.colorScheme.onSurface,
+        fontWeight = FontWeight.Bold
+    )
 }
