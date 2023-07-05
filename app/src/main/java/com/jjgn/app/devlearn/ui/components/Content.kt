@@ -18,11 +18,18 @@ import com.jjgn.app.devlearn.ui.screens.AwaitScreen
 import com.jjgn.app.devlearn.ui.theme.DevLearnTheme
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
+/**
+ * Funcion Composable donde se establece el contenido a mostrarse.
+ * */
 @Composable
 fun Content() {
+    // Se crea la instancia del ViewModel principal
     val viewModel = hiltViewModel<AppViewModel>()
+
+    // Se obtiene el contexto actual para iniciar las funciones de restauracion, etc.
     val context = LocalContext.current
     viewModel.starter(context)
+
     val loading = remember { mutableStateOf(true) }
     AwaitController(loading)
     DevLearnTheme {
