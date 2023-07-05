@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -34,42 +37,45 @@ fun InCourseContent(
     navController: NavController
 ) {
 
+    val testVM = hiltViewModel<TestViewModel>()
     val page by viewModel.currentPageValue.collectAsState()
     val txtSize by viewModel.textSize.collectAsState()
-    val zoomState = remember { mutableStateOf(false) }
+    val textSizeState = remember { mutableStateOf(false) }
 
     Scaffold(
         Modifier
             .fillMaxSize()
             .padding(top = 24.dp, bottom = 16.dp),
-        topBar = { TopBar(page = page, viewModel, context, zoomState) },
+        topBar = { TopBar(page = page, viewModel, context, textSizeState, txtSize) },
         content = {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(12.dp)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                Spacer(Modifier.padding(top = 70.dp))
-
-                Text(
-                    text = viewModel.infoString.value,
-                    Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .padding(start = 6.dp, end = 6.dp),
-                    fontSize = txtSize.sp,
-                    lineHeight = 26.sp,
-                    textAlign = TextAlign.Justify
-                )
-                if (zoomState.value) {
-                    ZoomState(zoomState, txtSize, 2000)
-                }
-                Spacer(Modifier.padding(bottom = 90.dp))
-            }
+            ContentView(viewModel, txtSize, textSizeState, testVM)
         },
         bottomBar = {
             BottomBar(viewModel, buttonNextState, buttonPrevState, context, navController)
         }
     )
+}
+
+@Composable
+fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<Boolean>, testVM: TestViewModel) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(12.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Spacer(Modifier.padding(top = 70.dp))
+
+        Text(
+            text = viewModel.infoString.value,
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(start = 6.dp, end = 6.dp),
+            fontSize = txtSize.sp,
+            lineHeight = 26.sp,
+            textAlign = TextAlign.Justify
+        )
+        Spacer(Modifier.padding(bottom = 90.dp))
+    }
 }
