@@ -6,6 +6,9 @@ import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
 import kotlinx.coroutines.flow.MutableStateFlow
 
+/**
+ * Se recupera el total de paginas de cada modulo correspondiente a cada curso.
+ * */
 fun getTotalPages(
     _currentState: MutableLiveData<Current>,
     currentMState: LiveData<Module>,

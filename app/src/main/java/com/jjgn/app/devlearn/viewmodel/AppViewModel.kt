@@ -77,6 +77,10 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
 
     val nm = MutableStateFlow(0)
 
+    /**
+     * Funcion iniciador. Obtiene el contexto desde [com.jjgn.app.devlearn.ui.components.Content]
+     * para que SharedPreferences funcione.
+     * */
     fun starter(context: Context) {
         preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
         loadState()
@@ -85,6 +89,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         zoomStateRestorer(context)
     }
 
+    // Funcion encargada de establecer el nuevo estado al seleccionar un curso.
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
@@ -94,6 +99,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
+    // Funcion encargada de cargar el ultimo curso seleccionado.
     private fun loadState() {
         val currentState = when (preferences.getString("currentState", null)) {
             Current.PY.javaClass.simpleName -> Current.PY
@@ -105,6 +111,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         _currentState.value = currentState
     }
 
+    // Funcion encargada de actualizar el estado del modulo seleccionado
     fun selectedModule(moduleSelected: Int) {
         getCurrentModule(
             moduleSelected,
@@ -128,6 +135,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
+    // Funcion que se encarga de ir a la siguiente pagina
     fun nextPage() {
         when (_currentMState.value) {
             is Module.KTM1 -> ktm1p.value++
@@ -150,6 +158,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
+    // Funcion que permite retroceder de pagina.
     fun prevPage() {
         when (_currentMState.value) {
             is Module.KTM1 -> ktm1p.value--
@@ -172,6 +181,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
+    // Funcion que carga el total de paginas de cada modulo y obtiene el texto que se debe mostrar
     fun loader() {
         totalPages = getTotalPages(
             _currentState,
@@ -197,6 +207,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         )
     }
 
+    // Funciones encargadas de guardar y restaurar el estado del zoom.
     fun zoomStateSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
@@ -212,6 +223,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
+    // Funcion encargada de guardar las paginas en la que el usuario se queda.
     fun dataSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
@@ -284,6 +296,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
+    // Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez.
     fun dataRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
