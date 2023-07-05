@@ -9,6 +9,10 @@ import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
 import kotlinx.coroutines.flow.MutableStateFlow
 
+/**
+ * Funcion encargada de establecer el texto en pantalla correspondiente al curso
+ * seleccionado.
+ * */
 fun getTextToShow(
     _currentState: MutableLiveData<Current>,
     _currentPage: MutableStateFlow<Int>,
