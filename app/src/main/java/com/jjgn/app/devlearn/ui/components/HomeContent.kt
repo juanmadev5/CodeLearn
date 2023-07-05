@@ -33,10 +33,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 
 @Composable
 fun HomeContent(

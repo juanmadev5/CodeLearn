@@ -10,9 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.controller.BackHandlerController
-import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 import com.jjgn.app.devlearn.ui.components.HomeContent
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

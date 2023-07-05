@@ -17,9 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.jjgn.app.devlearn.R
-import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
