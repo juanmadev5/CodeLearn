@@ -23,7 +23,6 @@ import com.jjgn.app.devlearn.viewmodel.TestViewModel
  *
  */
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KotlinM1Task1(testViewModel: TestViewModel) {
     var textvalue1 by remember { mutableStateOf("") }
