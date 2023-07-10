@@ -1,6 +1,5 @@
 package com.jjgn.app.devlearn.ui.components
 
-import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,41 +35,40 @@ import androidx.navigation.NavController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
-import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
 fun HomeContent(
     viewModel: AppViewModel,
-    moduleViewModel: ModuleViewModel,
-    navController: NavController,
-    context: Context
+    testViewModel: TestViewModel,
+    navController: NavController
 ) {
-    viewModel.dataRestorer(context)
+
     val m1Progress = remember {
         when (viewModel.currentState.value) {
-            is Current.KT -> viewModel.ktm1p
-            is Current.JV -> viewModel.jvm1p
-            is Current.JS -> viewModel.jsm1p
-            is Current.PY -> viewModel.pym1p
-            else -> viewModel.currentPageValue
+            is Current.KT -> viewModel.cModulesCurrentPage[0]
+            is Current.JV -> viewModel.cModulesCurrentPage[3]
+            is Current.JS -> viewModel.cModulesCurrentPage[6]
+            is Current.PY -> viewModel.cModulesCurrentPage[9]
+            else -> viewModel.cModulesCurrentPage[12]
         }
     }
     val m2Progress = remember {
         when (viewModel.currentState.value) {
-            is Current.KT -> viewModel.ktm2p
-            is Current.JV -> viewModel.jvm2p
-            is Current.JS -> viewModel.jsm2p
-            is Current.PY -> viewModel.pym2p
-            else -> viewModel.currentPageValue
+            is Current.KT -> viewModel.cModulesCurrentPage[1]
+            is Current.JV -> viewModel.cModulesCurrentPage[4]
+            is Current.JS -> viewModel.cModulesCurrentPage[7]
+            is Current.PY -> viewModel.cModulesCurrentPage[10]
+            else -> viewModel.cModulesCurrentPage[12]
         }
     }
     val m3Progress = remember {
         when (viewModel.currentState.value) {
-            is Current.KT -> viewModel.ktm3p
-            is Current.JV -> viewModel.jvm3p
-            is Current.JS -> viewModel.jsm3p
-            is Current.PY -> viewModel.pym3p
-            else -> viewModel.currentPageValue
+            is Current.KT -> viewModel.cModulesCurrentPage[2]
+            is Current.JV -> viewModel.cModulesCurrentPage[5]
+            is Current.JS -> viewModel.cModulesCurrentPage[8]
+            is Current.PY -> viewModel.cModulesCurrentPage[11]
+            else -> viewModel.cModulesCurrentPage[12]
         }
     }
 
@@ -132,7 +130,6 @@ fun HomeContent(
                     viewModel.loader()
                     navController.navigate(NavigationRoutes.InCourse.route)
                 }
-
         ) {
             ModuleCardContent1(
                 currentLanguage = viewModel.langName,
@@ -147,14 +144,14 @@ fun HomeContent(
                 .height(600.dp)
                 .clip(RoundedCornerShape(14.dp))
                 .clickable {
-                    if (moduleViewModel.unlockModule2()) {
+                    if (testViewModel.mUnlocked[1]) {
                         viewModel.selectedModule(2)
                         viewModel.loader()
                         navController.navigate(NavigationRoutes.InCourse.route)
                     }
                 }
         ) {
-            ModuleCardContent2(m2Progress, viewModel, moduleViewModel)
+            ModuleCardContent2(m2Progress, viewModel, testViewModel)
         }
         Spacer(Modifier.padding(top = 20.dp))
         Card(
@@ -163,14 +160,14 @@ fun HomeContent(
                 .height(400.dp)
                 .clip(RoundedCornerShape(14.dp))
                 .clickable {
-                    if (moduleViewModel.unlockModule3()) {
+                    if (testViewModel.mUnlocked[2]) {
                         viewModel.selectedModule(3)
                         viewModel.loader()
                         navController.navigate(NavigationRoutes.InCourse.route)
                     }
                 }
         ) {
-            ModuleCardContent3(m3Progress, viewModel, moduleViewModel)
+            ModuleCardContent3(m3Progress, viewModel, testViewModel)
         }
     }
 }

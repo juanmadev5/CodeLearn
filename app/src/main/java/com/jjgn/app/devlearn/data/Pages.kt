@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
-import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * Se recupera el total de paginas de cada modulo correspondiente a cada curso.
@@ -12,42 +11,31 @@ import kotlinx.coroutines.flow.MutableStateFlow
 fun getTotalPages(
     _currentState: MutableLiveData<Current>,
     currentMState: LiveData<Module>,
-    ktm1: MutableStateFlow<Int>,
-    ktm2: MutableStateFlow<Int>,
-    ktm3: MutableStateFlow<Int>,
-    jvm1: MutableStateFlow<Int>,
-    jvm2: MutableStateFlow<Int>,
-    jvm3: MutableStateFlow<Int>,
-    jsm1: MutableStateFlow<Int>,
-    jsm2: MutableStateFlow<Int>,
-    jsm3: MutableStateFlow<Int>,
-    pym1: MutableStateFlow<Int>,
-    pym2: MutableStateFlow<Int>,
-    pym3: MutableStateFlow<Int>
+    cModulesTPages: MutableList<Int>
 ): Int {
     when (_currentState.value) {
         is Current.KT -> {
-            ktm1.value = 45
-            ktm2.value = 9
-            ktm3.value = 14
+            cModulesTPages[0] = 45
+            cModulesTPages[1] = 9
+            cModulesTPages[2] = 14
         }
         is Current.JV -> {
-            jvm1.value = 30
-            jvm2.value = 30
-            jvm3.value = 30
+            cModulesTPages[3] = 30
+            cModulesTPages[4] = 30
+            cModulesTPages[5] = 30
         }
         is Current.JS -> {
-            jsm1.value = 30
-            jsm2.value = 30
-            jsm3.value = 30
+            cModulesTPages[6] = 30
+            cModulesTPages[7] = 30
+            cModulesTPages[8] = 30
         }
         is Current.PY -> {
-            pym1.value = 30
-            pym2.value = 30
-            pym3.value = 30
+            cModulesTPages[9] = 30
+            cModulesTPages[10] = 30
+            cModulesTPages[11] = 30
         }
         else -> {
-
+            cModulesTPages[12]
         }
     }
     return when (_currentState.value) {

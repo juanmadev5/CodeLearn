@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,22 +18,20 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
-import com.jjgn.app.devlearn.viewmodel.ModuleViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
 fun ModuleCardContent1(
     currentLanguage: String,
-    progress: MutableStateFlow<Int>,
+    progress: Int,
     viewModel: AppViewModel
 ) {
-    val currentProgress by progress.collectAsState()
-    val pages by when (viewModel.currentState.value) {
-        is Current.KT -> viewModel.ktm1.collectAsState()
-        is Current.JV -> viewModel.jvm1.collectAsState()
-        is Current.JS -> viewModel.jsm1.collectAsState()
-        is Current.PY -> viewModel.pym1.collectAsState()
-        else -> viewModel.nm.collectAsState()
+    val pages = when (viewModel.currentState.value) {
+        is Current.KT -> viewModel.cModulesTPages[0]
+        is Current.JV -> viewModel.cModulesTPages[3]
+        is Current.JS -> viewModel.cModulesTPages[6]
+        is Current.PY -> viewModel.cModulesTPages[9]
+        else -> viewModel.cModulesTPages[12]
     }
     ConstraintLayout(
         Modifier
@@ -72,7 +69,7 @@ fun ModuleCardContent1(
             fontSize = 14.sp
         )
         Text(
-            text = "$currentProgress / $pages",
+            text = "$progress / $pages",
             Modifier
                 .constrainAs(progressBar) {
                     top.linkTo(description.bottom, 2.dp)
@@ -85,20 +82,30 @@ fun ModuleCardContent1(
 }
 
 @Composable
-fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel, moduleViewModel: ModuleViewModel) {
-    val currentProgress by progress.collectAsState()
+fun ModuleCardContent2(
+    progress: Int,
+    viewModel: AppViewModel,
+    testViewModel: TestViewModel
+) {
     var tit by remember { mutableStateOf("Termina el módulo 1 para seguir.") }
     var desc by remember { mutableStateOf("") }
-    if (moduleViewModel.unlockModule2()) {
+    val currentUnlckState = when (viewModel.currentState.value) {
+        is Current.KT -> testViewModel.mUnlocked[1]
+        is Current.JV -> testViewModel.mUnlocked[3]
+        is Current.JS -> testViewModel.mUnlocked[5]
+        is Current.PY -> testViewModel.mUnlocked[7]
+        else -> testViewModel.mUnlocked[0]
+    }
+    if (currentUnlckState) {
         tit = "Funciones y arreglos"
         desc = "Aprende a usar las funciones y las listas."
     }
-    val pages by when (viewModel.currentState.value) {
-        is Current.KT -> viewModel.ktm2.collectAsState()
-        is Current.JV -> viewModel.jvm2.collectAsState()
-        is Current.JS -> viewModel.jsm2.collectAsState()
-        is Current.PY -> viewModel.pym2.collectAsState()
-        else -> viewModel.nm.collectAsState()
+    val pages = when (viewModel.currentState.value) {
+        is Current.KT -> viewModel.cModulesTPages[1]
+        is Current.JV -> viewModel.cModulesTPages[4]
+        is Current.JS -> viewModel.cModulesTPages[7]
+        is Current.PY -> viewModel.cModulesTPages[10]
+        else -> viewModel.cModulesTPages[12]
     }
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (title, description, progressBar, image) = createRefs()
@@ -118,7 +125,7 @@ fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel,
             }
         )
         Text(
-            text = "$currentProgress / $pages",
+            text = "$progress / $pages",
             Modifier
                 .constrainAs(progressBar) {
                     top.linkTo(description.bottom, 2.dp)
@@ -131,20 +138,30 @@ fun ModuleCardContent2(progress: MutableStateFlow<Int>, viewModel: AppViewModel,
 }
 
 @Composable
-fun ModuleCardContent3(progress: MutableStateFlow<Int>, viewModel: AppViewModel, moduleViewModel: ModuleViewModel) {
-    val currentProgress by progress.collectAsState()
+fun ModuleCardContent3(
+    progress: Int,
+    viewModel: AppViewModel,
+    testViewModel: TestViewModel
+) {
     var tit by remember { mutableStateOf("Termina el módulo 2 para seguir.") }
     var desc by remember { mutableStateOf("") }
-    if (moduleViewModel.unlockModule2()) {
+    val currentUnlckState = when (viewModel.currentState.value) {
+        is Current.KT -> testViewModel.mUnlocked[2]
+        is Current.JV -> testViewModel.mUnlocked[4]
+        is Current.JS -> testViewModel.mUnlocked[6]
+        is Current.PY -> testViewModel.mUnlocked[8]
+        else -> testViewModel.mUnlocked[1]
+    }
+    if (currentUnlckState) {
         tit = "Programacion orientada a objetos"
         desc = ""
     }
-    val pages by when (viewModel.currentState.value) {
-        is Current.KT -> viewModel.ktm3.collectAsState()
-        is Current.JV -> viewModel.jvm3.collectAsState()
-        is Current.JS -> viewModel.jsm3.collectAsState()
-        is Current.PY -> viewModel.pym3.collectAsState()
-        else -> viewModel.nm.collectAsState()
+    val pages = when (viewModel.currentState.value) {
+        is Current.KT -> viewModel.cModulesTPages[2]
+        is Current.JV -> viewModel.cModulesTPages[5]
+        is Current.JS -> viewModel.cModulesTPages[8]
+        is Current.PY -> viewModel.cModulesTPages[11]
+        else -> viewModel.cModulesTPages[12]
     }
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (title, description, progressBar, image) = createRefs()
@@ -164,7 +181,7 @@ fun ModuleCardContent3(progress: MutableStateFlow<Int>, viewModel: AppViewModel,
             }
         )
         Text(
-            text = "$currentProgress / $pages",
+            text = "$progress / $pages",
             Modifier
                 .constrainAs(progressBar) {
                     top.linkTo(description.bottom, 2.dp)
