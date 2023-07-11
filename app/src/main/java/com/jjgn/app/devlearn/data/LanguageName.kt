@@ -3,6 +3,10 @@ package com.jjgn.app.devlearn.data
 import androidx.lifecycle.MutableLiveData
 import com.jjgn.app.devlearn.states.Current
 
+/**
+ * Esta funcion se encarga de retornar el nombre del lenguaje a mostrar en Home
+ * de acuerdo al curso seleccionado
+ * */
 fun getLangName(
     _currentState: MutableLiveData<Current>
 ): String {

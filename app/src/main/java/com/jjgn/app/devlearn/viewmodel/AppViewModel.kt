@@ -8,6 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jjgn.app.devlearn.controller.moduleCurrentPageController
+import com.jjgn.app.devlearn.controller.onNextPageController
+import com.jjgn.app.devlearn.controller.onPrevPageController
 import com.jjgn.app.devlearn.data.DefaultData
 import com.jjgn.app.devlearn.data.getCurrentModule
 import com.jjgn.app.devlearn.data.getLangName
@@ -20,13 +23,21 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel principal de la aplicacion, se encarga de guardar y restaurar los datos,
+ * muestra la informacion de acuerdo al curso y modulo seleccionado, controla la
+ * paginacion y controla el zoom del texto.
+ * Algunas cosas estan en [DefaultData] y se implementan aqui para tener
+ * mas ordenado y que el codigo sea mas entendible.
+ * Varios componentes que usa este ViewModel estan separados en distintos archivos.
+ * */
 class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
 
-    override lateinit var preferences: SharedPreferences
+    override lateinit var pref: SharedPreferences
 
-    override var langName = "default"
+    override var lName = "default"
 
-    override var totalPages: Int = 0
+    override var tlPages: Int = 0
 
     private val _currentState = MutableLiveData<Current>()
 
@@ -37,17 +48,18 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
 
     private val _currentPage = MutableStateFlow(1)
 
-    val currentPageValue: MutableStateFlow<Int>
+    val cPageValue: MutableStateFlow<Int>
         get() = _currentPage
 
-    private val _infoString = mutableStateOf("")
+    private val _information = mutableStateOf("")
 
-    val infoString: State<String>
-        get() = _infoString
+    val information: State<String>
+        get() = _information
 
     val textSize = MutableStateFlow(16)
 
-    var cModulesCurrentPage = mutableListOf(
+    // lista donde se almacena la pagina actual del modulo.
+    var mPage = mutableListOf(
         1,// KTM1 0
         1,// KTM2 1
         1,// KTM3 2
@@ -63,47 +75,55 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         1 // NM 12
     )
 
-    val cModulesTPages = mutableListOf(
-        10,// KTM1 0
-        10,// KTM2 1
-        10,// KTM3 2
-        10,// JVM1 3
-        10,// JVM2 4
-        10,// JVM3 5
-        10,// JSM1 6
-        10,// JSM2 7
-        10,// JSM3 8
-        10,// PYM1 9
-        10,// PYM2 10
-        10,// PYM3 11
-        10 // NM 12
+    // lista donde se guarda la cantidad de paginas que tiene cada modulo.
+    val tPages = mutableListOf(
+        0,// KTM1 0
+        0,// KTM2 1
+        0,// KTM3 2
+        0,// JVM1 3
+        0,// JVM2 4
+        0,// JVM3 5
+        0,// JSM1 6
+        0,// JSM2 7
+        0,// JSM3 8
+        0,// PYM1 9
+        0,// PYM2 10
+        0,// PYM3 11
+        0 // NM 12
     )
+
 
     /**
      * Funcion iniciador. Obtiene el contexto desde [com.jjgn.app.devlearn.ui.components.Content]
      * para que SharedPreferences funcione.
      * */
     fun starter(context: Context) {
-        preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
+        pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
         loadState()
         loader()
         dataRestorer(context)
         zoomStateRestorer(context)
     }
 
-    // Funcion encargada de establecer el nuevo estado al seleccionar un curso.
+
+    /**
+     * Funcion encargada de establecer el curso actual seleccionado.
+     * */
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            val editor = preferences.edit()
-            editor?.putString("currentState", newState.javaClass.simpleName)
+            val editor = pref.edit()
+            editor?.putString(cStateValue, newState.javaClass.simpleName)
             editor?.apply()
         }
     }
 
-    // Funcion encargada de cargar el ultimo curso seleccionado.
+
+    /**
+     * Funcion encargada de cargar el ultimo curso seleccionado.
+     * */
     private fun loadState() {
-        val currentState = when (preferences.getString("currentState", null)) {
+        val currentState = when (pref.getString(cStateValue, null)) {
             Current.PY.javaClass.simpleName -> Current.PY
             Current.JS.javaClass.simpleName -> Current.JS
             Current.KT.javaClass.simpleName -> Current.KT
@@ -113,130 +133,107 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         _currentState.value = currentState
     }
 
-    // Funcion encargada de actualizar el estado del modulo seleccionado
+
+    /**
+     * Funcion encargada de actualizar el estado del modulo seleccionado.
+     * */
     fun selectedModule(moduleSelected: Int) {
         getCurrentModule(
             moduleSelected,
             _currentState,
             _currentMState
         )
-        _currentPage.value = when (_currentMState.value) {
-            is Module.KTM1 -> cModulesCurrentPage[0]
-            is Module.KTM2 -> cModulesCurrentPage[1]
-            is Module.KTM3 -> cModulesCurrentPage[2]
-            is Module.JVM1 -> cModulesCurrentPage[3]
-            is Module.JVM2 -> cModulesCurrentPage[4]
-            is Module.JVM3 -> cModulesCurrentPage[5]
-            is Module.JSM1 -> cModulesCurrentPage[6]
-            is Module.JSM2 -> cModulesCurrentPage[7]
-            is Module.JSM3 -> cModulesCurrentPage[8]
-            is Module.PYM1 -> cModulesCurrentPage[9]
-            is Module.PYM2 -> cModulesCurrentPage[10]
-            is Module.PYM3 -> cModulesCurrentPage[11]
-            else -> _currentPage.value
-        }
+        moduleCurrentPageController(_currentPage, _currentMState, mPage)
     }
 
-    // Funcion que se encarga de ir a la siguiente pagina
+
+    /**
+     * Funciones que se encargan de avanzar o retroceder de pagina.
+     * */
     fun nextPage() {
-        when (_currentMState.value) {
-            is Module.KTM1 -> cModulesCurrentPage[0]++
-            is Module.KTM2 -> cModulesCurrentPage[1]++
-            is Module.KTM3 -> cModulesCurrentPage[2]++
-            is Module.JVM1 -> cModulesCurrentPage[3]++
-            is Module.JVM2 -> cModulesCurrentPage[4]++
-            is Module.JVM3 -> cModulesCurrentPage[5]++
-            is Module.JSM1 -> cModulesCurrentPage[6]++
-            is Module.JSM2 -> cModulesCurrentPage[7]++
-            is Module.JSM3 -> cModulesCurrentPage[8]++
-            is Module.PYM1 -> cModulesCurrentPage[9]++
-            is Module.PYM2 -> cModulesCurrentPage[10]++
-            is Module.PYM3 -> cModulesCurrentPage[11]++
-            else -> return
-        }
-        if (_currentPage.value < totalPages) {
+        onNextPageController(_currentMState, mPage)
+        if (_currentPage.value < tlPages) {
             _currentPage.value = _currentPage.value.plus(1)
             loader()
         }
     }
-
-    // Funcion que permite retroceder de pagina.
     fun prevPage() {
-        when (_currentMState.value) {
-            is Module.KTM1 -> cModulesCurrentPage[0]--
-            is Module.KTM2 -> cModulesCurrentPage[0]--
-            is Module.KTM3 -> cModulesCurrentPage[0]--
-            is Module.JVM1 -> cModulesCurrentPage[0]--
-            is Module.JVM2 -> cModulesCurrentPage[0]--
-            is Module.JVM3 -> cModulesCurrentPage[0]--
-            is Module.JSM1 -> cModulesCurrentPage[0]--
-            is Module.JSM2 -> cModulesCurrentPage[0]--
-            is Module.JSM3 -> cModulesCurrentPage[0]--
-            is Module.PYM1 -> cModulesCurrentPage[0]--
-            is Module.PYM2 -> cModulesCurrentPage[0]--
-            is Module.PYM3 -> cModulesCurrentPage[0]--
-            else -> return
-        }
+        onPrevPageController(_currentMState, mPage)
         if (_currentPage.value > 1) {
             _currentPage.value = _currentPage.value - 1
             loader()
         }
     }
 
-    // Funcion que carga el total de paginas de cada modulo y obtiene el texto que se debe mostrar
+
+    /**
+     * Funcion que carga el total de paginas de cada modulo y obtiene el texto que se debe mostrar.
+     * */
     fun loader() {
-        totalPages = getTotalPages(
+        tlPages = getTotalPages(
             _currentState,
             _currentMState,
-            cModulesTPages
+            tPages
         )
-        langName = getLangName(_currentState)
-        _infoString.value = getTextToShow(
+        lName = getLangName(_currentState)
+        _information.value = getTextToShow(
             _currentState,
             _currentPage,
             _currentMState,
         )
     }
 
-    // Funciones encargadas de guardar y restaurar el estado del zoom.
+
+    /**
+     * Funcion encargada de guardar el estado del zoom.
+     * */
     fun zoomStateSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = preferences.edit()
-            editor.putInt("zoomState", textSize.value)
+            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = pref.edit()
+            editor.putInt(zValue, textSize.value)
             editor.apply()
         }
     }
 
+    /**
+     * Funcion encargada de restaurar el estado del zoom en la que el usuario establecio.
+     * */
     private fun zoomStateRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
-            textSize.value = preferences.getInt("zoomState", 16)
+            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
+            textSize.value = pref.getInt(zValue, 16)
         }
     }
 
-    // Funcion encargada de guardar las paginas en las que el usuario se queda.
+
+    /**
+     *  Funcion encargada de guardar las paginas en las que el usuario se queda.
+     * */
     fun dataSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = preferences.edit()
-            for (i in cModulesCurrentPage.indices) {
-                editor.putInt("cModulesCurrentPage_$i", cModulesCurrentPage[i])
+            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = pref.edit()
+            for (i in mPage.indices) {
+                editor.putInt("${mCurrentPage}$i", mPage[i])
             }
             editor.apply()
         }
     }
 
-    // Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez.
-    fun dataRestorer(context: Context) {
+
+    /**
+     * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez.
+     * */
+    private fun dataRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)
-            val restoredArray = mutableListOf<Int>()
-            for (i in cModulesCurrentPage.indices) {
-                val value = preferences.getInt("cModulesCurrentPage_$i", 1)
-                restoredArray.add(value)
+            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
+            val restoredList = mutableListOf<Int>()
+            for (i in mPage.indices) {
+                val value = pref.getInt("${mCurrentPage}$i", 1)
+                restoredList.add(value)
             }
-            cModulesCurrentPage = restoredArray
+            mPage = restoredList
         }
     }
 }

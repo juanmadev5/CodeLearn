@@ -4,6 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
 
+/**
+ * Esta funcion obtiene el modulo seleccionado. Al seleccionar un modulo en Home,
+ * se recibe por parametro un Int y dependiendo cual sea y que curso se selecciono
+ * se establece el modulo correspondiente.
+ * */
 fun getCurrentModule(
     moduleSelected: Int,
     _currentState: MutableLiveData<Current>,
