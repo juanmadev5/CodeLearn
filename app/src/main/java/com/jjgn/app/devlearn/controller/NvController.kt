@@ -13,11 +13,14 @@ import com.jjgn.app.devlearn.ui.screens.CourseSelectorScreen
 import com.jjgn.app.devlearn.ui.screens.HomeScreen
 import com.jjgn.app.devlearn.ui.screens.InCourseScreen
 import com.jjgn.app.devlearn.ui.screens.PracticeScreen
-import com.jjgn.app.devlearn.ui.screens.Preferences
 import com.jjgn.app.devlearn.ui.screens.WelcomeScreen
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
+/**
+ * Controlador de navegacion de la aplicacion. Permite navegar a las
+ * distintas pantallas y muestra el contenido
+ * */
 @Composable
 fun NvController(
     viewModel: AppViewModel,
@@ -56,16 +59,7 @@ fun NvController(
             PracticeScreen(navController, testViewModel)
         }
         composable(NavigationRoutes.Preferences.route) {
-            Preferences()
+
         }
     }
-}
-
-sealed class NavigationRoutes(val route: String) {
-    object Welcome : NavigationRoutes("welcome")
-    object Home : NavigationRoutes("home")
-    object Courses : NavigationRoutes("courses")
-    object InCourse : NavigationRoutes("inCourse")
-    object Practice : NavigationRoutes("practice")
-    object Preferences : NavigationRoutes("preferences")
 }
