@@ -569,14 +569,6 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
             """.trimIndent()
         }
 
-        45 -> {
-            """
-                Has finalizado el primer módulo!
-                
-                Ya puedes hacer el exámen para pasar al siguiente módulo. :)
-            """.trimIndent()
-        }
-
         else -> {
             ""
         }
@@ -668,13 +660,6 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                     println(numero)
                 }
 
-            """.trimIndent()
-        }
-
-        9 -> {
-            """
-                Has finalizado el módulo 2! 
-                Ya puedes realizar el exámen para para pasar al siguiente módulo. :)
             """.trimIndent()
         }
 
@@ -860,13 +845,6 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 val punto2 = Punto(4, 5)
                 val suma = punto1 + punto2
 
-            """.trimIndent()
-        }
-        14 -> {
-            """
-                Haz finalizado el módulo 3!
-                
-                Ya puedes hacer el exámen final para comprobar lo que aprendiste  :D
             """.trimIndent()
         }
 
