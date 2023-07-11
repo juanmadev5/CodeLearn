@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
@@ -75,7 +76,9 @@ fun BottomBar(
             Button(
                 onClick = {
                     if (!buttonNextState) {
-                        navController.popBackStack()
+                        // al finalizar el modulo se navega a la pantalla de
+                        // prueba final para desbloquear el siguiente modulo.
+                        navController.navigate(NavigationRoutes.Practice.route)
                     } else {
                         viewModel.nextPage()
                     }
