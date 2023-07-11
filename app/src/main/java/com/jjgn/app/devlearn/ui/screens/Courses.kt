@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,9 +18,6 @@ import androidx.navigation.NavController
 import com.jjgn.app.devlearn.ui.components.CourseCard
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
-/**
- * Modificacion pendiente
- */
 @Composable
 fun CourseSelectorScreen(
     viewModel: AppViewModel,
@@ -43,9 +41,9 @@ fun CourseSelectorScreen(
         }
         items(4) {
             CourseCard(
-                title = viewModel.coursesList[it],
-                description = viewModel.courseDescription[it],
-                logo = viewModel.courseLogo[it],
+                title = viewModel.cList[it],
+                description = stringResource(viewModel.cDescription[it]),
+                logo = viewModel.cLogo[it],
                 viewModel = viewModel,
                 navController = navController,
                 preferences = preference

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NavigateBefore
@@ -26,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
@@ -37,11 +37,11 @@ fun BottomBar(
     context: Context,
     navController: NavController
 ) {
-    var nxtButton by remember { mutableStateOf("Siguiente") }
+    var nxtButton by remember { mutableStateOf("") }
     nxtButton = if (buttonNextState) {
         "Siguiente"
     } else {
-        "Finalizar"
+        "Ir a inicio"
     }
     Card(
         Modifier
@@ -76,15 +76,13 @@ fun BottomBar(
             Button(
                 onClick = {
                     if (!buttonNextState) {
-                        // al finalizar el modulo se navega a la pantalla de
-                        // prueba final para desbloquear el siguiente modulo.
-                        navController.navigate(NavigationRoutes.Practice.route)
+                        navController.popBackStack()
                     } else {
                         viewModel.nextPage()
                     }
                     viewModel.dataSaver(context)
                 },
-                Modifier.height(48.dp).width(140.dp)
+                Modifier.height(48.dp).wrapContentWidth()
             ) {
                 Text(
                     nxtButton

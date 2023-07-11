@@ -2,7 +2,9 @@ package com.jjgn.app.devlearn.ui.components
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,10 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
-import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -37,7 +38,6 @@ fun InCourseContent(
     navController: NavController
 ) {
 
-    val testVM = hiltViewModel<TestViewModel>()
     val page by viewModel.cPageValue.collectAsState()
     val txtSize by viewModel.textSize.collectAsState()
     val textSizeState = remember { mutableStateOf(false) }
@@ -48,7 +48,7 @@ fun InCourseContent(
             .padding(top = 24.dp, bottom = 16.dp),
         topBar = { TopBar(page = page, viewModel, context, textSizeState, txtSize) },
         content = {
-            ContentView(viewModel, txtSize, textSizeState, testVM)
+            ContentView(viewModel, txtSize, textSizeState)
         },
         bottomBar = {
             BottomBar(viewModel, buttonNextState, buttonPrevState, context, navController)
@@ -57,7 +57,7 @@ fun InCourseContent(
 }
 
 @Composable
-fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<Boolean>, testVM: TestViewModel) {
+fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<Boolean>) {
     Column(
         Modifier
             .fillMaxSize()
@@ -76,6 +76,20 @@ fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<B
             lineHeight = 26.sp,
             textAlign = TextAlign.Justify
         )
+        if (1+1 == 2) {
+            Row(
+                Modifier.fillMaxWidth().wrapContentHeight().padding(top = 20.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Button(
+                    onClick = { /*TODO*/ },
+                    Modifier.padding(end = 16.dp)
+                ) {
+                    Text(text = "Practicar")
+                }
+            }
+
+        }
         Spacer(Modifier.padding(bottom = 90.dp))
     }
 }
