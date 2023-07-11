@@ -5,21 +5,25 @@ package com.jjgn.app.devlearn.controller
 import android.content.Context
 import android.preference.PreferenceManager
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jjgn.app.devlearn.ui.screens.CourseSelectorScreen
 import com.jjgn.app.devlearn.ui.screens.HomeScreen
 import com.jjgn.app.devlearn.ui.screens.InCourseScreen
+import com.jjgn.app.devlearn.ui.screens.PracticeScreen
 import com.jjgn.app.devlearn.ui.screens.Preferences
 import com.jjgn.app.devlearn.ui.screens.WelcomeScreen
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
 fun NvController(
     viewModel: AppViewModel,
     context: Context
 ) {
+    val testViewModel = hiltViewModel<TestViewModel>()
     val navController = rememberNavController()
     val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     val firstCourseSelected = preferences.getBoolean("firstCourseSelected", false)
@@ -36,7 +40,7 @@ fun NvController(
             WelcomeScreen(navController)
         }
         composable(NavigationRoutes.Home.route) {
-            HomeScreen(navController, viewModel, context)
+            HomeScreen(navController, viewModel, context, testViewModel)
         }
         composable(NavigationRoutes.Courses.route) {
             CourseSelectorScreen(
@@ -49,7 +53,7 @@ fun NvController(
             InCourseScreen(viewModel, context, navController)
         }
         composable(NavigationRoutes.Practice.route) {
-
+            PracticeScreen(navController, testViewModel)
         }
         composable(NavigationRoutes.Preferences.route) {
             Preferences()
