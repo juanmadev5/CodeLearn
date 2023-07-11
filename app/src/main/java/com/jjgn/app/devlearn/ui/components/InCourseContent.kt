@@ -2,9 +2,7 @@ package com.jjgn.app.devlearn.ui.components
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,7 +45,7 @@ fun InCourseContent(
             .padding(top = 24.dp, bottom = 16.dp),
         topBar = { TopBar(page = page, viewModel, context, textSizeState, txtSize) },
         content = {
-            ContentView(viewModel, txtSize, textSizeState)
+            ContentView(viewModel, txtSize, textSizeState, navController)
         },
         bottomBar = {
             BottomBar(viewModel, buttonNextState, buttonPrevState, context, navController)
@@ -57,7 +54,7 @@ fun InCourseContent(
 }
 
 @Composable
-fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<Boolean>) {
+fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<Boolean>, navController: NavController) {
     Column(
         Modifier
             .fillMaxSize()
@@ -76,20 +73,7 @@ fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<B
             lineHeight = 26.sp,
             textAlign = TextAlign.Justify
         )
-        if (1+1 == 2) {
-            Row(
-                Modifier.fillMaxWidth().wrapContentHeight().padding(top = 20.dp),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Button(
-                    onClick = { /*TODO*/ },
-                    Modifier.padding(end = 16.dp)
-                ) {
-                    Text(text = "Practicar")
-                }
-            }
-
-        }
+        PracticeButton(viewModel, navController)
         Spacer(Modifier.padding(bottom = 90.dp))
     }
 }
