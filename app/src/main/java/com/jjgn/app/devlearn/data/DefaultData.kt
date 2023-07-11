@@ -6,7 +6,6 @@ import com.jjgn.app.devlearn.R
 /**
  * Propiedades que AppViewModel implementa. Varios son por defecto.
  * */
-
 interface DefaultData {
 
     val pName: String
@@ -35,12 +34,12 @@ interface DefaultData {
             "Python"
         )
 
-    val cDescription: List<String>
+    val cDescription: List<Int>
         get() = listOf(
-            "Lenguaje de programación moderno y conciso para la plataforma Java. Destaca por su seguridad de tipo y capacidad de interoperabilidad.",
-            "Lenguaje de programación popular y ampliamente utilizado. Es orientado a objetos y se caracteriza por su portabilidad y escalabilidad.",
-            "Lenguaje de programación interpretado, utilizado principalmente para el desarrollo web. Permite la interacción dinámica con los elementos de una página.",
-            "Lenguaje de programación versátil y fácil de aprender. Se utiliza en una amplia gama de aplicaciones, desde desarrollo web hasta análisis de datos."
+            R.string.ktDesc,
+            R.string.jvDesc,
+            R.string.jsDesc,
+            R.string.pyDesc
         )
 
     val cLogo: List<Int>
