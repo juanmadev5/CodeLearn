@@ -46,29 +46,29 @@ fun HomeContent(
 
     val m1Progress = remember {
         when (viewModel.currentState.value) {
-            is Current.KT -> viewModel.cModulesCurrentPage[0]
-            is Current.JV -> viewModel.cModulesCurrentPage[3]
-            is Current.JS -> viewModel.cModulesCurrentPage[6]
-            is Current.PY -> viewModel.cModulesCurrentPage[9]
-            else -> viewModel.cModulesCurrentPage[12]
+            is Current.KT -> viewModel.mPage[0]
+            is Current.JV -> viewModel.mPage[3]
+            is Current.JS -> viewModel.mPage[6]
+            is Current.PY -> viewModel.mPage[9]
+            else -> viewModel.mPage[12]
         }
     }
     val m2Progress = remember {
         when (viewModel.currentState.value) {
-            is Current.KT -> viewModel.cModulesCurrentPage[1]
-            is Current.JV -> viewModel.cModulesCurrentPage[4]
-            is Current.JS -> viewModel.cModulesCurrentPage[7]
-            is Current.PY -> viewModel.cModulesCurrentPage[10]
-            else -> viewModel.cModulesCurrentPage[12]
+            is Current.KT -> viewModel.mPage[1]
+            is Current.JV -> viewModel.mPage[4]
+            is Current.JS -> viewModel.mPage[7]
+            is Current.PY -> viewModel.mPage[10]
+            else -> viewModel.mPage[12]
         }
     }
     val m3Progress = remember {
         when (viewModel.currentState.value) {
-            is Current.KT -> viewModel.cModulesCurrentPage[2]
-            is Current.JV -> viewModel.cModulesCurrentPage[5]
-            is Current.JS -> viewModel.cModulesCurrentPage[8]
-            is Current.PY -> viewModel.cModulesCurrentPage[11]
-            else -> viewModel.cModulesCurrentPage[12]
+            is Current.KT -> viewModel.mPage[2]
+            is Current.JV -> viewModel.mPage[5]
+            is Current.JS -> viewModel.mPage[8]
+            is Current.PY -> viewModel.mPage[11]
+            else -> viewModel.mPage[12]
         }
     }
 
@@ -96,7 +96,7 @@ fun HomeContent(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = viewModel.langName,
+                    text = viewModel.lName,
                     Modifier.padding(24.dp),
                     fontSize = 20.sp
                 )
@@ -132,7 +132,7 @@ fun HomeContent(
                 }
         ) {
             ModuleCardContent1(
-                currentLanguage = viewModel.langName,
+                currentLanguage = viewModel.lName,
                 m1Progress,
                 viewModel
             )

@@ -38,7 +38,7 @@ fun InCourseContent(
 ) {
 
     val testVM = hiltViewModel<TestViewModel>()
-    val page by viewModel.currentPageValue.collectAsState()
+    val page by viewModel.cPageValue.collectAsState()
     val txtSize by viewModel.textSize.collectAsState()
     val textSizeState = remember { mutableStateOf(false) }
 
@@ -67,7 +67,7 @@ fun ContentView(viewModel: AppViewModel, txtSize: Int, zoomState: MutableState<B
         Spacer(Modifier.padding(top = 70.dp))
 
         Text(
-            text = viewModel.infoString.value,
+            text = viewModel.information.value,
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()

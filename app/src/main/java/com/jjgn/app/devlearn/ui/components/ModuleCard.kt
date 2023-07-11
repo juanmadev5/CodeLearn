@@ -27,11 +27,11 @@ fun ModuleCardContent1(
     viewModel: AppViewModel
 ) {
     val pages = when (viewModel.currentState.value) {
-        is Current.KT -> viewModel.cModulesTPages[0]
-        is Current.JV -> viewModel.cModulesTPages[3]
-        is Current.JS -> viewModel.cModulesTPages[6]
-        is Current.PY -> viewModel.cModulesTPages[9]
-        else -> viewModel.cModulesTPages[12]
+        is Current.KT -> viewModel.tPages[0]
+        is Current.JV -> viewModel.tPages[3]
+        is Current.JS -> viewModel.tPages[6]
+        is Current.PY -> viewModel.tPages[9]
+        else -> viewModel.tPages[12]
     }
     ConstraintLayout(
         Modifier
@@ -101,11 +101,11 @@ fun ModuleCardContent2(
         desc = "Aprende a usar las funciones y las listas."
     }
     val pages = when (viewModel.currentState.value) {
-        is Current.KT -> viewModel.cModulesTPages[1]
-        is Current.JV -> viewModel.cModulesTPages[4]
-        is Current.JS -> viewModel.cModulesTPages[7]
-        is Current.PY -> viewModel.cModulesTPages[10]
-        else -> viewModel.cModulesTPages[12]
+        is Current.KT -> viewModel.tPages[1]
+        is Current.JV -> viewModel.tPages[4]
+        is Current.JS -> viewModel.tPages[7]
+        is Current.PY -> viewModel.tPages[10]
+        else -> viewModel.tPages[12]
     }
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (title, description, progressBar, image) = createRefs()
@@ -157,11 +157,11 @@ fun ModuleCardContent3(
         desc = ""
     }
     val pages = when (viewModel.currentState.value) {
-        is Current.KT -> viewModel.cModulesTPages[2]
-        is Current.JV -> viewModel.cModulesTPages[5]
-        is Current.JS -> viewModel.cModulesTPages[8]
-        is Current.PY -> viewModel.cModulesTPages[11]
-        else -> viewModel.cModulesTPages[12]
+        is Current.KT -> viewModel.tPages[2]
+        is Current.JV -> viewModel.tPages[5]
+        is Current.JS -> viewModel.tPages[8]
+        is Current.PY -> viewModel.tPages[11]
+        else -> viewModel.tPages[12]
     }
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (title, description, progressBar, image) = createRefs()

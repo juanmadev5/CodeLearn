@@ -11,9 +11,9 @@ fun ButtonController(
     buttonNextState: MutableState<Boolean>,
     buttonPrevState: MutableState<Boolean>
 ) {
-    LaunchedEffect(viewModel.currentPageValue) {
-        viewModel.currentPageValue.collect { currentPage ->
-            buttonNextState.value = currentPage < viewModel.totalPages
+    LaunchedEffect(viewModel.cPageValue) {
+        viewModel.cPageValue.collect { currentPage ->
+            buttonNextState.value = currentPage < viewModel.tlPages
             buttonPrevState.value = currentPage > 1
         }
     }
