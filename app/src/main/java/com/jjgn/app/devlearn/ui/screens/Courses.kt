@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.ui.components.CourseCard
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -27,7 +28,7 @@ fun CourseSelectorScreen(
     LazyColumn(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Text(
-                text = "Seleccione un curso",
+                text = stringResource(R.string.selectCourse),
                 Modifier
                     .padding(
                         top = 96.dp,

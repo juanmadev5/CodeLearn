@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 
 @Composable
@@ -29,7 +31,7 @@ fun WelcomeScreen(navController: NavController) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                "Bienvenido!",
+                stringResource(R.string.welcome),
                 fontSize = 30.sp
             )
             Spacer(Modifier.padding(top = 90.dp))
@@ -42,7 +44,7 @@ fun WelcomeScreen(navController: NavController) {
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowForward,
-                    contentDescription = null,
+                    contentDescription = stringResource(R.string.welcomeDesc),
                     Modifier.size(40.dp),
                     tint = MaterialTheme.colorScheme.onSecondary
                 )

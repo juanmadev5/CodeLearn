@@ -24,9 +24,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
@@ -107,7 +109,7 @@ fun TopBar(
 @Composable
 fun CurrentPage(page: Int) {
     Text(
-        "Página $page",
+        stringResource(R.string.page) + page,
         fontSize = 14.sp,
         color = MaterialTheme.colorScheme.onSurface,
         fontWeight = FontWeight.Bold

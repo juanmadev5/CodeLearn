@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,7 +41,7 @@ fun ModuleCardContent1(
     ) {
         val (title, description, progressBar, image) = createRefs()
         Image(
-            painter = painterResource(id = R.drawable.programmingillustration), "",
+            painter = painterResource(id = R.drawable.programmingillustration), stringResource(R.string.languageIcon),
             Modifier.constrainAs(image) {
                 top.linkTo(parent.top, 8.dp)
                 start.linkTo(parent.start)
@@ -48,7 +49,7 @@ fun ModuleCardContent1(
             }
         )
         Text(
-            text = "Conceptos basicos de $currentLanguage",
+            text = stringResource(R.string.basicsOf) + currentLanguage,
             Modifier.constrainAs(title) {
                 top.linkTo(image.bottom, 16.dp)
                 start.linkTo(image.start)
@@ -58,8 +59,7 @@ fun ModuleCardContent1(
             fontSize = 20.sp
         )
         Text(
-            text = "Aprenda sobres lo basico de $currentLanguage como las variables y como se declaran," +
-                    "los tipos de datos, los operadores y las estructuras de control.",
+            text = stringResource(R.string.cardDesc1),
             Modifier.constrainAs(description) {
                 top.linkTo(title.bottom, 10.dp)
                 start.linkTo(parent.start)
@@ -87,7 +87,7 @@ fun ModuleCardContent2(
     viewModel: AppViewModel,
     testViewModel: TestViewModel
 ) {
-    var tit by remember { mutableStateOf("Termina el módulo 1 para seguir.") }
+    var tit by remember { mutableStateOf("") }
     var desc by remember { mutableStateOf("") }
     val currentUnlckState = when (viewModel.currentState.value) {
         is Current.KT -> testViewModel.mUnlocked[1]
@@ -97,8 +97,10 @@ fun ModuleCardContent2(
         else -> testViewModel.mUnlocked[0]
     }
     if (currentUnlckState) {
-        tit = "Funciones y arreglos"
-        desc = "Aprende a usar las funciones y las listas."
+        tit = stringResource(R.string.fnArray)
+        desc = stringResource(R.string.fnArrayDesc)
+    } else {
+        tit = stringResource(R.string.unlockmodule2)
     }
     val pages = when (viewModel.currentState.value) {
         is Current.KT -> viewModel.tPages[1]
@@ -143,7 +145,7 @@ fun ModuleCardContent3(
     viewModel: AppViewModel,
     testViewModel: TestViewModel
 ) {
-    var tit by remember { mutableStateOf("Termina el módulo 2 para seguir.") }
+    var tit by remember { mutableStateOf("") }
     var desc by remember { mutableStateOf("") }
     val currentUnlckState = when (viewModel.currentState.value) {
         is Current.KT -> testViewModel.mUnlocked[2]
@@ -155,6 +157,8 @@ fun ModuleCardContent3(
     if (currentUnlckState) {
         tit = "Programacion orientada a objetos"
         desc = ""
+    } else {
+        tit = stringResource(R.string.unlockm3)
     }
     val pages = when (viewModel.currentState.value) {
         is Current.KT -> viewModel.tPages[2]

@@ -6,4 +6,31 @@
 
     <string name="pgStringsErr1">updatePageStrings function error</string>
 
+    <string name="ktDesc">Lenguaje de programación moderno y conciso para la plataforma Java. Destaca por su seguridad de tipo y capacidad de interoperabilidad.</string>
+    <string name="jvDesc">Lenguaje de programación popular y ampliamente utilizado. Es orientado a objetos y se caracteriza por su portabilidad y escalabilidad.</string>
+    <string name="jsDesc">Lenguaje de programación interpretado, utilizado principalmente para el desarrollo web. Permite la interacción dinámica con los elementos de una página.</string>
+    <string name="pyDesc">Lenguaje de programación versátil y fácil de aprender. Se utiliza en una amplia gama de aplicaciones, desde desarrollo web hasta análisis de datos.</string>
+    <string name="welcome">Bienvenido!</string>
+    <string name="welcomeDesc">Welcome text</string>
+    <string name="courseindex">Course index</string>
+    <string name="languageIcon">language icon</string>
+    <string name="basicsOf">"Conceptos basicos de "</string>
+    <string name="cardDesc1">Aprenda sobres lo basico como las variables y como se declaran, los tipos de datos, los operadores y las estructuras de control.</string>
+    <string name="fnArray">Funciones y arreglos</string>
+    <string name="fnArrayDesc">Aprende a usar las funciones y las listas.</string>
+    <string name="unlockmodule2">Termina el módulo 1 para seguir.</string>
+    <string name="unlockm3">Termina el módulo 2 para seguir.</string>
+    <string name="pressTwice">Presione dos veces para salir</string>
+    <string name="selectCourse">Seleccione un curso</string>
+    <string name="fontSize">"Tamaño de letra "</string>
+    <string name="page">"Página "</string>
+    <string name="next">Siguiente</string>
+    <string name="go_to_home">Ir a inicio</string>
+    <string name="prev_page2">Prev page</string>
+    <string name="prev_page">Anterior</string>
+    <string name="next_page">Next page</string>
+    <string name="exam">Pon a prueba lo aprendido</string>
+    <string name="go_home">Ir al inicio</string>
+
+
 </resources>

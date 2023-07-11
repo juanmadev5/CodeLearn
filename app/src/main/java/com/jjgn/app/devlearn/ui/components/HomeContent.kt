@@ -29,9 +29,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
@@ -110,7 +112,7 @@ fun HomeContent(
             ) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
-                    "",
+                    stringResource(R.string.courseindex),
                     Modifier
                         .size(36.dp)
                         .padding(4.dp),

@@ -12,6 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.jjgn.app.devlearn.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,6 +31,7 @@ fun BackHandlerController(
     isEnabled: Boolean,
     snackbarHostState: SnackbarHostState
 ) {
+    val msg = stringResource(R.string.pressTwice)
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     var c by remember { mutableStateOf(0) }
@@ -36,8 +39,8 @@ fun BackHandlerController(
         c += 1
         if (c == 1) {
             coroutineScope.launch {
-                snackbarHostState.showSnackbar("Presione dos veces para salir")
-                delay(2000) // Mostrar Snackbar durante 2 segundos
+                snackbarHostState.showSnackbar(msg)
+                delay(2000)
                 snackbarHostState.currentSnackbarData?.dismiss()
                 c = 0
             }
