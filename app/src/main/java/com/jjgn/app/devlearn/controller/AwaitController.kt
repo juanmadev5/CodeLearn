@@ -5,6 +5,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import kotlinx.coroutines.delay
 
+/**
+ * Muestra la pantalla de espera durante 700ms en lo que la aplicacion
+ * carga los datos necesarios. Una vez pasado ese tiempo de espera
+ * muestra el contenido.
+ * */
 @Composable
 fun AwaitController(loading: MutableState<Boolean>) {
     LaunchedEffect(true) {

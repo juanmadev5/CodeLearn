@@ -18,6 +18,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.system.exitProcess
 
+/**
+ * Esta funcion se encarga de avisarle al usuario que debe apretar retroceder
+ * dos veces para cerrar la aplicacion y cerrar de forma segura
+ * la aplicacion al apretar retroceder dos veces.
+ * */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun BackHandlerController(
@@ -31,15 +36,13 @@ fun BackHandlerController(
         c += 1
         if (c == 1) {
             coroutineScope.launch {
-                // se invoca el snackbar con el mensaje
                 snackbarHostState.showSnackbar("Presione dos veces para salir")
                 delay(2000) // Mostrar Snackbar durante 2 segundos
                 snackbarHostState.currentSnackbarData?.dismiss()
-                c = 0 // Reinicia el contador después de 2 segundos
+                c = 0
             }
         } else if (c == 2) {
             coroutineScope.launch {
-                // Finaliza todas las actividades y cierra la aplicación
                 withContext(Dispatchers.IO) {
                     snackbarHostState.currentSnackbarData?.dismiss()
                     val currentActivity = context as? Activity

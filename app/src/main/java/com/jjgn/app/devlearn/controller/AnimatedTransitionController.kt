@@ -5,6 +5,10 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 
+/**
+ * Cuando el tiempo de espera ya paso, muestra el contenido
+ * aplicando una transicion suave.
+ * */
 @Composable
 fun AwaitScreenTransition(
     visible: MutableState<Boolean>,
