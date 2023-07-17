@@ -15,8 +15,8 @@ import com.jjgn.app.devlearn.ui.screens.HomeScreen
 import com.jjgn.app.devlearn.ui.screens.InCourseScreen
 import com.jjgn.app.devlearn.ui.screens.PracticeScreen
 import com.jjgn.app.devlearn.ui.screens.WelcomeScreen
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
-import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 val LocalNvController = staticCompositionLocalOf<NavController> {
     error("NavController not provided")
@@ -30,8 +30,7 @@ val LocalNvController = staticCompositionLocalOf<NavController> {
  * */
 @Composable
 fun NvController(
-    viewModel: AppViewModel,
-    testViewModel: TestViewModel,
+    viewModel: AppViewModel = AccessInstance(),
     navController: NavHostController = rememberNavController(),
     route: String = if (
         viewModel.pref.getBoolean(viewModel.fSelected, false)
@@ -46,16 +45,16 @@ fun NvController(
                 WelcomeScreen()
             }
             composable(NavigationRoutes.Home.route) {
-                HomeScreen(viewModel, testViewModel)
+                HomeScreen()
             }
             composable(NavigationRoutes.Courses.route) {
-                CourseSelectorScreen(viewModel)
+                CourseSelectorScreen()
             }
             composable(NavigationRoutes.InCourse.route) {
-                InCourseScreen(viewModel, testViewModel)
+                InCourseScreen()
             }
             composable(NavigationRoutes.Practice.route) {
-                PracticeScreen(viewModel, testViewModel)
+                PracticeScreen()
             }
             composable(NavigationRoutes.Info.route) {
 

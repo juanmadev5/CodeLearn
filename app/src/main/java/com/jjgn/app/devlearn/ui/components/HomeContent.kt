@@ -39,11 +39,12 @@ import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 
 @Composable
 fun HomeContent(
-    viewModel: AppViewModel,
-    testViewModel: TestViewModel,
+    viewModel: AppViewModel = AccessInstance(),
+    testViewModel: TestViewModel = AccessInstance(),
     navController: NavController = LocalNvController.current
 ) {
 
@@ -134,11 +135,7 @@ fun HomeContent(
                     navController.navigate(NavigationRoutes.InCourse.route)
                 }
         ) {
-            ModuleCardContent1(
-                currentLanguage = viewModel.lName,
-                m1Progress,
-                viewModel
-            )
+            ModuleCardContent1(m1Progress)
         }
         Spacer(Modifier.padding(top = 20.dp))
         Card(
@@ -154,7 +151,7 @@ fun HomeContent(
                     }
                 }
         ) {
-            ModuleCardContent2(m2Progress, viewModel, testViewModel)
+            ModuleCardContent2(m2Progress)
         }
         Spacer(Modifier.padding(top = 20.dp))
         Card(
@@ -170,7 +167,7 @@ fun HomeContent(
                     }
                 }
         ) {
-            ModuleCardContent3(m3Progress, viewModel, testViewModel)
+            ModuleCardContent3(m3Progress)
         }
     }
 }

@@ -20,12 +20,12 @@ import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 
 @Composable
 fun ModuleCardContent1(
-    currentLanguage: String,
     progress: Int,
-    viewModel: AppViewModel
+    viewModel: AppViewModel = AccessInstance()
 ) {
     val pages = when (viewModel.currentState.value) {
         is Current.KT -> viewModel.tPages[0]
@@ -49,7 +49,7 @@ fun ModuleCardContent1(
             }
         )
         Text(
-            text = stringResource(R.string.basicsOf) + currentLanguage,
+            text = stringResource(R.string.basicsOf) + viewModel.lName,
             Modifier.constrainAs(title) {
                 top.linkTo(image.bottom, 16.dp)
                 start.linkTo(image.start)
@@ -84,8 +84,8 @@ fun ModuleCardContent1(
 @Composable
 fun ModuleCardContent2(
     progress: Int,
-    viewModel: AppViewModel,
-    testViewModel: TestViewModel
+    viewModel: AppViewModel = AccessInstance(),
+    testViewModel: TestViewModel = AccessInstance()
 ) {
     var tit by remember { mutableStateOf("") }
     var desc by remember { mutableStateOf("") }
@@ -142,8 +142,8 @@ fun ModuleCardContent2(
 @Composable
 fun ModuleCardContent3(
     progress: Int,
-    viewModel: AppViewModel,
-    testViewModel: TestViewModel
+    viewModel: AppViewModel = AccessInstance(),
+    testViewModel: TestViewModel = AccessInstance()
 ) {
     var tit by remember { mutableStateOf("") }
     var desc by remember { mutableStateOf("") }

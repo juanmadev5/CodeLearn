@@ -3,6 +3,7 @@ package com.jjgn.app.devlearn.controller
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 /**
@@ -12,9 +13,9 @@ import com.jjgn.app.devlearn.viewmodel.AppViewModel
  * */
 @Composable
 fun ButtonController(
-    viewModel: AppViewModel,
     buttonNextState: MutableState<Boolean>,
-    buttonPrevState: MutableState<Boolean>
+    buttonPrevState: MutableState<Boolean>,
+    viewModel: AppViewModel = AccessInstance()
 ) {
     LaunchedEffect(viewModel.cPageValue) {
         viewModel.cPageValue.collect { currentPage ->

@@ -20,16 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun InCourseContent(
-    viewModel: AppViewModel,
     buttonNextState: Boolean,
     buttonPrevState: Boolean,
-    testViewModel: TestViewModel
+    viewModel: AppViewModel = AccessInstance()
 ) {
     val page by viewModel.cPageValue.collectAsState()
     val txtSize by viewModel.textSize.collectAsState()
@@ -38,21 +38,21 @@ fun InCourseContent(
         Modifier
             .fillMaxSize()
             .padding(top = 24.dp, bottom = 16.dp),
-        topBar = { TopBar(page = page, viewModel, textSizeState, txtSize) },
+        topBar = { TopBar(page = page, textSizeState, txtSize) },
         content = {
-            ContentView(viewModel, txtSize, testViewModel)
+            ContentView(txtSize)
         },
         bottomBar = {
-            BottomBar(viewModel, buttonNextState, buttonPrevState)
+            BottomBar(buttonNextState, buttonPrevState)
         }
     )
 }
 
 @Composable
 fun ContentView(
-    viewModel: AppViewModel,
     txtSize: Int,
-    testViewModel: TestViewModel
+    viewModel: AppViewModel = AccessInstance(),
+    testViewModel: TestViewModel = AccessInstance()
 ) {
     Column(
         Modifier
@@ -61,7 +61,6 @@ fun ContentView(
             .verticalScroll(rememberScrollState())
     ) {
         Spacer(Modifier.padding(top = 70.dp))
-
         Text(
             text = viewModel.information.value,
             Modifier

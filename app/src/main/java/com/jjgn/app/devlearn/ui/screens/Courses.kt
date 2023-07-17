@@ -15,10 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.ui.components.CourseCard
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun CourseSelectorScreen(viewModel: AppViewModel) {
+fun CourseSelectorScreen(viewModel: AppViewModel = AccessInstance()) {
     LazyColumn(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Text(

@@ -30,15 +30,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
 fun TopBar(
     page: Int,
-    viewModel: AppViewModel,
     textSizeState: MutableState<Boolean>,
     txtSize: Int,
-    context: Context = LocalContext.current
+    context: Context = LocalContext.current,
+    viewModel: AppViewModel = AccessInstance()
 ) {
     Card(
         Modifier

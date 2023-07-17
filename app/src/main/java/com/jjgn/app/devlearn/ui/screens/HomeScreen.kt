@@ -8,19 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.jjgn.app.devlearn.controller.BackHandlerController
 import com.jjgn.app.devlearn.ui.components.HomeContent
-import com.jjgn.app.devlearn.viewmodel.AppViewModel
-import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(
-    viewModel: AppViewModel,
-    testViewModel: TestViewModel
-) {
+fun HomeScreen() {
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         content = {
-            HomeContent(viewModel, testViewModel)
+            HomeContent()
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     )

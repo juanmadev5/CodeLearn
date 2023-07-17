@@ -9,22 +9,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.jjgn.app.devlearn.controller.AwaitController
 import com.jjgn.app.devlearn.controller.AwaitScreenTransition
 import com.jjgn.app.devlearn.controller.NvController
 import com.jjgn.app.devlearn.ui.screens.AwaitScreen
 import com.jjgn.app.devlearn.ui.theme.DevLearnTheme
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
-import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 /**
  * Funcion Composable donde se establece el contenido a mostrarse.
  * */
 @Composable
 fun Content(
-    viewModel: AppViewModel = hiltViewModel(),
-    testViewModel: TestViewModel = hiltViewModel(),
+    viewModel: AppViewModel = AccessInstance(),
     loading: MutableState<Boolean> = remember { mutableStateOf(true) },
 ) {
     viewModel.starter(LocalContext.current)
@@ -35,7 +33,7 @@ fun Content(
             color = MaterialTheme.colorScheme.background
         ) {
             AwaitScreenTransition(visible = loading) {
-                NvController(viewModel, testViewModel)
+                NvController()
             }
             if (loading.value) {
                 AwaitScreen()

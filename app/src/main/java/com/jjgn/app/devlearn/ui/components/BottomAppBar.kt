@@ -31,15 +31,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNvController
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
 fun BottomBar(
-    viewModel: AppViewModel,
     buttonNextState: Boolean,
     buttonPrevState: Boolean,
     navController: NavController = LocalNvController.current,
-    context: Context = LocalContext.current
+    context: Context = LocalContext.current,
+    viewModel: AppViewModel = AccessInstance()
 ) {
     var nxtButton by remember { mutableStateOf("") }
     nxtButton = if (buttonNextState) {
@@ -66,7 +67,9 @@ fun BottomBar(
                     viewModel.prevPage()
                     viewModel.dataSaver(context)
                 },
-                Modifier.height(48.dp).width(140.dp),
+                Modifier
+                    .height(48.dp)
+                    .width(140.dp),
                 enabled = buttonPrevState
             ) {
                 Icon(
@@ -86,7 +89,9 @@ fun BottomBar(
                     }
                     viewModel.dataSaver(context)
                 },
-                Modifier.height(48.dp).wrapContentWidth()
+                Modifier
+                    .height(48.dp)
+                    .wrapContentWidth()
             ) {
                 Text(
                     nxtButton

@@ -34,13 +34,12 @@ import com.jjgn.app.devlearn.ui.components.Container3
 import com.jjgn.app.devlearn.ui.components.Container4
 import com.jjgn.app.devlearn.ui.components.Container5
 import com.jjgn.app.devlearn.ui.components.Container6
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
 fun PracticeScreen(
-    appViewModel: AppViewModel,
-    testViewModel: TestViewModel,
     navController: NavController = LocalNvController.current
 ) {
     val show = remember {
@@ -64,7 +63,7 @@ fun PracticeScreen(
                 fontWeight = FontWeight.Light
             )
         }
-        MainContainer(appViewModel, testViewModel, show)
+        MainContainer(show)
         if (show.value) {
             Row(
                 Modifier
@@ -88,9 +87,9 @@ fun PracticeScreen(
 
 @Composable
 fun MainContainer(
-    appViewModel: AppViewModel,
-    testViewModel: TestViewModel,
-    show: MutableState<Boolean>
+    show: MutableState<Boolean>,
+    appViewModel: AppViewModel = AccessInstance(),
+    testViewModel: TestViewModel = AccessInstance()
 ) {
     when (appViewModel.currentState.value) {
         Current.KT -> {
