@@ -29,8 +29,13 @@
     <string name="prev_page2">Prev page</string>
     <string name="prev_page">Anterior</string>
     <string name="next_page">Next page</string>
-    <string name="exam">Pon a prueba lo aprendido</string>
-    <string name="go_home">Ir al inicio</string>
+    <string name="exam">Práctica</string>
+    <string name="go_home">Continuar</string>
+    <string name="verify">Verificar</string>
+    <string name="correct">"Correcto. "</string>
+    <string name="incorrect">"Incorrecto. "</string>
+    <string name="result">"Resultado: "</string>
+    <string name="expected">"Se esperaba: "</string>
 
 
 </resources>
