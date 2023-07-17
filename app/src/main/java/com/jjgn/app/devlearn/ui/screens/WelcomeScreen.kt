@@ -24,10 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.controller.LocalNvController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 
 @Composable
-fun WelcomeScreen(navController: NavController) {
+fun WelcomeScreen(navController: NavController = LocalNvController.current) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             Text(

@@ -1,6 +1,5 @@
 package com.jjgn.app.devlearn.ui.screens
 
-import android.content.SharedPreferences
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,17 +13,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.ui.components.CourseCard
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun CourseSelectorScreen(
-    viewModel: AppViewModel,
-    navController: NavController,
-    preference: SharedPreferences
-) {
+fun CourseSelectorScreen(viewModel: AppViewModel) {
     LazyColumn(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Text(
@@ -45,9 +39,7 @@ fun CourseSelectorScreen(
                 title = viewModel.cList[it],
                 description = stringResource(viewModel.cDescription[it]),
                 logo = viewModel.cLogo[it],
-                viewModel = viewModel,
-                navController = navController,
-                preferences = preference
+                viewModel = viewModel
             )
             Spacer(Modifier.padding(5.dp))
         }

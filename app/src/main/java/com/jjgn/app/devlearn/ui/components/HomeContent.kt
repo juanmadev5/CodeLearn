@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.controller.LocalNvController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
@@ -43,7 +44,7 @@ import com.jjgn.app.devlearn.viewmodel.TestViewModel
 fun HomeContent(
     viewModel: AppViewModel,
     testViewModel: TestViewModel,
-    navController: NavController
+    navController: NavController = LocalNvController.current
 ) {
 
     val m1Progress = remember {
@@ -104,7 +105,7 @@ fun HomeContent(
                 )
             }
             IconButton(
-                onClick = { navController.navigate(NavigationRoutes.Preferences.route) },
+                onClick = { navController.navigate(NavigationRoutes.Info.route) },
                 Modifier
                     .wrapContentSize()
                     .clip(RoundedCornerShape(14.dp))

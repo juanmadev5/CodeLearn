@@ -1,6 +1,5 @@
 package com.jjgn.app.devlearn.ui.components
 
-import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.controller.LocalNvController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
@@ -30,8 +30,7 @@ fun CourseCard(
     description: String,
     logo: Int,
     viewModel: AppViewModel,
-    navController: NavController,
-    preferences: SharedPreferences
+    navController: NavController = LocalNvController.current
 ) {
     Card(
         Modifier
@@ -39,9 +38,9 @@ fun CourseCard(
             .height(228.dp)
             .clip(RoundedCornerShape(14.dp))
             .clickable {
-                preferences
+                viewModel.pref
                     .edit()
-                    .putBoolean("firstCourseSelected", true)
+                    .putBoolean(viewModel.fSelected, true)
                     .apply()
                 when (title) {
                     "Python" -> {

@@ -1,16 +1,18 @@
 package com.jjgn.app.devlearn.ui.screens
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.navigation.NavController
 import com.jjgn.app.devlearn.controller.ButtonController
 import com.jjgn.app.devlearn.ui.components.InCourseContent
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
-fun InCourseScreen(viewModel: AppViewModel, context: Context, navController: NavController) {
+fun InCourseScreen(
+    viewModel: AppViewModel,
+    testViewModel: TestViewModel
+) {
     val buttonNextState = remember {
         mutableStateOf(false)
     }
@@ -21,8 +23,7 @@ fun InCourseScreen(viewModel: AppViewModel, context: Context, navController: Nav
         viewModel,
         buttonNextState.value,
         buttonPrevState.value,
-        context,
-        navController
+        testViewModel
     )
     ButtonController(
         viewModel,

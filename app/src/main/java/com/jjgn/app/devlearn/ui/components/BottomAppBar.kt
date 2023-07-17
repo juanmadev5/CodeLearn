@@ -25,10 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.controller.LocalNvController
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
@@ -36,8 +38,8 @@ fun BottomBar(
     viewModel: AppViewModel,
     buttonNextState: Boolean,
     buttonPrevState: Boolean,
-    context: Context,
-    navController: NavController
+    navController: NavController = LocalNvController.current,
+    context: Context = LocalContext.current
 ) {
     var nxtButton by remember { mutableStateOf("") }
     nxtButton = if (buttonNextState) {
