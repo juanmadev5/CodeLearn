@@ -17,7 +17,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
@@ -60,7 +59,9 @@ fun ContentView(
             .padding(12.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(Modifier.padding(top = 70.dp))
+        Spacer(Modifier.padding(top = 50.dp))
+        PracticeButton(viewModel, testViewModel)
+        Spacer(Modifier.padding(top = 20.dp))
         Text(
             text = viewModel.information.value,
             Modifier
@@ -68,10 +69,8 @@ fun ContentView(
                 .wrapContentHeight()
                 .padding(start = 6.dp, end = 6.dp),
             fontSize = txtSize.sp,
-            lineHeight = 26.sp,
-            textAlign = TextAlign.Justify
+            lineHeight = 26.sp
         )
-        PracticeButton(viewModel, testViewModel)
         Spacer(Modifier.padding(bottom = 90.dp))
     }
 }

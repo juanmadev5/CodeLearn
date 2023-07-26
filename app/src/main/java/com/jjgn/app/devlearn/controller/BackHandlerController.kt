@@ -40,7 +40,7 @@ fun BackHandlerController(
         if (c == 1) {
             coroutineScope.launch {
                 snackbarHostState.showSnackbar(msg)
-                delay(2000)
+                delay(1500)
                 snackbarHostState.currentSnackbarData?.dismiss()
                 c = 0
             }

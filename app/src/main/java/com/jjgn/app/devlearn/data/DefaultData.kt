@@ -20,6 +20,9 @@ interface DefaultData {
     val mCurrentPage: String
         get() = "current_page-"
 
+    val fSelected: String
+        get() = "firstSelected"
+
     var pref: SharedPreferences
 
     var lName: String

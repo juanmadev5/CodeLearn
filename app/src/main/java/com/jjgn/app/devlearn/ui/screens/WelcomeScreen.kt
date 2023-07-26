@@ -1,5 +1,6 @@
 package com.jjgn.app.devlearn.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,23 +20,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
-import com.jjgn.app.devlearn.controller.LocalNvController
+import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 
 @Composable
-fun WelcomeScreen(navController: NavController = LocalNvController.current) {
+fun WelcomeScreen(navController: NavController = LocalNavigationController.current) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(id = R.drawable.undraw_welcoming_re_x0qo__1_),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(200.dp)
+            )
+            Spacer(modifier = Modifier.padding(30.dp))
             Text(
                 stringResource(R.string.welcome),
-                fontSize = 30.sp
+                fontSize = 26.sp
             )
-            Spacer(Modifier.padding(top = 90.dp))
+            Spacer(Modifier.padding(top = 60.dp))
             IconButton(
                 onClick = { navController.navigate(NavigationRoutes.Courses.route) },
                 Modifier

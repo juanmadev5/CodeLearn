@@ -39,7 +39,7 @@ fun KotlinM1Task1(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.ej1
+    val exercise = testViewModel.ktTask1
     var textvalue by remember { mutableStateOf("print") }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
@@ -130,7 +130,7 @@ fun KotlinM1Task2(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.ej2
+    val exercise = testViewModel.ktTask2
     var textvalue by remember { mutableStateOf("") }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
@@ -221,7 +221,7 @@ fun KotlinM1Task3(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.ej3
+    val exercise = testViewModel.ktTask3
     var textvalue by remember { mutableStateOf("") }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
@@ -312,7 +312,7 @@ fun KotlinM1Task4(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.ej4
+    val exercise = testViewModel.ktTask4
     var textvalue by remember { mutableStateOf("""
         val añosExperiencia = 2
         if () {
@@ -410,7 +410,7 @@ fun KotlinM1Task5(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.ej5
+    val exercise = testViewModel.ktTask5
     var textvalue by remember { mutableStateOf("""
         val dia = 2
         when (dia) {
@@ -509,7 +509,7 @@ fun KotlinM1Task6(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.ej6
+    val exercise = testViewModel.ktTask6
     var textvalue by remember { mutableStateOf("fun sumar()") }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
@@ -589,6 +589,294 @@ fun KotlinM1Task6(
                     } else {
                         stringResource(R.string.incorrect) + "\n" + stringResource(R.string.expected) +
                                 "8"
+                    },
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+@Composable
+fun KotlinM1Task7(
+    testViewModel: TestViewModel,
+    showBtn: MutableState<Boolean>
+) {
+    val exercise = testViewModel.ktTask7
+    var textvalue by remember { mutableStateOf("fun multiplicar(a, b)") }
+    var btnTextValue by remember { mutableStateOf("Verificar") }
+    var show by remember {
+        mutableStateOf(false)
+    }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp)
+        ) {
+            Text(
+                "7 - modifica la funcion para que reciba dos numeros como parametro" +
+                        " y imprima el resultado de la multiplicacion.",
+                fontSize = 16.sp
+            )
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    show = true
+                    keyboardController?.hide()
+                    btnTextValue = "Verificado"
+                    if (textvalue == exercise) {
+                        showBtn.value = true
+                        testViewModel.mCounterSum()
+                    }
+                }
+            ) {
+                Text(btnTextValue)
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 12.dp, bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            OutlinedTextField(
+                value = textvalue,
+                onValueChange = {
+                    textvalue = it
+                    show = false
+                    showBtn.value = false
+                    btnTextValue = "Verificar"
+                },
+                Modifier.size(380.dp, 130.dp)
+            )
+        }
+
+        if (show) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(8.dp)
+            ) {
+                Text(
+                    text = if (textvalue == exercise) {
+                        stringResource(R.string.correct)
+                    } else {
+                        stringResource(R.string.incorrect) + "\n" + stringResource(R.string.expected) +
+                                "a*b = c"
+                    },
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+@Composable
+fun KotlinM1Task8(
+    testViewModel: TestViewModel,
+    showBtn: MutableState<Boolean>
+) {
+    val exercise = testViewModel.ktTask8
+    var textvalue by remember { mutableStateOf("val num = arrayOf(1, 2, 3, 4, 5)") }
+    var btnTextValue by remember { mutableStateOf("Verificar") }
+    var show by remember {
+        mutableStateOf(false)
+    }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp)
+        ) {
+            Text(
+                "8 - De la siguiente lista, imprime el numero 3",
+                fontSize = 16.sp
+            )
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    show = true
+                    keyboardController?.hide()
+                    btnTextValue = "Verificado"
+                    if (textvalue == exercise) {
+                        showBtn.value = true
+                        testViewModel.mCounterSum()
+                    }
+                }
+            ) {
+                Text(btnTextValue)
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 12.dp, bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            OutlinedTextField(
+                value = textvalue,
+                onValueChange = {
+                    textvalue = it
+                    show = false
+                    showBtn.value = false
+                    btnTextValue = "Verificar"
+                },
+                Modifier.size(380.dp, 130.dp)
+            )
+        }
+
+        if (show) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(8.dp)
+            ) {
+                Text(
+                    text = if (textvalue == exercise) {
+                        stringResource(R.string.correct) + "\n" + stringResource(R.string.result) +
+                                "3"
+                    } else {
+                        stringResource(R.string.incorrect) + "\n" + stringResource(R.string.expected) +
+                                "3"
+                    },
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+@Composable
+fun KotlinM1Task9(
+    testViewModel: TestViewModel,
+    showBtn: MutableState<Boolean>
+) {
+    val exercise = testViewModel.ktTask9
+    var textvalue by remember { mutableStateOf(
+        """
+        interface Reproducible {
+            fun reproducir()
+            fun detener()
+            
+        }
+        class Musica : Reproducible {
+            override fun reproducir() {
+                println("Reproduciendo música...")
+            }
+            override fun detener() {
+                println("Deteniendo reproducción de música.")
+            }
+            
+        }
+        """.trimIndent()
+    ) }
+    var btnTextValue by remember { mutableStateOf("Verificar") }
+    var show by remember {
+        mutableStateOf(false)
+    }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp)
+        ) {
+            Text(
+                "9 - Modifica el siguiente codigo y agregale la funcion de pausar",
+                fontSize = 16.sp
+            )
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    show = true
+                    keyboardController?.hide()
+                    btnTextValue = "Verificado"
+                    if (textvalue == exercise) {
+                        showBtn.value = true
+                        testViewModel.mCounterSum()
+                    }
+                }
+            ) {
+                Text(btnTextValue)
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 12.dp, bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            OutlinedTextField(
+                value = textvalue,
+                onValueChange = {
+                    textvalue = it
+                    show = false
+                    showBtn.value = false
+                    btnTextValue = "Verificar"
+                },
+                Modifier.size(380.dp, 380.dp)
+            )
+        }
+
+        if (show) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(8.dp)
+            ) {
+                Text(
+                    text = if (textvalue == exercise) {
+                        stringResource(R.string.correct)
+                    } else {
+                        stringResource(R.string.incorrect)
                     },
                     fontSize = 12.sp
                 )

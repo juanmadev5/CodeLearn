@@ -35,8 +35,9 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
                 var edad = 25
                 
-                // cambiamos el valor de la variable
-                edad = 26  
+                // cambiamos el valor de la variable y lo imprimimos.
+                edad = 26
+                println(edad)
 
                 Si deseas declarar una variable cuyo valor no puede cambiar, se utiliza la palabra clave "val" para declarar una variable inmutable.
                 Por ejemplo:  
@@ -612,9 +613,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 fun calcularVolumen(ancho: Int, alto: Int, profundidad: Int) {
                     // Cálculo del volumen
                 }
-
                 calcularVolumen(ancho = 10, profundidad = 5, alto = 3)
-
             """.trimIndent()
         }
 

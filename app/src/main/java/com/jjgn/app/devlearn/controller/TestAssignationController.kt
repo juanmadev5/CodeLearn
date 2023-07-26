@@ -25,54 +25,86 @@ fun testAssignationController(appViewModel: AppViewModel, testViewModel: TestVie
                     }
                 }
                 Module.KTM2 -> {
-                    TODO()
+                    when (appViewModel.cPageValue.value) {
+                        4 -> testViewModel.setCurrentTest(7)
+                        6 -> testViewModel.setCurrentTest(8)
+                    }
                 }
                 Module.KTM3 -> {
-                    TODO()
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
                 }
-                Module.JVM1 -> {
-                    TODO()
-                }
-                Module.JVM2 -> {
-                    TODO()
-                }
-                Module.JVM3 -> {
-                    TODO()
-                }
-                Module.JSM1 -> {
-                    TODO()
-                }
-                Module.JSM2 -> {
-                    TODO()
-                }
-                Module.JSM3 -> {
-                    TODO()
-                }
-                Module.PYM1 -> {
-                    TODO()
-                }
-                Module.PYM2 -> {
-                    TODO()
-                }
-                Module.PYM3 -> {
-                    TODO()
-                }
-                Module.NM -> {
-                    TODO()
-                }
-                null -> {
-                    TODO()
+                else -> {
+
                 }
             }
         }
         Current.JV -> {
-            TODO()
+            when (appViewModel.currentMState.value) {
+                Module.JVM1 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                Module.JVM2 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                Module.JVM3 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                else -> {
+
+                }
+            }
         }
         Current.JS -> {
-            TODO()
+            when (appViewModel.currentMState.value) {
+                Module.JSM1 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                Module.JSM2 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                Module.JSM3 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                else -> {
+
+                }
+            }
         }
         Current.PY -> {
-            TODO()
+            when (appViewModel.currentMState.value) {
+                Module.PYM1 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                Module.PYM2 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                Module.PYM3 -> {
+                    when (appViewModel.cPageValue.value) {
+                        11 -> testViewModel.setCurrentTest(9)
+                    }
+                }
+                else -> {
+
+                }
+            }
         }
         null -> {
             TODO()

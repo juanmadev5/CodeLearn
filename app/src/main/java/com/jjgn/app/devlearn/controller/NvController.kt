@@ -13,12 +13,17 @@ import androidx.navigation.compose.rememberNavController
 import com.jjgn.app.devlearn.ui.screens.CourseSelectorScreen
 import com.jjgn.app.devlearn.ui.screens.HomeScreen
 import com.jjgn.app.devlearn.ui.screens.InCourseScreen
+import com.jjgn.app.devlearn.ui.screens.IndexScreen
 import com.jjgn.app.devlearn.ui.screens.PracticeScreen
 import com.jjgn.app.devlearn.ui.screens.WelcomeScreen
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
-val LocalNvController = staticCompositionLocalOf<NavController> {
+/**
+ * Permite acceder al navController sin necesidad de pasarle a cada funcion el
+ * navController como parametro
+ * */
+val LocalNavigationController = staticCompositionLocalOf<NavController> {
     error("NavController not provided")
 }
 /**
@@ -26,7 +31,7 @@ val LocalNvController = staticCompositionLocalOf<NavController> {
  * distintas pantallas y muestra el contenido. Utiliza [CompositionLocalProvider] para
  * que se pueda acceder al controlador de navegacion en lugares necesarios sin necesidad
  * de pasar por parametro navController a cada Composable.
- * Se accede al controlador desde [LocalNvController]
+ * Se accede al controlador desde [LocalNavigationController]
  * */
 @Composable
 fun NvController(
@@ -36,7 +41,7 @@ fun NvController(
         viewModel.pref.getBoolean(viewModel.fSelected, false)
     ) NavigationRoutes.Home.route else NavigationRoutes.Welcome.route
 ) {
-    CompositionLocalProvider(LocalNvController provides navController) {
+    CompositionLocalProvider(LocalNavigationController provides navController) {
         NavHost(
             navController = navController,
             startDestination = route
@@ -57,7 +62,7 @@ fun NvController(
                 PracticeScreen()
             }
             composable(NavigationRoutes.Info.route) {
-
+                IndexScreen()
             }
         }
     }

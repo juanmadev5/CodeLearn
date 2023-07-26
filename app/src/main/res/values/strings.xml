@@ -36,6 +36,8 @@
     <string name="incorrect">"Incorrecto. "</string>
     <string name="result">"Resultado: "</string>
     <string name="expected">"Se esperaba: "</string>
+    <string name="oop">Programacion orientada a objetos</string>
+    <string name="oop_desc">Aprende sobre la famosa programacion orientada a objetos, el paradigma de programacion mas importante del mundo de la programacion.</string>
 
 
 </resources>

@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
-import com.jjgn.app.devlearn.controller.LocalNvController
+import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.ui.components.Container1
 import com.jjgn.app.devlearn.ui.components.Container2
@@ -34,13 +34,16 @@ import com.jjgn.app.devlearn.ui.components.Container3
 import com.jjgn.app.devlearn.ui.components.Container4
 import com.jjgn.app.devlearn.ui.components.Container5
 import com.jjgn.app.devlearn.ui.components.Container6
+import com.jjgn.app.devlearn.ui.components.Container7
+import com.jjgn.app.devlearn.ui.components.Container8
+import com.jjgn.app.devlearn.ui.components.Container9
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
 fun PracticeScreen(
-    navController: NavController = LocalNvController.current
+    navController: NavController = LocalNavigationController.current
 ) {
     val show = remember {
         mutableStateOf(false)
@@ -100,6 +103,9 @@ fun MainContainer(
                 4 -> Container4(testViewModel, show)
                 5 -> Container5(testViewModel, show)
                 6 -> Container6(testViewModel, show)
+                7 -> Container7(testViewModel, show)
+                8 -> Container8(testViewModel, show)
+                9 -> Container9(testViewModel, show)
             }
         }
 

@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
-import com.jjgn.app.devlearn.controller.LocalNvController
+import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -38,7 +38,7 @@ import com.jjgn.app.devlearn.viewmodel.AppViewModel
 fun BottomBar(
     buttonNextState: Boolean,
     buttonPrevState: Boolean,
-    navController: NavController = LocalNvController.current,
+    navController: NavController = LocalNavigationController.current,
     context: Context = LocalContext.current,
     viewModel: AppViewModel = AccessInstance()
 ) {

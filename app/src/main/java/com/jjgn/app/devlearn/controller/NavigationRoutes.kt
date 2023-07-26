@@ -6,5 +6,5 @@ sealed class NavigationRoutes(val route: String) {
     object Courses : NavigationRoutes("courses")
     object InCourse : NavigationRoutes("inCourse")
     object Practice : NavigationRoutes("practice")
-    object Preferences : NavigationRoutes("course index")
+    object Info : NavigationRoutes("app info")
 }
