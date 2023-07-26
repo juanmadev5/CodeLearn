@@ -2,8 +2,12 @@ package com.jjgn.app.devlearn.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,10 +16,16 @@ import com.jjgn.app.devlearn.controller.moduleCurrentPageController
 import com.jjgn.app.devlearn.controller.onNextPageController
 import com.jjgn.app.devlearn.controller.onPrevPageController
 import com.jjgn.app.devlearn.data.DefaultData
+import com.jjgn.app.devlearn.data.dRestorer
+import com.jjgn.app.devlearn.data.dSaver
+import com.jjgn.app.devlearn.data.gCurrentState
 import com.jjgn.app.devlearn.data.getCurrentModule
 import com.jjgn.app.devlearn.data.getLangName
 import com.jjgn.app.devlearn.data.getTextToShow
 import com.jjgn.app.devlearn.data.getTotalPages
+import com.jjgn.app.devlearn.data.sCurrentState
+import com.jjgn.app.devlearn.data.zStateRestorer
+import com.jjgn.app.devlearn.data.zStateSaver
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +43,8 @@ import javax.inject.Inject
  * */
 class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
 
+    val md = Modifier.fillMaxSize().padding(16.dp)
+
     override lateinit var pref: SharedPreferences
 
     override var lName = "default"
@@ -45,6 +57,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         get() = _currentState
 
     private val _currentMState = MutableLiveData<Module>(Module.NM)
+    val currentMState: LiveData<Module>
+        get() = _currentMState
 
     private val _currentPage = MutableStateFlow(1)
 
@@ -92,7 +106,6 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         0 // NM 12
     )
 
-
     /**
      * Funcion iniciador. Obtiene el contexto desde [com.jjgn.app.devlearn.ui.components.Content]
      * para que SharedPreferences funcione.
@@ -105,47 +118,30 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         zoomStateRestorer(context)
     }
 
-
     /**
      * Funcion encargada de establecer el curso actual seleccionado.
      * */
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            val editor = pref.edit()
-            editor?.putString(cStateValue, newState.javaClass.simpleName)
-            editor?.apply()
+            sCurrentState(newState, pref, cStateValue)
         }
     }
-
 
     /**
      * Funcion encargada de cargar el ultimo curso seleccionado.
      * */
     private fun loadState() {
-        val currentState = when (pref.getString(cStateValue, null)) {
-            Current.PY.javaClass.simpleName -> Current.PY
-            Current.JS.javaClass.simpleName -> Current.JS
-            Current.KT.javaClass.simpleName -> Current.KT
-            Current.JV.javaClass.simpleName -> Current.JV
-            else -> null
-        }
-        _currentState.value = currentState
+        _currentState.value = gCurrentState(pref, cStateValue)
     }
-
 
     /**
      * Funcion encargada de actualizar el estado del modulo seleccionado.
      * */
     fun selectedModule(moduleSelected: Int) {
-        getCurrentModule(
-            moduleSelected,
-            _currentState,
-            _currentMState
-        )
+        getCurrentModule(moduleSelected, _currentState, _currentMState)
         moduleCurrentPageController(_currentPage, _currentMState, mPage)
     }
-
 
     /**
      * Funciones que se encargan de avanzar o retroceder de pagina.
@@ -165,34 +161,21 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         }
     }
 
-
     /**
      * Funcion que carga el total de paginas de cada modulo y obtiene el texto que se debe mostrar.
      * */
     fun loader() {
-        tlPages = getTotalPages(
-            _currentState,
-            _currentMState,
-            tPages
-        )
+        tlPages = getTotalPages(_currentState, _currentMState, tPages)
         lName = getLangName(_currentState)
-        _information.value = getTextToShow(
-            _currentState,
-            _currentPage,
-            _currentMState,
-        )
+        _information.value = getTextToShow(_currentState, _currentPage, _currentMState,)
     }
-
 
     /**
      * Funcion encargada de guardar el estado del zoom.
      * */
     fun zoomStateSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = pref.edit()
-            editor.putInt(zValue, textSize.value)
-            editor.apply()
+            zStateSaver(pref, context, pName, zValue, textSize)
         }
     }
 
@@ -201,39 +184,25 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * */
     private fun zoomStateRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-            textSize.value = pref.getInt(zValue, 16)
+            zStateRestorer(context, pName, zValue, textSize, pref)
         }
     }
-
 
     /**
      *  Funcion encargada de guardar las paginas en las que el usuario se queda.
      * */
     fun dataSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = pref.edit()
-            for (i in mPage.indices) {
-                editor.putInt("${mCurrentPage}$i", mPage[i])
-            }
-            editor.apply()
+            dSaver(pref, context, pName, mPage, mCurrentPage)
         }
     }
-
 
     /**
      * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez.
      * */
     private fun dataRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-            val restoredList = mutableListOf<Int>()
-            for (i in mPage.indices) {
-                val value = pref.getInt("${mCurrentPage}$i", 1)
-                restoredList.add(value)
-            }
-            mPage = restoredList
+            dRestorer(pref, context, pName, mPage, mCurrentPage)
         }
     }
 }
