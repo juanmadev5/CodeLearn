@@ -48,14 +48,14 @@ fun WelcomeScreen(navController: NavController = LocalNavigationController.curre
             IconButton(
                 onClick = { navController.navigate(NavigationRoutes.Courses.route) },
                 Modifier
-                    .size(64.dp)
+                    .size(54.dp)
                     .clip(RoundedCornerShape(14.dp))
                     .background(MaterialTheme.colorScheme.primary)
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowForward,
                     contentDescription = stringResource(R.string.welcomeDesc),
-                    Modifier.size(40.dp),
+                    Modifier.size(32.dp),
                     tint = MaterialTheme.colorScheme.onSecondary
                 )
             }
