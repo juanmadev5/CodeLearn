@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun AwaitController(loading: MutableState<Boolean>) {
     LaunchedEffect(true) {
-        delay(700)
+        delay(800)
         loading.value = false
     }
 }
