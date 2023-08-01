@@ -36,7 +36,7 @@ fun CourseCard(
         Modifier
             .fillMaxWidth()
             .height(228.dp)
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RoundedCornerShape(20.dp))
             .clickable {
                 viewModel.pref
                     .edit()
