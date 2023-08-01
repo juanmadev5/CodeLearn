@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,12 +38,12 @@ fun ModuleCardContent1(
             .padding(16.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.basics),
+            painter = painterResource(id = R.drawable.undraw_code_thinking_re_gka2),
             stringResource(R.string.languageIcon),
             Modifier
-                .clip(RoundedCornerShape(12.dp))
+                .size(200.dp)
+                .align(Alignment.CenterHorizontally)
         )
-        Spacer(Modifier.padding(top = 16.dp))
         Text(
             text = stringResource(R.string.basicsOf) + viewModel.lName,
             fontWeight = FontWeight.SemiBold,
@@ -80,12 +80,12 @@ fun ModuleCardContent2(
             .padding(16.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.functions),
+            painter = painterResource(id = R.drawable.undraw_proud_coder_re_exuy),
             stringResource(R.string.languageIcon),
             Modifier
-                .clip(RoundedCornerShape(12.dp))
+                .size(200.dp)
+                .align(Alignment.CenterHorizontally)
         )
-        Spacer(Modifier.padding(top = 16.dp))
         Text(
             text = stringResource(R.string.fnArray),
             fontWeight = FontWeight.SemiBold,
@@ -115,15 +115,15 @@ fun ModuleCardContent3(
         else -> viewModel.tPages[12]
     }
     Column(
-        modifier = viewModel.md
+        modifier = Modifier.fillMaxSize().padding(16.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.oop),
+            painter = painterResource(id = R.drawable.undraw_software_engineer_re_tnjc),
             stringResource(R.string.languageIcon),
             Modifier
-                .clip(RoundedCornerShape(12.dp))
+                .size(200.dp)
+                .align(Alignment.CenterHorizontally)
         )
-        Spacer(Modifier.padding(top = 16.dp))
         Text(
             text = stringResource(R.string.oop),
             fontWeight = FontWeight.SemiBold,

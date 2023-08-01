@@ -1,6 +1,7 @@
 package com.jjgn.app.devlearn.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,17 +23,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.controller.LocalNavigationController
+import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun IndexScreen(appViewModel: AppViewModel = AccessInstance()) {
+fun IndexScreen(
+    appViewModel: AppViewModel = AccessInstance(),
+    navController: NavController = LocalNavigationController.current
+) {
     val courseIndex = when (appViewModel.currentState.value) {
         Current.KT -> {
             """
@@ -108,7 +114,7 @@ fun IndexScreen(appViewModel: AppViewModel = AccessInstance()) {
     Column(
         Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             .verticalScroll(rememberScrollState())
     ) {
         Spacer(modifier = Modifier.padding(top = 30.dp))
@@ -134,6 +140,9 @@ fun IndexScreen(appViewModel: AppViewModel = AccessInstance()) {
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
+                .clickable {
+                    navController.navigate(NavigationRoutes.AppInfo.route)
+                }
         ) {
             Column(
                 Modifier
@@ -152,16 +161,8 @@ fun IndexScreen(appViewModel: AppViewModel = AccessInstance()) {
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
-                Spacer(Modifier.padding(top = 16.dp))
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Image(painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "app icon", Modifier.size(40.dp))
-                    Spacer(Modifier.padding(start = 8.dp))
-                    Text(
-                        text = stringResource(id = R.string.app_name) + " v1.2",
-                        fontSize = 14.sp
-                    )
-                }
             }
         }
+        Spacer(modifier = Modifier.padding(8.dp))
     }
 }

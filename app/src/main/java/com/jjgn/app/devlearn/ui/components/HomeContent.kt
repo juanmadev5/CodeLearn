@@ -63,12 +63,12 @@ fun HomeContent(
             .verticalScroll(rememberScrollState())
     ) {
         HomeTopAppBar()
-        Spacer(Modifier.padding(top = 40.dp))
+        Spacer(Modifier.padding(top = 16.dp))
         Card(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(14.dp))
+                .clip(RoundedCornerShape(20.dp))
                 .clickable {
                     viewModel.selectedModule(1)
                     viewModel.loader()
@@ -82,7 +82,7 @@ fun HomeContent(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(14.dp))
+                .clip(RoundedCornerShape(20.dp))
                 .clickable {
                     viewModel.selectedModule(2)
                     viewModel.loader()
@@ -96,7 +96,7 @@ fun HomeContent(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(14.dp))
+                .clip(RoundedCornerShape(20.dp))
                 .clickable {
                     viewModel.selectedModule(3)
                     viewModel.loader()
@@ -105,5 +105,6 @@ fun HomeContent(
         ) {
             ModuleCardContent3(m3Progress)
         }
+        Spacer(modifier = Modifier.padding(8.dp))
     }
 }

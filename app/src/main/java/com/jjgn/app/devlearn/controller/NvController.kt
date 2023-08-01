@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.jjgn.app.devlearn.ui.screens.AppInfoScreen
 import com.jjgn.app.devlearn.ui.screens.CourseSelectorScreen
 import com.jjgn.app.devlearn.ui.screens.HomeScreen
 import com.jjgn.app.devlearn.ui.screens.InCourseScreen
@@ -63,6 +64,9 @@ fun NvController(
             }
             composable(NavigationRoutes.Info.route) {
                 IndexScreen()
+            }
+            composable(NavigationRoutes.AppInfo.route) {
+                AppInfoScreen()
             }
         }
     }

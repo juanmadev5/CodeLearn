@@ -3,15 +3,18 @@ package com.jjgn.app.devlearn.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -26,7 +29,10 @@ import com.jjgn.app.devlearn.viewmodel.AppViewModel
 fun CourseSelectorScreen(viewModel: AppViewModel = AccessInstance()) {
     Column(
         modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(14.dp))
             .verticalScroll(rememberScrollState())
+
     ) {
         Image(
             painter = painterResource(id = R.drawable.undraw_selection_re_ycpo__1_),
