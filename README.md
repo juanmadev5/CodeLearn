@@ -13,3 +13,9 @@ Aplicación súper ligera! Todo en un paquete de solo 2MB 🥳
 3. [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419) usado para la injección de dependencias.
 4. [ConstraintLayout](https://developer.android.com/jetpack/compose/layouts/constraintlayout?hl=es-419) utilizado por los componentes más pequeños de la IU.
 5. [Accompanist SystemUI Controller](https://google.github.io/accompanist/systemuicontroller/) permite modificar el estilo de la barra de notificaciones y de navegación.
+
+## 📱 UI:
+
+_[Android Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwldKmBhCCARIsAP-0rfz5lq2RvpjpQ-iD-IJyBpqYJdZPACaR7fie2KId0CRads0YSCsm1F4aAt0NEALw_wcB&gclsrc=aw.ds&hl=es-419) Interfaz de Usuario de la aplicación_
+
+_[unDraw Illustrations](https://undraw.co/illustrations) Ilustraciones utilizadas en la aplicación_
