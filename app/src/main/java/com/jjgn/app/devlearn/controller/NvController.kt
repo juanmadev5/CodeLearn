@@ -27,6 +27,7 @@ import com.jjgn.app.devlearn.viewmodel.AppViewModel
 val LocalNavigationController = staticCompositionLocalOf<NavController> {
     error("NavController not provided")
 }
+
 /**
  * Controlador de navegacion de la aplicacion. Permite navegar a las
  * distintas pantallas y muestra el contenido. Utiliza [CompositionLocalProvider] para

@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.controller.LocalNavigationController
@@ -28,7 +29,7 @@ fun HomeContent(
     viewModel: AppViewModel = AccessInstance(),
     navController: NavController = LocalNavigationController.current
 ) {
-
+    viewModel.dataSaver(LocalContext.current)
     val m1Progress = remember {
         when (viewModel.currentState.value) {
             is Current.KT -> viewModel.mPage[0]

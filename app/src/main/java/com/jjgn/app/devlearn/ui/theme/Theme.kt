@@ -147,12 +147,14 @@ fun DevLearnTheme(
 }
 
 @Composable
-@Preview(showSystemUi = true, showBackground = true, name = "Galaxy A22 4G",
-    device = "id:Galaxy A22 4G", apiLevel = 33,
+@Preview(
+    showSystemUi = true, showBackground = true,
+    apiLevel = 33,
     wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE,
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 fun ThemePreview() {
+    val image = painterResource(id = R.drawable.jetpackcompose)
     DevLearnTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -208,7 +210,7 @@ fun ThemePreview() {
                         }
                         Spacer(modifier = Modifier.padding(top = 8.dp))
                         Image(
-                            painter = painterResource(id = R.drawable.jetpackcompose),
+                            painter = image,
                             contentDescription = "image",
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -247,7 +249,7 @@ fun ThemePreview() {
                         }
                         Spacer(modifier = Modifier.padding(top = 8.dp))
                         Image(
-                            painter = painterResource(id = R.drawable.jetpackcompose),
+                            painter = image,
                             contentDescription = "image",
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -286,7 +288,7 @@ fun ThemePreview() {
                         }
                         Spacer(modifier = Modifier.padding(top = 8.dp))
                         Image(
-                            painter = painterResource(id = R.drawable.jetpackcompose),
+                            painter = image,
                             contentDescription = "image",
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -325,7 +327,7 @@ fun ThemePreview() {
                         }
                         Spacer(modifier = Modifier.padding(top = 8.dp))
                         Image(
-                            painter = painterResource(id = R.drawable.jetpackcompose),
+                            painter = image,
                             contentDescription = "image",
                             modifier = Modifier
                                 .fillMaxWidth()

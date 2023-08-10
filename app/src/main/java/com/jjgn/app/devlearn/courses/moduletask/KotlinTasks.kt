@@ -125,6 +125,7 @@ fun KotlinM1Task1(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task2(
     testViewModel: TestViewModel,
@@ -216,6 +217,7 @@ fun KotlinM1Task2(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task3(
     testViewModel: TestViewModel,
@@ -307,18 +309,23 @@ fun KotlinM1Task3(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task4(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
     val exercise = testViewModel.ktTask4
-    var textvalue by remember { mutableStateOf("""
+    var textvalue by remember {
+        mutableStateOf(
+            """
         val añosExperiencia = 2
         if () {
             
         }
-    """.trimIndent()) }
+    """.trimIndent()
+        )
+    }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
         mutableStateOf(false)
@@ -405,13 +412,16 @@ fun KotlinM1Task4(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task5(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
     val exercise = testViewModel.ktTask5
-    var textvalue by remember { mutableStateOf("""
+    var textvalue by remember {
+        mutableStateOf(
+            """
         val dia = 2
         when (dia) {
             1 -> println("Lunes")
@@ -420,7 +430,9 @@ fun KotlinM1Task5(
             4 -> println("Jueves")
         
         }
-    """.trimIndent()) }
+    """.trimIndent()
+        )
+    }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
         mutableStateOf(false)
@@ -504,6 +516,7 @@ fun KotlinM1Task5(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task6(
     testViewModel: TestViewModel,
@@ -596,6 +609,7 @@ fun KotlinM1Task6(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task7(
     testViewModel: TestViewModel,
@@ -687,6 +701,7 @@ fun KotlinM1Task7(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task8(
     testViewModel: TestViewModel,
@@ -778,14 +793,16 @@ fun KotlinM1Task8(
         }
     }
 }
+
 @Composable
 fun KotlinM1Task9(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
     val exercise = testViewModel.ktTask9
-    var textvalue by remember { mutableStateOf(
-        """
+    var textvalue by remember {
+        mutableStateOf(
+            """
         interface Reproducible {
             fun reproducir()
             fun detener()
@@ -801,7 +818,8 @@ fun KotlinM1Task9(
             
         }
         """.trimIndent()
-    ) }
+        )
+    }
     var btnTextValue by remember { mutableStateOf("Verificar") }
     var show by remember {
         mutableStateOf(false)

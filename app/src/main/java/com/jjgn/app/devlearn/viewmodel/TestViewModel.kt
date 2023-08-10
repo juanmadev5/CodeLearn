@@ -96,11 +96,72 @@ class TestViewModel @Inject constructor() : ViewModel() {
     // Ejercicios de Python
 
     val pyTask1 = """
-        
+        print("Hola mundo")
     """.trimIndent()
 
     val pyTask2 = """
-        
+        numCadena = "22"
+        numero = int(numCadena)
+    """.trimIndent()
+
+    val pyTask3 = """
+        if edad > 18:
+            print("Contratado")
+        else:
+            print("No contratado")
+    """.trimIndent()
+    val pyTask4 = """
+        colores = ["rojo", "verde", "azul"]
+    """.trimIndent()
+
+    // Ejercicios de Javascript
+
+    val jsTask1 = """
+        const id = 123
+    """.trimIndent()
+    val jsTask2 = """
+        let indefValue;
+    """.trimIndent()
+
+    val jsTask3 = """
+        if (edad > 18) {
+            Console.log("Contratado")
+        } else {
+            Console.log("No contratado")
+        }
+    """.trimIndent()
+
+    val jsTask4 = """
+        Function saludar() {
+            Console.log("Hola mundo")
+        }
+    """.trimIndent()
+
+    val jsTask5 = """
+        let colores = ["rojo", "verde", "azul"]
+    """.trimIndent()
+
+    // Ejercicios de Java
+
+    val jvTask1 = """
+        System.out.print("Hola mundo")
+    """.trimIndent()
+
+    val jvTask2 = """
+        if (edad > 18) {
+            System.out.print("Contratado");
+        } else {
+            System.out.print("No contratado");
+        }
+    """.trimIndent()
+
+    val jvTask3 = """
+        public class Persona {
+            String nombre;
+            String apellido;
+            int edad;
+        }
+
     """.trimIndent()
 
     fun mCounterSum() {

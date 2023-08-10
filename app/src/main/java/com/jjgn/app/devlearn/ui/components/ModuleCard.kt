@@ -98,7 +98,7 @@ fun ModuleCardContent2(
             fontSize = 14.sp
         )
         Spacer(Modifier.padding(top = 16.dp))
-        Text(text = "$progress / $pages",)
+        Text(text = "$progress / $pages")
     }
 }
 
@@ -115,7 +115,9 @@ fun ModuleCardContent3(
         else -> viewModel.tPages[12]
     }
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.undraw_software_engineer_re_tnjc),
@@ -136,6 +138,6 @@ fun ModuleCardContent3(
             fontSize = 14.sp
         )
         Spacer(Modifier.padding(top = 16.dp))
-        Text(text = "$progress / $pages",)
+        Text(text = "$progress / $pages")
     }
 }

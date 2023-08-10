@@ -7,10 +7,6 @@ import com.jjgn.app.devlearn.states.Module
  * Curso Kotlin
  * */
 fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
-    val contador = "contador"
-    val nombre = "nombre"
-    val resultado = "resultado"
-    val message = "ex.message"
     val module1 = when (page) {
         1 -> {
             """
@@ -279,7 +275,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
                 var contador = 0
                 while (contador < 5) {
-                    println("Contador: $$contador")
+                    println("Contador: $\contador")
                     contador++
                 }
 
@@ -336,7 +332,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 Aquí tienes un ejemplo de cómo definir y llamar una función en Kotlin:
 
                 fun saludar(nombre: String) {
-                    println("¡Hola, $$nombre!")
+                    println("¡Hola, $\nombre!")
                 }
                 
                 // Llamada a la función saludar
@@ -437,10 +433,10 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 try {
                     // Código que puede generar una excepción
                     val resultado = dividir(10, 0)
-                    println("Resultado: $$resultado")
+                    println("Resultado: $\resultado")
                 } catch (ex: Exception) {
                     // Manejo de la excepción
-                    println("Se produjo un error: $${message}")
+                    println("Se produjo un error: $\{message}")
                 }
 
             """.trimIndent()
@@ -465,7 +461,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                     abrirArchivo()
                 } catch (ex: IOException) {
                     // Manejo de la excepción de E/S
-                    println("Error de E/S: $message")
+                    println("Error de E/S: $\message")
                 } finally {
                     // Tareas de limpieza
                     cerrarArchivo()
@@ -589,7 +585,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 Ejemplo:
                 
                 fun saludar(nombre: String = "Usuario") {
-                    println("¡Hola, $$nombre!")
+                    println("¡Hola, $\nombre!")
                 }
 
                 saludar() // Salida: ¡Hola, Usuario!
@@ -672,6 +668,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 La orientación a objetos es un paradigma de programación que se basa en la creación de objetos y su interacción para resolver problemas. En Kotlin, puedes utilizar la orientación a objetos para crear clases, objetos, herencia y polimorfismo.
             """.trimIndent()
         }
+
         2 -> {
             """
                 1. Clases y objetos:
@@ -680,6 +677,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 Puedes crear objetos o instancias de una clase utilizando el operador new o simplemente llamando al constructor de la clase.
             """.trimIndent()
         }
+
         3 -> {
             """
                 Ejemplo:
@@ -689,7 +687,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                     var edad: Int = 0
 
                     fun saludar() {
-                        println("¡Hola, soy $$nombre!")
+                        println("¡Hola, soy $\nombre!")
                     }
                 }
 
@@ -700,6 +698,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
             """.trimIndent()
         }
+
         4 -> {
             """
                 2. Herencia:
@@ -708,6 +707,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 La clase que se hereda se denomina clase base o superclase, y la clase que hereda se denomina clase derivada o subclase.
             """.trimIndent()
         }
+
         5 -> {
             """
                 Ejemplo:
@@ -729,6 +729,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
             """.trimIndent()
         }
+
         6 -> {
             """
                 3. Polimorfismo:
@@ -737,6 +738,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 En Kotlin, puedes lograr el polimorfismo mediante la creación de funciones o propiedades en una superclase y sobrescribiéndolas en las subclases según sea necesario.
             """.trimIndent()
         }
+
         7 -> {
             """
                 Ejemplo:
@@ -766,6 +768,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
             """.trimIndent()
         }
+
         8 -> {
             """
                 Modificadores de acceso:
@@ -779,6 +782,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 internal: Accesible dentro del mismo módulo.
             """.trimIndent()
         }
+
         9 -> {
             """
                 Ejemplo: 
@@ -792,6 +796,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
             """.trimIndent()
         }
+
         10 -> {
             """
                 Interfaces:
@@ -801,6 +806,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 Puedes implementar múltiples interfaces en una clase y proporcionar implementaciones para sus funciones.
             """.trimIndent()
         }
+
         11 -> {
             """
                 Ejemplo:
@@ -822,6 +828,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
 
             """.trimIndent()
         }
+
         12 -> {
             """
                 Sobrecarga de operadores:
@@ -830,6 +837,7 @@ fun ktCourse(page: Int, _currentMState: MutableLiveData<Module>): String {
                 Para sobrecargar un operador, debes definir una función con el nombre especial correspondiente al operador.
             """.trimIndent()
         }
+
         13 -> {
             """
                 Ejemplo:

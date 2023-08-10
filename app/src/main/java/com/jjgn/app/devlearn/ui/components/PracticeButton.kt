@@ -71,15 +71,23 @@ fun PracticeButton(
         Current.JS -> {
             when (appViewModel.currentMState.value) {
                 Module.JSM1 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        3, 7, 13 -> isEnabled.value = true
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.JSM2 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        2, 8 -> isEnabled.value = true
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.JSM3 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.NM -> {
@@ -93,15 +101,23 @@ fun PracticeButton(
         Current.JV -> {
             when (appViewModel.currentMState.value) {
                 Module.JVM1 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        3, 14 -> isEnabled.value = true
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.JVM2 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.JVM3 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        1 -> isEnabled.value = true
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 else -> {}
@@ -111,15 +127,23 @@ fun PracticeButton(
         Current.PY -> {
             when (appViewModel.currentMState.value) {
                 Module.PYM1 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        2, 6, 12 -> isEnabled.value = true
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.PYM2 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        1 -> isEnabled.value = true
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 Module.PYM3 -> {
-
+                    when (appViewModel.cPageValue.collectAsState().value) {
+                        else -> isEnabled.value = false
+                    }
                 }
 
                 else -> {}
@@ -143,7 +167,9 @@ fun PracticeButton(
                     testAssignationController(appViewModel, testViewModel)
                     navController.navigate(NavigationRoutes.Practice.route)
                 },
-                Modifier.padding(end = 16.dp).wrapContentHeight()
+                Modifier
+                    .padding(end = 16.dp)
+                    .wrapContentHeight()
             ) {
                 Spacer(modifier = Modifier.padding(top = 30.dp))
                 Icon(

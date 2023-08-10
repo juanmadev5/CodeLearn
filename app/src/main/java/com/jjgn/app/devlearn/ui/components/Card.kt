@@ -69,10 +69,12 @@ fun CourseCard(
             Image(
                 painter = painterResource(id = logo),
                 "",
-                Modifier.constrainAs(cLogo) {
-                    top.linkTo(parent.top, 24.dp)
-                    start.linkTo(parent.start, 24.dp)
-                }.size(45.dp)
+                Modifier
+                    .constrainAs(cLogo) {
+                        top.linkTo(parent.top, 24.dp)
+                        start.linkTo(parent.start, 24.dp)
+                    }
+                    .size(45.dp)
             )
             Text(
                 text = title,
@@ -85,11 +87,14 @@ fun CourseCard(
             )
             Text(
                 text = description,
-                Modifier.constrainAs(cDesc) {
-                    start.linkTo(parent.start, 24.dp)
-                    bottom.linkTo(parent.bottom, 20.dp)
-                    end.linkTo(parent.end, 24.dp)
-                }.width(325.dp).wrapContentHeight(),
+                Modifier
+                    .constrainAs(cDesc) {
+                        start.linkTo(parent.start, 24.dp)
+                        bottom.linkTo(parent.bottom, 20.dp)
+                        end.linkTo(parent.end, 24.dp)
+                    }
+                    .width(325.dp)
+                    .wrapContentHeight(),
                 fontSize = 14.sp
             )
         }

@@ -1,4 +1,7 @@
-@file:OptIn(ExperimentalComposeUiApi::class, ExperimentalComposeUiApi::class)
+@file:OptIn(
+    ExperimentalComposeUiApi::class, ExperimentalComposeUiApi::class,
+    ExperimentalComposeUiApi::class
+)
 
 package com.jjgn.app.devlearn.courses.moduletask
 
@@ -29,109 +32,14 @@ import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
 
 @Composable
-fun PythonM1Task1(
+fun JSTask1(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.pyTask1
-    var textvalue by remember { mutableStateOf("prin") }
-    var btnTextValue by remember { mutableStateOf("Verificar") }
-    var show by remember {
-        mutableStateOf(false)
-    }
-    val keyboardController = LocalSoftwareKeyboardController.current
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(8.dp)
-    ) {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(8.dp)
-        ) {
-            Text(
-                "1 - Imprime un Hola mundo",
-                fontSize = 16.sp
-            )
-        }
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Button(
-                onClick = {
-                    show = true
-                    keyboardController?.hide()
-                    btnTextValue = "Verificado"
-                    if (textvalue == exercise) {
-                        showBtn.value = true
-                        testViewModel.mCounterSum()
-                    }
-                }
-            ) {
-                Text(btnTextValue)
-            }
-        }
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 12.dp, bottom = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            OutlinedTextField(
-                value = textvalue,
-                onValueChange = {
-                    textvalue = it
-                    show = false
-                    showBtn.value = false
-                    btnTextValue = "Verificar"
-                },
-                Modifier.size(380.dp, 120.dp)
-            )
-        }
-
-        if (show) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(8.dp)
-            ) {
-                Text(
-                    text = if (textvalue == exercise) {
-                        stringResource(R.string.correct) + "\n" + stringResource(R.string.result) +
-                                "Hola mundo"
-                    } else {
-                        stringResource(R.string.incorrect) + "\n" + stringResource(R.string.expected) +
-                                "Hola mundo"
-                    },
-                    fontSize = 12.sp
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun PythonM1Task2(
-    testViewModel: TestViewModel,
-    showBtn: MutableState<Boolean>
-) {
-    val exercise = testViewModel.pyTask2
+    val exercise = testViewModel.jsTask1
     var textvalue by remember {
         mutableStateOf(
-            """
-        numCadena = "22"
-        numero = int()
-    """.trimIndent()
+            ""
         )
     }
     var btnTextValue by remember { mutableStateOf("Verificar") }
@@ -152,7 +60,7 @@ fun PythonM1Task2(
                 .padding(8.dp)
         ) {
             Text(
-                "2 - Convierte el valor de numCadena a Int",
+                "1 - Crea una constante llamada id con valor 123",
                 fontSize = 16.sp
             )
         }
@@ -206,11 +114,9 @@ fun PythonM1Task2(
             ) {
                 Text(
                     text = if (textvalue == exercise) {
-                        stringResource(R.string.correct) + "\n" + stringResource(R.string.result) +
-                                "22"
+                        stringResource(R.string.correct)
                     } else {
-                        stringResource(R.string.incorrect) + "\n" + stringResource(R.string.expected) +
-                                "22"
+                        stringResource(R.string.incorrect)
                     },
                     fontSize = 12.sp
                 )
@@ -220,15 +126,109 @@ fun PythonM1Task2(
 }
 
 @Composable
-fun PythonM1Task3(
+fun JSTask2(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.pyTask3
+    val exercise = testViewModel.jsTask2
+    var textvalue by remember {
+        mutableStateOf(
+            ""
+        )
+    }
+    var btnTextValue by remember { mutableStateOf("Verificar") }
+    var show by remember {
+        mutableStateOf(false)
+    }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp)
+        ) {
+            Text(
+                "2 - Crea una variable de valor indefinida llamada indefValue",
+                fontSize = 16.sp
+            )
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    show = true
+                    keyboardController?.hide()
+                    btnTextValue = "Verificado"
+                    if (textvalue == exercise) {
+                        showBtn.value = true
+                        testViewModel.mCounterSum()
+                    }
+                }
+            ) {
+                Text(btnTextValue)
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 12.dp, bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            OutlinedTextField(
+                value = textvalue,
+                onValueChange = {
+                    textvalue = it
+                    show = false
+                    showBtn.value = false
+                    btnTextValue = "Verificar"
+                },
+                Modifier.size(380.dp, 120.dp)
+            )
+        }
+
+        if (show) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(8.dp)
+            ) {
+                Text(
+                    text = if (textvalue == exercise) {
+                        stringResource(R.string.correct)
+                    } else {
+                        stringResource(R.string.incorrect)
+                    },
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun JSTask3(
+    testViewModel: TestViewModel,
+    showBtn: MutableState<Boolean>
+) {
+    val exercise = testViewModel.jsTask3
     var textvalue by remember {
         mutableStateOf(
             """
-                if
+                if () 
             """.trimIndent()
         )
     }
@@ -250,7 +250,7 @@ fun PythonM1Task3(
                 .padding(8.dp)
         ) {
             Text(
-                "3 - Haz que se imprima Contratado si edad es mayor de 18, de lo contrario No contratado",
+                "3 - Haz que se imprima Contratado si edad es mayor a 18 de lo contrario No contratado",
                 fontSize = 16.sp
             )
         }
@@ -316,16 +316,14 @@ fun PythonM1Task3(
 }
 
 @Composable
-fun PythonM1Task4(
+fun JSTask4(
     testViewModel: TestViewModel,
     showBtn: MutableState<Boolean>
 ) {
-    val exercise = testViewModel.pyTask4
+    val exercise = testViewModel.jsTask4
     var textvalue by remember {
         mutableStateOf(
-            """
-                colores = 
-            """.trimIndent()
+            ""
         )
     }
     var btnTextValue by remember { mutableStateOf("Verificar") }
@@ -346,7 +344,101 @@ fun PythonM1Task4(
                 .padding(8.dp)
         ) {
             Text(
-                "4 - Crea una lista que contenga los colores rojo, verde, azul",
+                "4 - Crea una funcion llamada saludar que imprima Hola mundo en consola",
+                fontSize = 16.sp
+            )
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    show = true
+                    keyboardController?.hide()
+                    btnTextValue = "Verificado"
+                    if (textvalue == exercise) {
+                        showBtn.value = true
+                        testViewModel.mCounterSum()
+                    }
+                }
+            ) {
+                Text(btnTextValue)
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 12.dp, bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            OutlinedTextField(
+                value = textvalue,
+                onValueChange = {
+                    textvalue = it
+                    show = false
+                    showBtn.value = false
+                    btnTextValue = "Verificar"
+                },
+                Modifier.size(380.dp, 120.dp)
+            )
+        }
+
+        if (show) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(8.dp)
+            ) {
+                Text(
+                    text = if (textvalue == exercise) {
+                        stringResource(R.string.correct)
+                    } else {
+                        stringResource(R.string.incorrect)
+                    },
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun JSTask5(
+    testViewModel: TestViewModel,
+    showBtn: MutableState<Boolean>
+) {
+    val exercise = testViewModel.jsTask5
+    var textvalue by remember {
+        mutableStateOf(
+            ""
+        )
+    }
+    var btnTextValue by remember { mutableStateOf("Verificar") }
+    var show by remember {
+        mutableStateOf(false)
+    }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp)
+        ) {
+            Text(
+                "5 - Crea un arreglo llamado colores que contenga rojo, verde y azul",
                 fontSize = 16.sp
             )
         }

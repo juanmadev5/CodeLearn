@@ -2,12 +2,8 @@ package com.jjgn.app.devlearn.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,8 +38,6 @@ import javax.inject.Inject
  * Varios componentes que usa este ViewModel estan separados en distintos archivos.
  * */
 class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
-
-    val md = Modifier.fillMaxSize().padding(16.dp)
 
     override lateinit var pref: SharedPreferences
 
@@ -153,6 +147,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
             loader()
         }
     }
+
     fun prevPage() {
         onPrevPageController(_currentMState, mPage)
         if (_currentPage.value > 1) {
@@ -167,7 +162,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     fun loader() {
         tlPages = getTotalPages(_currentState, _currentMState, tPages)
         lName = getLangName(_currentState)
-        _information.value = getTextToShow(_currentState, _currentPage, _currentMState,)
+        _information.value = getTextToShow(_currentState, _currentPage, _currentMState)
     }
 
     /**
@@ -200,7 +195,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     /**
      * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez.
      * */
-    private fun dataRestorer(context: Context) {
+    fun dataRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             dRestorer(pref, context, pName, mPage, mCurrentPage)
         }

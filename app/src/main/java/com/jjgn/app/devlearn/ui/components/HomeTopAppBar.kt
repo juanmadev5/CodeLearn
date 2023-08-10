@@ -3,7 +3,9 @@ package com.jjgn.app.devlearn.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,7 +16,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,12 +40,18 @@ fun HomeTopAppBar(
     viewModel: AppViewModel = AccessInstance(),
     navController: NavController = LocalNavigationController.current
 ) {
-    Card(
-        Modifier
-            .fillMaxWidth()
+    Column(
+        modifier = Modifier
             .wrapContentHeight()
-            .padding(top = 40.dp)
+            .fillMaxWidth()
     ) {
+        Text(
+            text = stringResource(id = R.string.app_name),
+            modifier = Modifier.padding(top = 100.dp, start = 16.dp),
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Light
+        )
+        Spacer(modifier = Modifier.padding(top = 90.dp))
         Row(
             Modifier
                 .wrapContentHeight()
@@ -63,7 +70,7 @@ fun HomeTopAppBar(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Curso ${viewModel.lName}",
+                    text = viewModel.lName,
                     Modifier.padding(start = 18.dp, end = 18.dp),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
@@ -87,4 +94,5 @@ fun HomeTopAppBar(
             }
         }
     }
+
 }

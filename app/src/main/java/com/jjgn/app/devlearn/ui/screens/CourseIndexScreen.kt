@@ -68,11 +68,57 @@ fun IndexScreen(
         }
 
         Current.JS -> {
-            TODO()
+            """
+                Módulo 1
+                - Pág. 1  Presentación
+                - Pág. 2  Variables
+                - Pág. 4  Tipos de datos
+                - Pág. 8  Operadores
+                - Pág. 12  Estructuras de control
+                - Pág. 15  Bucles
+                
+                Módulo 2
+                - Pág. 1  Funciones
+                - Pág. 4  Funciones anónimas y de flecha
+                - Pág. 7  Arreglos
+                
+                Módulo 3
+                - Pág. 1  Programación Orientada a Objetos
+                - Pág. 3  Clases
+                - Pág. 5  Herencia
+                - Pág. 6  Objetos
+                - Pág. 10  Objetos como parámetros y retornos
+                - Pág. 11  Objetos anidados
+                - Pág. 12  Propiedades
+                - Pág. 14  Acceso a propiedades del objeto
+                - Pág. 17  Métodos
+            """.trimIndent()
         }
+
         Current.JV -> {
-            TODO()
+            """
+                Módulo 1
+                - Pág. 2  Variables
+                - Pág. 6  Tipos de datos
+                - Pág. 7  Conversión de tipos
+                - Pág. 9  Operadores
+                - Pág. 12  Estructuras de control
+                
+                Módulo 2
+                - Listas
+                
+                Módulo 3
+                - Pág. 1  Clases
+                - Pág. 2  Objetos
+                - Pág. 3  Encapsulación
+                - Pág. 4  Herencia
+                - Pág. 5  Polimorfismo
+                - Pág. 6  Abstracción
+                - Pág. 7  Interfaz
+                - Pág. 9  Manejos de excepciones
+            """.trimIndent()
         }
+
         Current.PY -> {
             """
                 Módulo 1
@@ -107,6 +153,7 @@ fun IndexScreen(
                
             """.trimIndent()
         }
+
         null -> {
             TODO()
         }
@@ -149,7 +196,11 @@ fun IndexScreen(
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Text(
                         text = "Informacion de la aplicacion",
                         fontSize = 14.sp,

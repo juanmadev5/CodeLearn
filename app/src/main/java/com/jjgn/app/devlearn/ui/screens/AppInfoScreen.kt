@@ -52,7 +52,12 @@ fun AppInfoScreen() {
                     .clip(RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(painterResource(id = R.drawable.app_icon_foreground), contentDescription = "app icon", Modifier.fillMaxSize(), tint = MaterialTheme.colorScheme.primary)
+                Icon(
+                    painterResource(id = R.drawable.app_icon_foreground),
+                    contentDescription = "app icon",
+                    Modifier.fillMaxSize(),
+                    tint = MaterialTheme.colorScheme.primary
+                )
             }
             Spacer(Modifier.padding(start = 12.dp))
             Text(

@@ -29,7 +29,19 @@ import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.ui.components.Container1
+import com.jjgn.app.devlearn.ui.components.Container10
+import com.jjgn.app.devlearn.ui.components.Container11
+import com.jjgn.app.devlearn.ui.components.Container12
+import com.jjgn.app.devlearn.ui.components.Container13
+import com.jjgn.app.devlearn.ui.components.Container14
+import com.jjgn.app.devlearn.ui.components.Container15
+import com.jjgn.app.devlearn.ui.components.Container16
+import com.jjgn.app.devlearn.ui.components.Container17
+import com.jjgn.app.devlearn.ui.components.Container18
+import com.jjgn.app.devlearn.ui.components.Container19
 import com.jjgn.app.devlearn.ui.components.Container2
+import com.jjgn.app.devlearn.ui.components.Container20
+import com.jjgn.app.devlearn.ui.components.Container21
 import com.jjgn.app.devlearn.ui.components.Container3
 import com.jjgn.app.devlearn.ui.components.Container4
 import com.jjgn.app.devlearn.ui.components.Container5
@@ -110,15 +122,31 @@ fun MainContainer(
         }
 
         Current.JS -> {
-            TODO()
+            when (testViewModel.cTest.collectAsState().value) {
+                13 -> Container14(testViewModel, show)
+                14 -> Container15(testViewModel, show)
+                15 -> Container16(testViewModel, show)
+                17 -> Container17(testViewModel, show)
+                18 -> Container18(testViewModel, show)
+            }
         }
 
         Current.JV -> {
-            TODO()
+            when (testViewModel.cTest.collectAsState().value) {
+                10 -> Container19(testViewModel, show)
+                101 -> Container20(testViewModel, show)
+                12 -> Container21(testViewModel, show)
+            }
         }
 
         Current.PY -> {
-            TODO()
+            when (testViewModel.cTest.collectAsState().value) {
+                19 -> Container10(testViewModel, show)
+                20 -> Container11(testViewModel, show)
+                21 -> Container12(testViewModel, show)
+                22 -> Container13(testViewModel, show)
+                23 -> Container16(testViewModel, show)
+            }
         }
 
         null -> {

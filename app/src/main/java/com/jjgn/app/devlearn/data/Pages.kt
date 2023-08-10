@@ -9,7 +9,7 @@ import com.jjgn.app.devlearn.states.Module
  * Esta funcion recupera el total de paginas de cada modulo correspondiente a cada curso.
  * */
 fun getTotalPages(
-    _currentState: MutableLiveData<Current>,
+    currentState: MutableLiveData<Current>,
     currentMState: LiveData<Module>,
     cModulesTPages: MutableList<Int>
 ): Int {
@@ -22,44 +22,48 @@ fun getTotalPages(
         13, //3
 
         // java
-        30, //4
-        30, //5
-        30, //6
+        16, //4
+        8, //5
+        9, //6
         // javascript
-        30, //7
-        30, //8
-        30, //9
+        17, //7
+        12, //8
+        21, //9
         // python
         19, //10
         16, //11
         16 //12
     )
-    when (_currentState.value) {
+    when (currentState.value) {
         is Current.KT -> {
             cModulesTPages[0] = pagesList[1]
             cModulesTPages[1] = pagesList[2]
             cModulesTPages[2] = pagesList[3]
         }
+
         is Current.JV -> {
             cModulesTPages[3] = pagesList[4]
             cModulesTPages[4] = pagesList[5]
             cModulesTPages[5] = pagesList[6]
         }
+
         is Current.JS -> {
             cModulesTPages[6] = pagesList[7]
             cModulesTPages[7] = pagesList[8]
             cModulesTPages[8] = pagesList[9]
         }
+
         is Current.PY -> {
             cModulesTPages[9] = pagesList[10]
             cModulesTPages[10] = pagesList[11]
             cModulesTPages[11] = pagesList[12]
         }
+
         else -> {
             cModulesTPages[12]
         }
     }
-    return when (_currentState.value) {
+    return when (currentState.value) {
         is Current.KT -> {
             when (currentMState.value) {
                 is Module.KTM1 -> pagesList[1]
@@ -68,6 +72,7 @@ fun getTotalPages(
                 else -> 1
             }
         }
+
         is Current.JV -> {
             when (currentMState.value) {
                 is Module.JVM1 -> pagesList[4]
@@ -76,6 +81,7 @@ fun getTotalPages(
                 else -> 1
             }
         }
+
         is Current.JS -> {
             when (currentMState.value) {
                 is Module.JSM1 -> pagesList[7]
@@ -84,6 +90,7 @@ fun getTotalPages(
                 else -> 1
             }
         }
+
         is Current.PY -> {
             when (currentMState.value) {
                 is Module.PYM1 -> pagesList[10]
@@ -92,6 +99,7 @@ fun getTotalPages(
                 else -> 1
             }
         }
+
         else -> 1
     }
 }

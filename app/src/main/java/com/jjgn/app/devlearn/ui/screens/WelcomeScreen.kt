@@ -32,7 +32,10 @@ import com.jjgn.app.devlearn.controller.NavigationRoutes
 @Composable
 fun WelcomeScreen(navController: NavController = LocalNavigationController.current) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.undraw_welcoming_re_x0qo__1_),
                 contentDescription = "",

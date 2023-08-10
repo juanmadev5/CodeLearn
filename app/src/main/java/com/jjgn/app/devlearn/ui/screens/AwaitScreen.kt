@@ -12,19 +12,26 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun AwaitScreen() {
+fun AwaitScreen(
+    appViewModel: AppViewModel = AccessInstance()
+) {
+    appViewModel.dataRestorer(LocalContext.current)
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         Column(
             Modifier
                 .wrapContentHeight()
-                .fillMaxWidth()) {
+                .fillMaxWidth()
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.undraw_loading_re_5axr),
                 contentDescription = "",
