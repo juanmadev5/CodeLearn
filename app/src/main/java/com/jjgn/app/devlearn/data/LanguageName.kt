@@ -8,9 +8,9 @@ import com.jjgn.app.devlearn.states.Current
  * de acuerdo al curso seleccionado
  * */
 fun getLangName(
-    _currentState: MutableLiveData<Current>
+    currentState: MutableLiveData<Current>
 ): String {
-    return when (_currentState.value) {
+    return when (currentState.value) {
         is Current.PY -> "Python"
         is Current.KT -> "Kotlin"
         is Current.JV -> "Java"

@@ -65,7 +65,6 @@ fun BottomBar(
             Button(
                 onClick = {
                     viewModel.prevPage()
-                    viewModel.dataSaver(context)
                 },
                 Modifier
                     .height(48.dp)
@@ -87,7 +86,6 @@ fun BottomBar(
                     } else {
                         viewModel.nextPage()
                     }
-                    viewModel.dataSaver(context)
                 },
                 Modifier
                     .height(48.dp)

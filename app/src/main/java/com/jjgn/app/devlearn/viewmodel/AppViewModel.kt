@@ -2,6 +2,7 @@ package com.jjgn.app.devlearn.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
@@ -25,6 +26,7 @@ import com.jjgn.app.devlearn.data.zStateSaver
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -85,19 +87,19 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
 
     // lista donde se guarda la cantidad de paginas que tiene cada modulo.
     val tPages = mutableListOf(
-        0,// KTM1 0
-        0,// KTM2 1
-        0,// KTM3 2
-        0,// JVM1 3
-        0,// JVM2 4
-        0,// JVM3 5
-        0,// JSM1 6
-        0,// JSM2 7
-        0,// JSM3 8
-        0,// PYM1 9
-        0,// PYM2 10
-        0,// PYM3 11
-        0 // NM 12
+        1,// KTM1 0
+        1,// KTM2 1
+        1,// KTM3 2
+        1,// JVM1 3
+        1,// JVM2 4
+        1,// JVM3 5
+        1,// JSM1 6
+        1,// JSM2 7
+        1,// JSM3 8
+        1,// PYM1 9
+        1,// PYM2 10
+        1,// PYM3 11
+        1 // NM 12
     )
 
     /**
@@ -108,8 +110,10 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
         loadState()
         loader()
-        dataRestorer(context)
-        zoomStateRestorer(context)
+        if (_currentState.value != null) {
+            dataRestorer(context)
+        }
+        dataSManager(context)
     }
 
     /**
@@ -166,38 +170,40 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     }
 
     /**
-     * Funcion encargada de guardar el estado del zoom.
+     * Funcion encargada de comprobar que se haya seleccionado un curso, de esta manera evita estar
+     * ejecutando [dataSaver] de forma innecesaria.
      * */
-    fun zoomStateSaver(context: Context) {
+    private fun dataSManager(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            zStateSaver(pref, context, pName, zValue, textSize)
+            if (_currentState.value == null) {
+                delay(2000)
+                dataSManager(context)
+            } else {
+                dataSaver(context)
+            }
         }
     }
 
     /**
-     * Funcion encargada de restaurar el estado del zoom en la que el usuario establecio.
+     *  Funcion encargada de guardar las paginas en las que el usuario se queda y el estado del zoom del texto.
      * */
-    private fun zoomStateRestorer(context: Context) {
-        viewModelScope.launch(Dispatchers.IO) {
-            zStateRestorer(context, pName, zValue, textSize, pref)
-        }
-    }
-
-    /**
-     *  Funcion encargada de guardar las paginas en las que el usuario se queda.
-     * */
-    fun dataSaver(context: Context) {
+    private fun dataSaver(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             dSaver(pref, context, pName, mPage, mCurrentPage)
+            zStateSaver(pref, context, pName, zValue, textSize)
+            delay(3000)
+            Log.i("AppData", "Data saved!")
+            dataSaver(context)
         }
     }
 
     /**
-     * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez.
+     * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez y el estado del zoom del texto.
      * */
-    fun dataRestorer(context: Context) {
+    private fun dataRestorer(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             dRestorer(pref, context, pName, mPage, mCurrentPage)
+            zStateRestorer(context, pName, zValue, textSize, pref)
         }
     }
 }

@@ -61,8 +61,7 @@ fun CourseSelectorScreen(viewModel: AppViewModel = AccessInstance()) {
                 logo = viewModel.cLogo[index],
                 viewModel = viewModel
             )
-            Spacer(Modifier.padding(5.dp))
+            Spacer(Modifier.padding(8.dp))
         }
-        Spacer(Modifier.padding(28.dp))
     }
 }

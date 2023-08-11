@@ -123,6 +123,6 @@ fun AppInfoScreen() {
             """.trimIndent(),
             fontSize = 14.sp
         )
-        Spacer(modifier = Modifier.padding(48.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
     }
 }

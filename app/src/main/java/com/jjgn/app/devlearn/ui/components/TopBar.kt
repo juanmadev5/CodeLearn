@@ -78,7 +78,6 @@ fun TopBar(
                                 viewModel.textSize.value++
                                 textSizeState.value = true
                             }
-                            viewModel.zoomStateSaver(context)
                         }
                     ) {
                         Icon(
@@ -93,7 +92,6 @@ fun TopBar(
                                 viewModel.textSize.value--
                                 textSizeState.value = true
                             }
-                            viewModel.zoomStateSaver(context)
                         }
                     ) {
                         Icon(
