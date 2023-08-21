@@ -1,13 +1,18 @@
 package com.jjgn.app.devlearn.data
 
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.jjgn.app.devlearn.states.Current
+import kotlinx.coroutines.flow.first
 
-fun gCurrentState(
-    preferences: SharedPreferences,
+suspend fun gCurrentState(
+    dataStore: DataStore<Preferences>,
     cStateValue: String,
 ): Current? {
-    return when (preferences.getString(cStateValue, null)) {
+    val currentStateKey = stringPreferencesKey(cStateValue)
+    val preferences = dataStore.data.first()
+    return when (preferences[currentStateKey]) {
         Current.PY.javaClass.simpleName -> Current.PY
         Current.JS.javaClass.simpleName -> Current.JS
         Current.KT.javaClass.simpleName -> Current.KT

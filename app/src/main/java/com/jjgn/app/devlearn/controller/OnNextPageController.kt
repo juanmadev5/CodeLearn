@@ -7,10 +7,10 @@ import com.jjgn.app.devlearn.states.Module
  * Esta funcion se encarga de avanzar de pagina.
  * */
 fun onNextPageController(
-    _currentMState: MutableLiveData<Module>,
+    currentMState: MutableLiveData<Module>,
     cModulesCurrentPage: MutableList<Int>
 ) {
-    when (_currentMState.value) {
+    when (currentMState.value) {
         is Module.KTM1 -> cModulesCurrentPage[0]++
         is Module.KTM2 -> cModulesCurrentPage[1]++
         is Module.KTM3 -> cModulesCurrentPage[2]++

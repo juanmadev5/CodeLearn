@@ -1,25 +1,24 @@
 package com.jjgn.app.devlearn.data
 
-import android.content.Context
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 suspend fun zStateSaver(
-    preferences: SharedPreferences,
-    context: Context,
-    pName: String,
+    dataStore: DataStore<Preferences>,
     zValue: String,
     textSize: MutableStateFlow<Int>
 ) {
     coroutineScope {
         launch(Dispatchers.IO) {
-            context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = preferences.edit()
-            editor.putInt(zValue, textSize.value)
-            editor.apply()
+            dataStore.edit { preferences ->
+                preferences[intPreferencesKey(zValue)] = textSize.value
+            }
         }
     }
 }

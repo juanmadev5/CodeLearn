@@ -1,14 +1,18 @@
 package com.jjgn.app.devlearn.data
 
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.jjgn.app.devlearn.states.Current
 
-fun sCurrentState(
+suspend fun sCurrentState(
     newState: Current,
-    preferences: SharedPreferences,
+    dataStore: DataStore<Preferences>,
     cStateValue: String
 ) {
-    val editor = preferences.edit()
-    editor.putString(cStateValue, newState.javaClass.simpleName)
-    editor.apply()
+    val currentStateKey = stringPreferencesKey(cStateValue)
+    dataStore.edit { preferences ->
+        preferences[currentStateKey] = newState.javaClass.simpleName
+    }
 }

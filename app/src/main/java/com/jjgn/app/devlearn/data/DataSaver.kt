@@ -1,26 +1,29 @@
 package com.jjgn.app.devlearn.data
 
-import android.content.Context
-import android.content.SharedPreferences
+import androidx.compose.runtime.MutableState
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 suspend fun dSaver(
-    preferences: SharedPreferences,
-    context: Context,
-    pName: String,
+    dataStore: DataStore<Preferences>,
     mPage: MutableList<Int>,
-    mCurrentPage: String
+    mCurrentPage: String,
+    isSelectedFirstC: MutableState<Boolean>
 ) {
     coroutineScope {
         launch(Dispatchers.IO) {
-            context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = preferences.edit()
-            for (i in mPage.indices) {
-                editor.putInt("${mCurrentPage}$i", mPage[i])
+            dataStore.edit { preferences ->
+                for (i in mPage.indices) {
+                    preferences[intPreferencesKey("${mCurrentPage}$i")] = mPage[i]
+                }
+                preferences[booleanPreferencesKey(isSelectedKey)] = isSelectedFirstC.value
             }
-            editor.apply()
         }
     }
 }

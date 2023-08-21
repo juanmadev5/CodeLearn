@@ -1,28 +1,36 @@
 package com.jjgn.app.devlearn.data
 
-import android.content.Context
-import android.content.SharedPreferences
+import androidx.compose.runtime.MutableState
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 suspend fun dRestorer(
-    preferences: SharedPreferences,
-    context: Context,
-    pName: String,
+    dataStore: DataStore<Preferences>,
     mPage: MutableList<Int>,
-    mCurrentPage: String
+    mCurrentPage: String,
+    isSelectedFirstC: MutableState<Boolean>
 ) {
     coroutineScope {
         launch(Dispatchers.IO) {
-            context.getSharedPreferences(pName, Context.MODE_PRIVATE)
+            val preferences = dataStore.data.first()
             val restoredList = mutableListOf<Int>()
+
             for (i in mPage.indices) {
-                val value = preferences.getInt("${mCurrentPage}$i", 1)
+                val value = preferences[intPreferencesKey("${mCurrentPage}$i")] ?: 1
                 restoredList.add(value)
             }
+
             mPage.clear()
             mPage.addAll(restoredList)
+
+            isSelectedFirstC.value =
+                preferences[booleanPreferencesKey(isSelectedKey)] ?: true
         }
     }
 }

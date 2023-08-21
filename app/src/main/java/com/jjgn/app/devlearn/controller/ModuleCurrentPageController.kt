@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * Cada modulo de cada curso utiliza un indice en la matriz.
  * */
 fun moduleCurrentPageController(
-    _currentPage: MutableStateFlow<Int>,
-    _currentMState: MutableLiveData<Module>,
+    currentPage: MutableStateFlow<Int>,
+    currentMState: MutableLiveData<Module>,
     cModulesCurrentPage: MutableList<Int>
 ) {
-    _currentPage.value = when (_currentMState.value) {
+    currentPage.value = when (currentMState.value) {
         is Module.KTM1 -> cModulesCurrentPage[0]
         is Module.KTM2 -> cModulesCurrentPage[1]
         is Module.KTM3 -> cModulesCurrentPage[2]
@@ -26,6 +26,6 @@ fun moduleCurrentPageController(
         is Module.PYM1 -> cModulesCurrentPage[9]
         is Module.PYM2 -> cModulesCurrentPage[10]
         is Module.PYM3 -> cModulesCurrentPage[11]
-        else -> _currentPage.value
+        else -> currentPage.value
     }
 }

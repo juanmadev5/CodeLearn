@@ -1,10 +1,10 @@
 package com.jjgn.app.devlearn.viewmodel
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,11 +15,15 @@ import com.jjgn.app.devlearn.controller.onPrevPageController
 import com.jjgn.app.devlearn.data.DefaultData
 import com.jjgn.app.devlearn.data.dRestorer
 import com.jjgn.app.devlearn.data.dSaver
+import com.jjgn.app.devlearn.data.defaultTextSize
+import com.jjgn.app.devlearn.data.dsDelay
+import com.jjgn.app.devlearn.data.dsManagerDelay
 import com.jjgn.app.devlearn.data.gCurrentState
 import com.jjgn.app.devlearn.data.getCurrentModule
 import com.jjgn.app.devlearn.data.getLangName
 import com.jjgn.app.devlearn.data.getTextToShow
 import com.jjgn.app.devlearn.data.getTotalPages
+import com.jjgn.app.devlearn.data.isSelectedFirst
 import com.jjgn.app.devlearn.data.sCurrentState
 import com.jjgn.app.devlearn.data.zStateRestorer
 import com.jjgn.app.devlearn.data.zStateSaver
@@ -29,6 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 /**
@@ -41,13 +46,13 @@ import javax.inject.Inject
  * */
 class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
 
-    override lateinit var pref: SharedPreferences
-
     override var lName = "default"
 
     override var tlPages: Int = 0
 
     private val _currentState = MutableLiveData<Current>()
+
+    lateinit var ds: DataStore<Preferences>
 
     val currentState: LiveData<Current>
         get() = _currentState
@@ -66,7 +71,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     val information: State<String>
         get() = _information
 
-    val textSize = MutableStateFlow(16)
+    val textSize = MutableStateFlow(defaultTextSize)
 
     // lista donde se almacena la pagina actual del modulo.
     var mPage = mutableListOf(
@@ -101,19 +106,21 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         1,// PYM3 11
         1 // NM 12
     )
+    val isSelectedFirstC = mutableStateOf(isSelectedFirst)
 
     /**
      * Funcion iniciador. Obtiene el contexto desde [com.jjgn.app.devlearn.ui.components.Content]
      * para que SharedPreferences funcione.
      * */
-    fun starter(context: Context) {
-        pref = context.getSharedPreferences(pName, Context.MODE_PRIVATE)
-        loadState()
+    fun starter() {
+        viewModelScope.launch {
+            loadState()
+        }
         loader()
         if (_currentState.value != null) {
-            dataRestorer(context)
+            dataRestorer()
         }
-        dataSManager(context)
+        dataSManager()
     }
 
     /**
@@ -122,15 +129,17 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            sCurrentState(newState, pref, cStateValue)
+            sCurrentState(newState, ds, cStateValue)
         }
     }
 
     /**
      * Funcion encargada de cargar el ultimo curso seleccionado.
      * */
-    private fun loadState() {
-        _currentState.value = gCurrentState(pref, cStateValue)
+    private suspend fun loadState() {
+        runBlocking {
+            _currentState.value = gCurrentState(ds, cStateValue)
+        }
     }
 
     /**
@@ -173,13 +182,13 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * Funcion encargada de comprobar que se haya seleccionado un curso, de esta manera evita estar
      * ejecutando [dataSaver] de forma innecesaria.
      * */
-    private fun dataSManager(context: Context) {
+    private fun dataSManager() {
         viewModelScope.launch(Dispatchers.IO) {
             if (_currentState.value == null) {
-                delay(2000)
-                dataSManager(context)
+                delay(dsManagerDelay)
+                dataSManager()
             } else {
-                dataSaver(context)
+                dataSaver()
             }
         }
     }
@@ -187,23 +196,23 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     /**
      *  Funcion encargada de guardar las paginas en las que el usuario se queda y el estado del zoom del texto.
      * */
-    private fun dataSaver(context: Context) {
+    fun dataSaver() {
         viewModelScope.launch(Dispatchers.IO) {
-            dSaver(pref, context, pName, mPage, mCurrentPage)
-            zStateSaver(pref, context, pName, zValue, textSize)
-            delay(3000)
+            dSaver(ds, mPage, mCurrentPage, isSelectedFirstC)
+            zStateSaver(ds, zValue, textSize)
+            delay(dsDelay)
             Log.i("AppData", "Data saved!")
-            dataSaver(context)
+            dataSaver()
         }
     }
 
     /**
      * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez y el estado del zoom del texto.
      * */
-    private fun dataRestorer(context: Context) {
+    private fun dataRestorer() {
         viewModelScope.launch(Dispatchers.IO) {
-            dRestorer(pref, context, pName, mPage, mCurrentPage)
-            zStateRestorer(context, pName, zValue, textSize, pref)
+            dRestorer(ds, mPage, mCurrentPage, isSelectedFirstC)
+            zStateRestorer(ds, zValue, textSize)
         }
     }
 }

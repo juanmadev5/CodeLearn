@@ -40,7 +40,7 @@ fun NvController(
     viewModel: AppViewModel = AccessInstance(),
     navController: NavHostController = rememberNavController(),
     route: String = if (
-        viewModel.pref.getBoolean(viewModel.fSelected, false)
+        viewModel.isSelectedFirstC.value
     ) NavigationRoutes.Home.route else NavigationRoutes.Welcome.route
 ) {
     CompositionLocalProvider(LocalNavigationController provides navController) {
