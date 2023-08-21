@@ -38,10 +38,7 @@ fun CourseCard(
             .height(228.dp)
             .clip(RoundedCornerShape(20.dp))
             .clickable {
-                viewModel.pref
-                    .edit()
-                    .putBoolean(viewModel.fSelected, true)
-                    .apply()
+                viewModel.isSelectedFirstC.value = true
                 when (title) {
                     "Python" -> {
                         viewModel.setCurrentState(Current.PY)
@@ -65,7 +62,6 @@ fun CourseCard(
     ) {
         ConstraintLayout(Modifier.fillMaxSize()) {
             val (cTitle, cDesc, cLogo) = createRefs()
-
             Image(
                 painter = painterResource(id = logo),
                 "",

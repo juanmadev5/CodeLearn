@@ -1,6 +1,5 @@
 package com.jjgn.app.devlearn.data
 
-import android.content.SharedPreferences
 import com.jjgn.app.devlearn.R
 
 /**
@@ -22,8 +21,6 @@ interface DefaultData {
 
     val fSelected: String
         get() = "firstSelected"
-
-    var pref: SharedPreferences
 
     var lName: String
 

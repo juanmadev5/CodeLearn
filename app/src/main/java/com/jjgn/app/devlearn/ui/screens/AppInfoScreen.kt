@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LogoDev
 import androidx.compose.material.icons.filled.SettingsApplications
@@ -31,87 +31,100 @@ import com.jjgn.app.devlearn.R
 
 @Composable
 fun AppInfoScreen() {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-            .verticalScroll(rememberScrollState())
     ) {
-        Spacer(Modifier.padding(top = 64.dp))
-        Text(
-            text = "Informacion de la aplicación",
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Light,
-            lineHeight = 40.sp
-        )
-        Spacer(Modifier.padding(top = 64.dp))
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painterResource(id = R.drawable.app_icon_foreground),
-                    contentDescription = "app icon",
-                    Modifier.fillMaxSize(),
-                    tint = MaterialTheme.colorScheme.primary
+        item {
+            Spacer(Modifier.padding(top = 64.dp))
+            Text(
+                text = "Informacion de la aplicación",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Light,
+                lineHeight = 40.sp
+            )
+            Spacer(Modifier.padding(top = 64.dp))
+        }
+        item {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(RoundedCornerShape(8.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painterResource(id = R.drawable.app_icon_foreground),
+                        contentDescription = "app icon",
+                        Modifier.fillMaxSize(),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Spacer(Modifier.padding(start = 12.dp))
+                Text(
+                    text = stringResource(id = R.string.app_name) + " v1.5",
+                    fontSize = 14.sp
                 )
             }
-            Spacer(Modifier.padding(start = 12.dp))
-            Text(
-                text = stringResource(id = R.string.app_name) + " v1.5",
-                fontSize = 14.sp
-            )
+            Spacer(modifier = Modifier.padding(top = 16.dp))
         }
-        Spacer(modifier = Modifier.padding(top = 16.dp))
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Filled.LogoDev,
-                contentDescription = "app developer",
-                Modifier
-                    .size(36.dp)
-                    .padding(start = 5.dp)
-            )
-            Spacer(Modifier.padding(start = 18.dp))
-            Text(
-                text = "Desarrollador: JM Dev",
-                fontSize = 14.sp
-            )
+        item {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Filled.LogoDev,
+                    contentDescription = "app developer",
+                    Modifier
+                        .size(36.dp)
+                        .padding(start = 5.dp)
+                )
+                Spacer(Modifier.padding(start = 18.dp))
+                Text(
+                    text = "Desarrollador: JM Dev",
+                    fontSize = 14.sp
+                )
+            }
+            Spacer(modifier = Modifier.padding(top = 16.dp))
         }
-        Spacer(modifier = Modifier.padding(top = 16.dp))
-        Text(
-            text = "Aplicación construida con Jetpack Compose, el kit de herramientas moderno de Android para compilar IU nativas.",
-            fontSize = 14.sp
-        )
-        Image(
-            painter = painterResource(id = R.drawable.undraw_android_jr64),
-            contentDescription = "",
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .size(200.dp)
-        )
-        Spacer(modifier = Modifier.padding(top = 8.dp))
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Filled.SettingsApplications,
-                contentDescription = "app developer",
-                Modifier
-                    .size(46.dp)
-                    .padding(start = 16.dp)
-            )
-            Spacer(Modifier.padding(start = 16.dp))
-            Text(
-                text = "Componentes de la aplicación",
-                fontSize = 14.sp
-            )
+        item {
+            Column(Modifier.fillMaxWidth().wrapContentHeight()) {
+                Text(
+                    text = "Aplicación construida con Jetpack Compose, el kit de herramientas moderno de Android para compilar IU nativas.",
+                    fontSize = 14.sp
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.undraw_android_jr64),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .size(200.dp)
+                )
+                Spacer(modifier = Modifier.padding(top = 8.dp))
+            }
         }
-        Spacer(modifier = Modifier.padding(top = 16.dp))
-        Text(
-            text = """
+        item {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Filled.SettingsApplications,
+                    contentDescription = "app developer",
+                    Modifier
+                        .size(46.dp)
+                        .padding(start = 16.dp)
+                )
+                Spacer(Modifier.padding(start = 16.dp))
+                Text(
+                    text = "Componentes de la aplicación",
+                    fontSize = 14.sp
+                )
+            }
+            Spacer(modifier = Modifier.padding(top = 16.dp))
+        }
+        item {
+            Text(
+                text = """
                 - Dagger Hilt v2.46.1
                 - Accompanist SystemUI Controller v0.17.0
+                - Android Data Store Preferences v1.0.0
                 - Android Core SplashScreen v1.0.1
                 - Android Compose Runtime v1.4.3
                 - Kotlin Coroutines v1.7.1
@@ -121,8 +134,9 @@ fun AppInfoScreen() {
                 - Material Icons Extended v1.4.3
                 - Compose ConstraintLayout v1.0.1
             """.trimIndent(),
-            fontSize = 14.sp
-        )
-        Spacer(modifier = Modifier.padding(8.dp))
+                fontSize = 14.sp
+            )
+            Spacer(modifier = Modifier.padding(8.dp))
+        }
     }
 }

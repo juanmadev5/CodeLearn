@@ -1,10 +1,9 @@
 package com.jjgn.app.devlearn.controller
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import com.jjgn.app.devlearn.data.awaitScreenTSetting
 
 /**
  * Cuando el tiempo de espera ya paso, muestra el contenido
@@ -17,7 +16,7 @@ fun AwaitScreenTransition(
 ) {
     AnimatedVisibility(
         visible = !visible.value,
-        enter = fadeIn(animationSpec = tween(durationMillis = 1250))
+        enter = awaitScreenTSetting
     ) {
         content()
     }

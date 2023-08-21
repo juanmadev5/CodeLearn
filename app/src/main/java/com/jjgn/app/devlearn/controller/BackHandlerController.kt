@@ -7,13 +7,16 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.data.backHandlerDelay
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,23 +32,25 @@ import kotlin.system.exitProcess
 @Composable
 fun BackHandlerController(
     isEnabled: Boolean,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    appViewModel: AppViewModel = AccessInstance()
 ) {
     val msg = stringResource(R.string.pressTwice)
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    var c by remember { mutableStateOf(0) }
+    var c by remember { mutableIntStateOf(0) }
     BackHandler(enabled = isEnabled) {
         c += 1
         if (c == 1) {
             coroutineScope.launch {
                 snackbarHostState.showSnackbar(msg)
-                delay(1500)
+                delay(backHandlerDelay)
                 snackbarHostState.currentSnackbarData?.dismiss()
                 c = 0
             }
         } else if (c == 2) {
             coroutineScope.launch {
+                appViewModel.dataSaver()
                 withContext(Dispatchers.IO) {
                     snackbarHostState.currentSnackbarData?.dismiss()
                     val currentActivity = context as? Activity

@@ -11,12 +11,12 @@ import com.jjgn.app.devlearn.states.Module
  * */
 fun getCurrentModule(
     moduleSelected: Int,
-    _currentState: MutableLiveData<Current>,
-    _currentMState: MutableLiveData<Module>
+    currentState: MutableLiveData<Current>,
+    currentMState: MutableLiveData<Module>
 ) {
     val currentModule = when (moduleSelected) {
         1 -> {
-            when (_currentState.value) {
+            when (currentState.value) {
                 Current.KT -> Module.KTM1
                 Current.JV -> Module.JVM1
                 Current.JS -> Module.JSM1
@@ -26,7 +26,7 @@ fun getCurrentModule(
         }
 
         2 -> {
-            when (_currentState.value) {
+            when (currentState.value) {
                 Current.KT -> Module.KTM2
                 Current.JV -> Module.JVM2
                 Current.JS -> Module.JSM2
@@ -36,7 +36,7 @@ fun getCurrentModule(
         }
 
         else -> {
-            when (_currentState.value) {
+            when (currentState.value) {
                 Current.KT -> Module.KTM3
                 Current.JV -> Module.JVM3
                 Current.JS -> Module.JSM3
@@ -46,18 +46,18 @@ fun getCurrentModule(
         }
     }
     when (currentModule) {
-        Module.KTM1 -> _currentMState.value = currentModule
-        Module.KTM2 -> _currentMState.value = currentModule
-        Module.KTM3 -> _currentMState.value = currentModule
-        Module.JVM1 -> _currentMState.value = currentModule
-        Module.JVM2 -> _currentMState.value = currentModule
-        Module.JVM3 -> _currentMState.value = currentModule
-        Module.JSM1 -> _currentMState.value = currentModule
-        Module.JSM2 -> _currentMState.value = currentModule
-        Module.JSM3 -> _currentMState.value = currentModule
-        Module.PYM1 -> _currentMState.value = currentModule
-        Module.PYM2 -> _currentMState.value = currentModule
-        Module.PYM3 -> _currentMState.value = currentModule
-        else -> _currentMState.value = currentModule
+        Module.KTM1 -> currentMState.value = currentModule
+        Module.KTM2 -> currentMState.value = currentModule
+        Module.KTM3 -> currentMState.value = currentModule
+        Module.JVM1 -> currentMState.value = currentModule
+        Module.JVM2 -> currentMState.value = currentModule
+        Module.JVM3 -> currentMState.value = currentModule
+        Module.JSM1 -> currentMState.value = currentModule
+        Module.JSM2 -> currentMState.value = currentModule
+        Module.JSM3 -> currentMState.value = currentModule
+        Module.PYM1 -> currentMState.value = currentModule
+        Module.PYM2 -> currentMState.value = currentModule
+        Module.PYM3 -> currentMState.value = currentModule
+        else -> currentMState.value = currentModule
     }
 }
