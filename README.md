@@ -13,6 +13,7 @@ Aplicación súper ligera! Todo en un paquete de solo 2MB 🥳
 3. [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419) usado para la injección de dependencias.
 4. [ConstraintLayout](https://developer.android.com/jetpack/compose/layouts/constraintlayout?hl=es-419) utilizado por los componentes más pequeños de la IU.
 5. [Accompanist SystemUI Controller](https://google.github.io/accompanist/systemuicontroller/) permite modificar el estilo de la barra de notificaciones y de navegación.
+6. [Android Data Store](https://developer.android.com/topic/libraries/architecture/datastore?hl=es-419) guarda datos pequeños como las paginas donde se quedo el usuario o el ultimo curso seleccionado.
 
 ## 📱 UI:
 
