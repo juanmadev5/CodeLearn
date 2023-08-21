@@ -5,7 +5,7 @@ import androidx.compose.animation.fadeIn
 
 const val isSelectedKey = "isSelectedFirstC"
 const val isSelectedFirst = false
-const val awaitScreenMillis = 800
+const val awaitScreenMillis = 900
 const val awaitControllerDelay = 1500L
 const val backHandlerDelay = 1500L
 const val dsManagerDelay = 2000L
