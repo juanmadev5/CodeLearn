@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -30,36 +30,33 @@ import com.jjgn.app.devlearn.viewmodel.AppViewModel
 fun CourseSelectorScreen(viewModel: AppViewModel = AccessInstance()) {
     val painter = remember { R.drawable.undraw_selection_re_ycpo__1_ }
     val text = remember { R.string.selectCourse }
-    LazyColumn(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(14.dp))
+            .verticalScroll(rememberScrollState())
     ) {
-        item {
-            Column(Modifier.fillMaxWidth().wrapContentHeight()) {
-                Image(
-                    painter = painterResource(painter),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(200.dp)
-                        .padding(top = 64.dp)
-                        .align(Alignment.CenterHorizontally)
+        Image(
+            painter = painterResource(painter),
+            contentDescription = "",
+            modifier = Modifier
+                .size(200.dp)
+                .padding(top = 64.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = stringResource(text),
+            Modifier
+                .padding(
+                    top = 64.dp,
+                    start = 16.dp,
+                    bottom = 64.dp
                 )
-                Text(
-                    text = stringResource(text),
-                    Modifier
-                        .padding(
-                            top = 64.dp,
-                            start = 16.dp,
-                            bottom = 64.dp
-                        )
-                        .fillMaxWidth(),
-                    fontSize = 26.sp,
-                    textAlign = TextAlign.Left
-                )
-            }
-        }
-        items(viewModel.cList.size) { index ->
+                .fillMaxWidth(),
+            fontSize = 26.sp,
+            textAlign = TextAlign.Left
+        )
+        viewModel.cList.forEachIndexed { index, _ ->
             CourseCard(
                 title = viewModel.cList[index],
                 description = stringResource(viewModel.cDescription[index]),

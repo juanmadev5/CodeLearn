@@ -1,13 +1,15 @@
 package com.jjgn.app.devlearn.ui.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -54,62 +56,54 @@ fun HomeContent(
         }
     }
 
-    LazyColumn(
+    Column(
         Modifier
-            .fillMaxSize(),
-        userScrollEnabled = true
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
-        item {
-            HomeTopAppBar()
-            Spacer(Modifier.padding(top = 16.dp))
+        HomeTopAppBar()
+        Spacer(Modifier.padding(top = 16.dp))
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .clip(RoundedCornerShape(20.dp))
+                .clickable {
+                    viewModel.selectedModule(1)
+                    viewModel.loader()
+                    navController.navigate(NavigationRoutes.InCourse.route)
+                }
+        ) {
+            ModuleCardContent1(m1Progress)
         }
-        item {
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable {
-                        viewModel.selectedModule(1)
-                        viewModel.loader()
-                        navController.navigate(NavigationRoutes.InCourse.route)
-                    }
-            ) {
-                ModuleCardContent1(m1Progress)
-            }
-            Spacer(Modifier.padding(top = 20.dp))
+        Spacer(Modifier.padding(top = 20.dp))
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .clip(RoundedCornerShape(20.dp))
+                .clickable {
+                    viewModel.selectedModule(2)
+                    viewModel.loader()
+                    navController.navigate(NavigationRoutes.InCourse.route)
+                }
+        ) {
+            ModuleCardContent2(m2Progress)
         }
-        item {
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable {
-                        viewModel.selectedModule(2)
-                        viewModel.loader()
-                        navController.navigate(NavigationRoutes.InCourse.route)
-                    }
-            ) {
-                ModuleCardContent2(m2Progress)
-            }
-            Spacer(Modifier.padding(top = 20.dp))
+        Spacer(Modifier.padding(top = 20.dp))
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .clip(RoundedCornerShape(20.dp))
+                .clickable {
+                    viewModel.selectedModule(3)
+                    viewModel.loader()
+                    navController.navigate(NavigationRoutes.InCourse.route)
+                }
+        ) {
+            ModuleCardContent3(m3Progress)
         }
-        item {
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable {
-                        viewModel.selectedModule(3)
-                        viewModel.loader()
-                        navController.navigate(NavigationRoutes.InCourse.route)
-                    }
-            ) {
-                ModuleCardContent3(m3Progress)
-            }
-            Spacer(modifier = Modifier.padding(8.dp))
-        }
+        Spacer(modifier = Modifier.padding(8.dp))
     }
 }
