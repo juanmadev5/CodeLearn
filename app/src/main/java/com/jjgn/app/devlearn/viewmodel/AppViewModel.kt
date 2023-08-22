@@ -26,6 +26,7 @@ import com.jjgn.app.devlearn.data.zStateSaver
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.states.Module
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -110,12 +111,13 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     fun starter() {
         viewModelScope.launch {
             loadState()
+
+            loader()
+            if (_currentState.value != null) {
+                dataRestorer()
+            }
+            dataSManager()
         }
-        loader()
-        if (_currentState.value != null) {
-            dataRestorer()
-        }
-        dataSManager()
     }
 
     /**
@@ -177,8 +179,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * Funcion encargada de comprobar que se haya seleccionado un curso, de esta manera evita estar
      * ejecutando [dataSaver] de forma innecesaria.
      * */
-    private fun dataSManager() {
-        viewModelScope.launch(Dispatchers.IO) {
+    private suspend fun dataSManager() {
+        coroutineScope {
             if (_currentState.value == null) {
                 delay(App.DS_MANAGER_DELAY)
                 dataSManager()
@@ -189,15 +191,15 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     }
 
     private suspend fun autoDataSaver() {
-        viewModelScope.launch(Dispatchers.IO) {
+        coroutineScope {
             val dataSaveJob = launch {
                 dataSaver()
             }
             dataSaveJob.start()
-            if (dataSaveJob.isCompleted) {
+            if (!dataSaveJob.isActive) {
                 delay(5000)
-                dataSManager()
             }
+            dataSManager()
         }
     }
 
