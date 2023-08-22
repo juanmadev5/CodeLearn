@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.jjgn.app.devlearn.application.App
+import com.jjgn.app.devlearn.application.IS_SELECTED_KEY
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ suspend fun dSaver(
                 for (i in mPage.indices) {
                     preferences[intPreferencesKey("${mCurrentPage}$i")] = mPage[i]
                 }
-                preferences[booleanPreferencesKey(App.IS_SELECTED_KEY)] = isSelectedFirstC.value
+                preferences[booleanPreferencesKey(IS_SELECTED_KEY)] = isSelectedFirstC.value
             }
         }
     }
