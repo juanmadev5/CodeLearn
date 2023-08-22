@@ -7,9 +7,6 @@ import com.jjgn.app.devlearn.R
  * */
 interface DefaultData {
 
-    val pName: String
-        get() = "AppPreferences"
-
     val cStateValue: String
         get() = "current_state"
 
@@ -18,9 +15,6 @@ interface DefaultData {
 
     val mCurrentPage: String
         get() = "current_page-"
-
-    val fSelected: String
-        get() = "firstSelected"
 
     var lName: String
 
