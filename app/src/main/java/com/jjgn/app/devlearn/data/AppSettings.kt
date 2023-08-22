@@ -3,6 +3,7 @@ package com.jjgn.app.devlearn.data
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 
+const val DS_NAME = "app_dataStore"
 const val isSelectedKey = "isSelectedFirstC"
 const val isSelectedFirst = false
 const val awaitScreenMillis = 900
