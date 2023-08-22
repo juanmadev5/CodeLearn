@@ -1,4 +1,4 @@
-package com.jjgn.app.devlearn
+package com.jjgn.app.devlearn.application
 
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 val Context.dataStore by preferencesDataStore(App.DS_NAME)
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class ApplicationActivity : ComponentActivity() {
     private val appViewModel: AppViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

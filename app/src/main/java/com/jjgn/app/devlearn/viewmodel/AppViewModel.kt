@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jjgn.app.devlearn.App
+import com.jjgn.app.devlearn.application.App
 import com.jjgn.app.devlearn.controller.moduleCurrentPageController
 import com.jjgn.app.devlearn.controller.onNextPageController
 import com.jjgn.app.devlearn.controller.onPrevPageController

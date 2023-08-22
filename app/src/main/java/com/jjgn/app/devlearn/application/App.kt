@@ -1,4 +1,4 @@
-package com.jjgn.app.devlearn
+package com.jjgn.app.devlearn.application
 
 import android.app.Application
 import androidx.compose.animation.core.tween
