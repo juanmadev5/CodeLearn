@@ -13,8 +13,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
-import com.jjgn.app.devlearn.data.backHandlerDelay
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +44,7 @@ fun BackHandlerController(
         if (c == 1) {
             coroutineScope.launch {
                 snackbarHostState.showSnackbar(msg)
-                delay(backHandlerDelay)
+                delay(App.BACKHANDLER_DELAY)
                 snackbarHostState.currentSnackbarData?.dismiss()
                 c = 0
             }

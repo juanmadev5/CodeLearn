@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import com.jjgn.app.devlearn.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.first
@@ -30,7 +31,7 @@ suspend fun dRestorer(
             mPage.addAll(restoredList)
 
             isSelectedFirstC.value =
-                preferences[booleanPreferencesKey(isSelectedKey)] ?: true
+                preferences[booleanPreferencesKey(App.IS_SELECTED_KEY)] ?: true
         }
     }
 }

@@ -3,7 +3,7 @@ package com.jjgn.app.devlearn.controller
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import com.jjgn.app.devlearn.data.awaitControllerDelay
+import com.jjgn.app.devlearn.App
 import kotlinx.coroutines.delay
 
 /**
@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun AwaitController(loading: MutableState<Boolean>) {
     LaunchedEffect(true) {
-        delay(awaitControllerDelay)
+        delay(App.AWAIT_CONTROLLER_DELAY)
         loading.value = false
     }
 }
