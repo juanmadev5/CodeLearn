@@ -9,10 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jjgn.app.devlearn.application.DEFAULT_TEXT_SIZE
-import com.jjgn.app.devlearn.application.DS_DELAY
-import com.jjgn.app.devlearn.application.DS_MANAGER_DELAY
-import com.jjgn.app.devlearn.application.IS_SELECTED_FIRST
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.controller.moduleCurrentPageController
 import com.jjgn.app.devlearn.controller.onNextPageController
 import com.jjgn.app.devlearn.controller.onPrevPageController
@@ -71,7 +68,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     val information: State<String>
         get() = _information
 
-    val textSize = MutableStateFlow(DEFAULT_TEXT_SIZE)
+    val textSize = MutableStateFlow(App.DEFAULT_TEXT_SIZE)
 
     // lista donde se almacena la pagina actual del modulo.
     var mPage = mutableListOf(
@@ -106,7 +103,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         1,// PYM3 11
         1 // NM 12
     )
-    val isSelectedFirstC = mutableStateOf(IS_SELECTED_FIRST)
+    val isSelectedFirstC = mutableStateOf(App.IS_SELECTED_FIRST)
 
     /**
      * Funcion iniciador. Obtiene el contexto desde [com.jjgn.app.devlearn.ui.components.Content]
@@ -185,7 +182,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     private fun dataSManager() {
         viewModelScope.launch(Dispatchers.IO) {
             if (_currentState.value == null) {
-                delay(DS_MANAGER_DELAY)
+                delay(App.DS_MANAGER_DELAY)
                 dataSManager()
             } else {
                 dataSaver()
@@ -200,7 +197,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         viewModelScope.launch(Dispatchers.IO) {
             dSaver(ds, mPage, mCurrentPage, isSelectedFirstC)
             zStateSaver(ds, zValue, textSize)
-            delay(DS_DELAY)
+            delay(App.DS_DELAY)
             Log.i("AppData", "Data saved!")
             dataSaver()
         }

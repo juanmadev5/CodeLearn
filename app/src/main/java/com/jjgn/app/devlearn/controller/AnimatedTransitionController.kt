@@ -3,7 +3,7 @@ package com.jjgn.app.devlearn.controller
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import com.jjgn.app.devlearn.application.AWAIT_SCREEN_SETTING
+import com.jjgn.app.devlearn.App
 
 /**
  * Cuando el tiempo de espera ya paso, muestra el contenido
@@ -16,7 +16,7 @@ fun AwaitScreenTransition(
 ) {
     AnimatedVisibility(
         visible = !visible.value,
-        enter = AWAIT_SCREEN_SETTING
+        enter = App.AWAIT_SCREEN_SETTING
     ) {
         content()
     }
