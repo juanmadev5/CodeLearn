@@ -1,6 +1,5 @@
 package com.jjgn.app.devlearn.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.core.DataStore
@@ -184,7 +183,20 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
                 delay(App.DS_MANAGER_DELAY)
                 dataSManager()
             } else {
+                autoDataSaver()
+            }
+        }
+    }
+
+    private suspend fun autoDataSaver() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val dataSaveJob = launch {
                 dataSaver()
+            }
+            dataSaveJob.start()
+            if (dataSaveJob.isCompleted) {
+                delay(5000)
+                dataSManager()
             }
         }
     }
@@ -196,9 +208,6 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
         viewModelScope.launch(Dispatchers.IO) {
             dSaver(ds, mPage, mCurrentPage, isSelectedFirstC)
             zStateSaver(ds, zValue, textSize)
-            delay(App.DS_DELAY)
-            dataSaver()
-            Log.i("AppData", "Data saved!")
         }
     }
 
