@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -44,14 +43,8 @@ fun HomeTopAppBar(
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth()
+            .padding(top = 8.dp)
     ) {
-        Text(
-            text = stringResource(id = R.string.app_name),
-            modifier = Modifier.padding(top = 100.dp, start = 16.dp),
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Light
-        )
-        Spacer(modifier = Modifier.padding(top = 90.dp))
         Row(
             Modifier
                 .wrapContentHeight()
@@ -94,5 +87,4 @@ fun HomeTopAppBar(
             }
         }
     }
-
 }

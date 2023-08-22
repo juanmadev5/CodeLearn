@@ -9,10 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewModelScope
 import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
@@ -37,19 +37,18 @@ fun BackHandlerController(
 ) {
     val msg = stringResource(R.string.pressTwice)
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
     var c by remember { mutableIntStateOf(0) }
     BackHandler(enabled = isEnabled) {
         c += 1
         if (c == 1) {
-            coroutineScope.launch {
+            appViewModel.viewModelScope.launch {
                 snackbarHostState.showSnackbar(msg)
                 delay(App.BACKHANDLER_DELAY)
                 snackbarHostState.currentSnackbarData?.dismiss()
                 c = 0
             }
         } else if (c == 2) {
-            coroutineScope.launch {
+            appViewModel.viewModelScope.launch {
                 appViewModel.dataSaver()
                 withContext(Dispatchers.IO) {
                     snackbarHostState.currentSnackbarData?.dismiss()

@@ -106,8 +106,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     val isSelectedFirstC = mutableStateOf(App.IS_SELECTED_FIRST)
 
     /**
-     * Funcion iniciador. Obtiene el contexto desde [com.jjgn.app.devlearn.ui.components.Content]
-     * para que SharedPreferences funcione.
+     * Funcion iniciador del ViewModel
      * */
     fun starter() {
         viewModelScope.launch {
@@ -198,8 +197,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
             dSaver(ds, mPage, mCurrentPage, isSelectedFirstC)
             zStateSaver(ds, zValue, textSize)
             delay(App.DS_DELAY)
-            Log.i("AppData", "Data saved!")
             dataSaver()
+            Log.i("AppData", "Data saved!")
         }
     }
 

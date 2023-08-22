@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.datastore.preferences.preferencesDataStore
 import com.jjgn.app.devlearn.App
-import com.jjgn.app.devlearn.ui.components.Content
+import com.jjgn.app.devlearn.controller.ViewController
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +21,7 @@ class ApplicationActivity : ComponentActivity() {
         appViewModel.ds = dataStore
         appViewModel.starter()
         setContent {
-            Content()
+            ViewController()
         }
     }
 }
