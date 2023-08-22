@@ -111,13 +111,12 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     fun starter() {
         viewModelScope.launch {
             loadState()
-
-            loader()
-            if (_currentState.value != null) {
-                dataRestorer()
-            }
-            dataSManager()
         }
+        loader()
+        if (_currentState.value != null) {
+            dataRestorer()
+        }
+        dataSManager()
     }
 
     /**
@@ -179,8 +178,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * Funcion encargada de comprobar que se haya seleccionado un curso, de esta manera evita estar
      * ejecutando [dataSaver] de forma innecesaria.
      * */
-    private suspend fun dataSManager() {
-        coroutineScope {
+    private fun dataSManager() {
+        viewModelScope.launch(Dispatchers.IO) {
             if (_currentState.value == null) {
                 delay(App.DS_MANAGER_DELAY)
                 dataSManager()
