@@ -22,12 +22,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.states.Current
+import com.jjgn.app.devlearn.ui.P_BOX_H
+import com.jjgn.app.devlearn.ui.P_PADD_E
+import com.jjgn.app.devlearn.ui.P_PADD_T
+import com.jjgn.app.devlearn.ui.P_TXT_PADD_S
+import com.jjgn.app.devlearn.ui.P_TXT_PADD_T
+import com.jjgn.app.devlearn.ui.P_TXT_SIZE
 import com.jjgn.app.devlearn.ui.components.Container1
 import com.jjgn.app.devlearn.ui.components.Container10
 import com.jjgn.app.devlearn.ui.components.Container11
@@ -49,6 +53,7 @@ import com.jjgn.app.devlearn.ui.components.Container6
 import com.jjgn.app.devlearn.ui.components.Container7
 import com.jjgn.app.devlearn.ui.components.Container8
 import com.jjgn.app.devlearn.ui.components.Container9
+import com.jjgn.app.devlearn.ui.paddingValue1
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
@@ -64,17 +69,17 @@ fun PracticeScreen(
         Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(top = 8.dp)
+            .padding(top = paddingValue1)
     ) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(P_BOX_H)
         ) {
             Text(
                 text = stringResource(R.string.exam),
-                Modifier.padding(start = 20.dp, top = 32.dp),
-                fontSize = 24.sp,
+                Modifier.padding(start = P_TXT_PADD_S, top = P_TXT_PADD_T),
+                fontSize = P_TXT_SIZE,
                 fontWeight = FontWeight.Light
             )
         }
@@ -84,7 +89,7 @@ fun PracticeScreen(
                 Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(top = 8.dp, end = 16.dp),
+                    .padding(top = P_PADD_T, end = P_PADD_E),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {

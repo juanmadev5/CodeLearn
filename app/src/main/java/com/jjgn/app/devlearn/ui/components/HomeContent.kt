@@ -15,11 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
+import com.jjgn.app.devlearn.ui.H_SPACER
+import com.jjgn.app.devlearn.ui.defaultClipSize
+import com.jjgn.app.devlearn.ui.paddingValue1
+import com.jjgn.app.devlearn.ui.paddingValue2
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -62,12 +65,12 @@ fun HomeContent(
             .verticalScroll(rememberScrollState())
     ) {
         HomeTopAppBar()
-        Spacer(Modifier.padding(top = 16.dp))
+        Spacer(Modifier.padding(top = paddingValue2))
         Card(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(20.dp))
+                .clip(RoundedCornerShape(defaultClipSize))
                 .clickable {
                     viewModel.selectedModule(1)
                     viewModel.loader()
@@ -76,12 +79,12 @@ fun HomeContent(
         ) {
             ModuleCardContent1(m1Progress)
         }
-        Spacer(Modifier.padding(top = 20.dp))
+        Spacer(Modifier.padding(top = H_SPACER))
         Card(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(20.dp))
+                .clip(RoundedCornerShape(defaultClipSize))
                 .clickable {
                     viewModel.selectedModule(2)
                     viewModel.loader()
@@ -90,12 +93,12 @@ fun HomeContent(
         ) {
             ModuleCardContent2(m2Progress)
         }
-        Spacer(Modifier.padding(top = 20.dp))
+        Spacer(Modifier.padding(top = H_SPACER))
         Card(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(20.dp))
+                .clip(RoundedCornerShape(defaultClipSize))
                 .clickable {
                     viewModel.selectedModule(3)
                     viewModel.loader()
@@ -104,6 +107,6 @@ fun HomeContent(
         ) {
             ModuleCardContent3(m3Progress)
         }
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(paddingValue1))
     }
 }

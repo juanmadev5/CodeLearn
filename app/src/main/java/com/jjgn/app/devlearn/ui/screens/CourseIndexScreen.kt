@@ -24,13 +24,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
+import com.jjgn.app.devlearn.ui.CI_IMG_SIZE
+import com.jjgn.app.devlearn.ui.CI_TXT2_SIZE
+import com.jjgn.app.devlearn.ui.CI_TXT_SIZE
+import com.jjgn.app.devlearn.ui.paddingValue1
+import com.jjgn.app.devlearn.ui.paddingValue2
+import com.jjgn.app.devlearn.ui.paddingValue3
+import com.jjgn.app.devlearn.ui.paddingValue4
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -161,28 +167,28 @@ fun IndexScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            .padding(top = paddingValue2, start = paddingValue2, end = paddingValue2)
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(modifier = Modifier.padding(top = 30.dp))
+        Spacer(modifier = Modifier.padding(top = paddingValue3))
         Image(
             painter = painterResource(id = R.drawable.undraw_diary_re_4jpc__1_),
             contentDescription = "",
             modifier = Modifier
-                .size(200.dp)
+                .size(CI_IMG_SIZE)
         )
         Text(
             text = "Índice del curso",
-            Modifier.padding(top = 54.dp),
+            Modifier.padding(top = paddingValue4),
             fontSize = 32.sp,
             fontWeight = FontWeight.Light
         )
-        Spacer(modifier = Modifier.padding(16.dp))
+        Spacer(modifier = Modifier.padding(paddingValue2))
         Text(
             text = courseIndex,
-            fontSize = 16.sp
+            fontSize = CI_TXT_SIZE
         )
-        Spacer(Modifier.padding(16.dp))
+        Spacer(Modifier.padding(paddingValue2))
         Card(
             Modifier
                 .fillMaxWidth()
@@ -194,7 +200,7 @@ fun IndexScreen(
             Column(
                 Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(paddingValue2)
             ) {
                 Row(
                     Modifier.fillMaxWidth(),
@@ -203,7 +209,7 @@ fun IndexScreen(
                 ) {
                     Text(
                         text = "Informacion de la aplicacion",
-                        fontSize = 14.sp,
+                        fontSize = CI_TXT2_SIZE,
                         fontWeight = FontWeight.Bold
                     )
                     Icon(
@@ -214,6 +220,6 @@ fun IndexScreen(
                 }
             }
         }
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(paddingValue1))
     }
 }

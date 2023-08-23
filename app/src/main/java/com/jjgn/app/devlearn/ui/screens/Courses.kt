@@ -19,10 +19,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.ui.C_BOTTOM_PADDING
+import com.jjgn.app.devlearn.ui.C_TOP_IMAGE
+import com.jjgn.app.devlearn.ui.C_TOP_PADDING
+import com.jjgn.app.devlearn.ui.C_TOP_TEXT_SIZE
 import com.jjgn.app.devlearn.ui.components.CourseCard
+import com.jjgn.app.devlearn.ui.defaultClipSize
+import com.jjgn.app.devlearn.ui.paddingValue1
+import com.jjgn.app.devlearn.ui.paddingValue2
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -33,37 +38,32 @@ fun CourseSelectorScreen(viewModel: AppViewModel = AccessInstance()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RoundedCornerShape(defaultClipSize))
             .verticalScroll(rememberScrollState())
     ) {
         Image(
             painter = painterResource(painter),
             contentDescription = "",
             modifier = Modifier
-                .size(200.dp)
-                .padding(top = 64.dp)
+                .size(C_TOP_IMAGE)
+                .padding(top = C_TOP_PADDING)
                 .align(Alignment.CenterHorizontally)
         )
         Text(
             text = stringResource(text),
             Modifier
                 .padding(
-                    top = 64.dp,
-                    start = 16.dp,
-                    bottom = 64.dp
+                    top = C_TOP_PADDING,
+                    start = paddingValue2,
+                    bottom = C_BOTTOM_PADDING
                 )
                 .fillMaxWidth(),
-            fontSize = 26.sp,
+            fontSize = C_TOP_TEXT_SIZE,
             textAlign = TextAlign.Left
         )
         viewModel.cList.forEachIndexed { index, _ ->
-            CourseCard(
-                title = viewModel.cList[index],
-                description = stringResource(viewModel.cDescription[index]),
-                logo = viewModel.cLogo[index],
-                viewModel = viewModel
-            )
-            Spacer(Modifier.padding(8.dp))
+            CourseCard(index)
+            Spacer(Modifier.padding(paddingValue1))
         }
     }
 }

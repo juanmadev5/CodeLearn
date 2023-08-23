@@ -13,8 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.jjgn.app.devlearn.R
+import com.jjgn.app.devlearn.ui.AS_BPADD
+import com.jjgn.app.devlearn.ui.AS_IMG_S
 
 @Composable
 fun AwaitScreen() {
@@ -30,12 +31,11 @@ fun AwaitScreen() {
                 painter = painterResource(id = R.drawable.undraw_loading_re_5axr),
                 contentDescription = "",
                 modifier = Modifier
-                    .padding(bottom = 32.dp)
-                    .size(300.dp)
+                    .padding(bottom = AS_BPADD)
+                    .size(AS_IMG_S)
                     .align(Alignment.CenterHorizontally)
             )
             Text("Cargando...", modifier = Modifier.align(Alignment.CenterHorizontally))
         }
     }
-
 }

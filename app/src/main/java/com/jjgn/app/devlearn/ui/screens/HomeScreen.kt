@@ -9,16 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import com.jjgn.app.devlearn.controller.BackHandlerController
 import com.jjgn.app.devlearn.ui.components.HomeContent
+import com.jjgn.app.devlearn.ui.defaultClipSize
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen() {
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
-        modifier = Modifier.clip(RoundedCornerShape(14.dp)),
+        modifier = Modifier.clip(RoundedCornerShape(defaultClipSize)),
         content = {
             HomeContent()
         },

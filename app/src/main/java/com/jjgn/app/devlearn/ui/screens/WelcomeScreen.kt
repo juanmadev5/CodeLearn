@@ -22,12 +22,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
+import com.jjgn.app.devlearn.ui.IC_BTN_ICON
+import com.jjgn.app.devlearn.ui.IC_BTN_SIZE
+import com.jjgn.app.devlearn.ui.W_S_IMG_SIZE
+import com.jjgn.app.devlearn.ui.W_TEXT_SIZE
+import com.jjgn.app.devlearn.ui.defaultClipSize
+import com.jjgn.app.devlearn.ui.paddingValue3
+import com.jjgn.app.devlearn.ui.paddingValue4
 
 @Composable
 fun WelcomeScreen(navController: NavController = LocalNavigationController.current) {
@@ -40,25 +45,25 @@ fun WelcomeScreen(navController: NavController = LocalNavigationController.curre
                 painter = painterResource(id = R.drawable.undraw_welcoming_re_x0qo__1_),
                 contentDescription = "",
                 modifier = Modifier
-                    .size(200.dp)
+                    .size(W_S_IMG_SIZE)
             )
-            Spacer(modifier = Modifier.padding(30.dp))
+            Spacer(modifier = Modifier.padding(paddingValue3))
             Text(
                 stringResource(R.string.welcome),
-                fontSize = 26.sp
+                fontSize = W_TEXT_SIZE
             )
-            Spacer(Modifier.padding(top = 60.dp))
+            Spacer(Modifier.padding(top = paddingValue4))
             IconButton(
                 onClick = { navController.navigate(NavigationRoutes.Courses.route) },
                 Modifier
-                    .size(54.dp)
-                    .clip(RoundedCornerShape(14.dp))
+                    .size(IC_BTN_SIZE)
+                    .clip(RoundedCornerShape(defaultClipSize))
                     .background(MaterialTheme.colorScheme.primary)
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowForward,
                     contentDescription = stringResource(R.string.welcomeDesc),
-                    Modifier.size(32.dp),
+                    Modifier.size(IC_BTN_ICON),
                     tint = MaterialTheme.colorScheme.onSecondary
                 )
             }

@@ -15,27 +15,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
+import com.jjgn.app.devlearn.ui.CARD_HEIGHT
+import com.jjgn.app.devlearn.ui.DESC_W
+import com.jjgn.app.devlearn.ui.IMG_SIZE
+import com.jjgn.app.devlearn.ui.PADD1
+import com.jjgn.app.devlearn.ui.PADD2
+import com.jjgn.app.devlearn.ui.TXT2_SIZE
+import com.jjgn.app.devlearn.ui.TXT_SIZE
+import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
 fun CourseCard(
-    title: String,
-    description: String,
-    logo: Int,
-    viewModel: AppViewModel,
+    index: Int,
+    viewModel: AppViewModel = AccessInstance(),
     navController: NavController = LocalNavigationController.current
 ) {
+    val title = viewModel.cList[index]
     Card(
         Modifier
             .fillMaxWidth()
-            .height(228.dp)
+            .height(CARD_HEIGHT)
             .clip(RoundedCornerShape(20.dp))
             .clickable {
                 viewModel.isSelectedFirstC.value = true
@@ -63,35 +70,35 @@ fun CourseCard(
         ConstraintLayout(Modifier.fillMaxSize()) {
             val (cTitle, cDesc, cLogo) = createRefs()
             Image(
-                painter = painterResource(id = logo),
+                painter = painterResource(id = viewModel.cLogo[index]),
                 "",
                 Modifier
                     .constrainAs(cLogo) {
-                        top.linkTo(parent.top, 24.dp)
-                        start.linkTo(parent.start, 24.dp)
+                        top.linkTo(parent.top, PADD1)
+                        start.linkTo(parent.start, PADD1)
                     }
-                    .size(45.dp)
+                    .size(IMG_SIZE)
             )
             Text(
                 text = title,
                 Modifier.constrainAs(cTitle) {
                     top.linkTo(cLogo.top)
-                    start.linkTo(cLogo.end, 24.dp)
+                    start.linkTo(cLogo.end, PADD1)
                     bottom.linkTo(cLogo.bottom)
                 },
-                fontSize = 20.sp
+                fontSize = TXT_SIZE
             )
             Text(
-                text = description,
+                text = stringResource(viewModel.cDescription[index]),
                 Modifier
                     .constrainAs(cDesc) {
-                        start.linkTo(parent.start, 24.dp)
-                        bottom.linkTo(parent.bottom, 20.dp)
-                        end.linkTo(parent.end, 24.dp)
+                        start.linkTo(parent.start, PADD1)
+                        bottom.linkTo(parent.bottom, PADD2)
+                        end.linkTo(parent.end, PADD1)
                     }
-                    .width(325.dp)
+                    .width(DESC_W)
                     .wrapContentHeight(),
-                fontSize = 14.sp
+                fontSize = TXT2_SIZE
             )
         }
     }

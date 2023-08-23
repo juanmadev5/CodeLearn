@@ -1,6 +1,7 @@
 package com.jjgn.app.devlearn.controller
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
@@ -68,8 +69,8 @@ fun ViewController(
         ) {
             AnimatedVisibility(
                 visible = !loading.value,
-                enter = fadeIn(),
-                exit = fadeOut()
+                enter = fadeIn(tween(durationMillis = App.ANIMATED_VISIBILITY_DELAY)),
+                exit = fadeOut(tween(durationMillis = App.ANIMATED_VISIBILITY_DELAY))
             ) {
                 CompositionLocalProvider(LocalNavigationController provides navController) {
                     NavHost(

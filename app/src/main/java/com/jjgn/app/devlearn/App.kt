@@ -12,7 +12,7 @@ class App : Application() {
         const val AWAIT_CONTROLLER_DELAY = 700L
         const val BACKHANDLER_DELAY = 2000L
         const val DS_MANAGER_DELAY = 2000L
-        const val DS_DELAY = 3000L
+        const val ANIMATED_VISIBILITY_DELAY = 1000
         const val DEFAULT_TEXT_SIZE = 16
     }
 }

@@ -17,8 +17,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jjgn.app.devlearn.ui.I_C_BPADD
+import com.jjgn.app.devlearn.ui.I_C_LINE_H
+import com.jjgn.app.devlearn.ui.I_C_PADD
+import com.jjgn.app.devlearn.ui.I_C_TPADD
+import com.jjgn.app.devlearn.ui.I_PADD1
+import com.jjgn.app.devlearn.ui.I_PADD2
+import com.jjgn.app.devlearn.ui.paddingValue1
+import com.jjgn.app.devlearn.ui.paddingValue5
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.viewmodel.TestViewModel
@@ -36,7 +43,7 @@ fun InCourseContent(
     Scaffold(
         Modifier
             .fillMaxSize()
-            .padding(top = 24.dp, bottom = 16.dp),
+            .padding(top = I_PADD2, bottom = I_PADD1),
         topBar = { TopBar(page = page, textSizeState, txtSize) },
         content = {
             ContentView(txtSize)
@@ -56,21 +63,21 @@ fun ContentView(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(12.dp)
+            .padding(I_C_PADD)
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(Modifier.padding(top = 50.dp))
+        Spacer(Modifier.padding(top = I_C_TPADD))
         PracticeButton(viewModel, testViewModel)
-        Spacer(Modifier.padding(top = 20.dp))
+        Spacer(Modifier.padding(top = I_C_BPADD))
         Text(
             text = viewModel.information.value,
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(start = 6.dp, end = 6.dp),
+                .padding(start = paddingValue1, end = paddingValue1),
             fontSize = txtSize.sp,
-            lineHeight = 26.sp
+            lineHeight = I_C_LINE_H
         )
-        Spacer(Modifier.padding(bottom = 90.dp))
+        Spacer(Modifier.padding(bottom = paddingValue5))
     }
 }
