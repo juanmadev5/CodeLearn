@@ -165,7 +165,9 @@ fun PracticeButton(
             Button(
                 onClick = {
                     testAssignationController(appViewModel, testViewModel)
-                    navController.navigate(NavigationRoutes.Practice.route)
+                    navController.navigate(NavigationRoutes.Practice.route) {
+                        launchSingleTop = true
+                    }
                 },
                 Modifier
                     .padding(end = 16.dp)

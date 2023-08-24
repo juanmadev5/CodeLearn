@@ -72,3 +72,9 @@ val AP_IC2_S = 46.dp
 // AwaitScreen
 val AS_BPADD = 32.dp
 val AS_IMG_S = 300.dp
+
+// Bottom app bar
+val B_A_PADD = 20.dp
+val B_A_H = 48.dp
+val B_A_W = 140.dp
+val B_A_BTN_H = 48.dp

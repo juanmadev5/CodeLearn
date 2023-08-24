@@ -74,7 +74,9 @@ fun HomeContent(
                 .clickable {
                     viewModel.selectedModule(1)
                     viewModel.loader()
-                    navController.navigate(NavigationRoutes.InCourse.route)
+                    navController.navigate(NavigationRoutes.InCourse.route) {
+                        launchSingleTop = true
+                    }
                 }
         ) {
             ModuleCardContent1(m1Progress)
@@ -88,7 +90,9 @@ fun HomeContent(
                 .clickable {
                     viewModel.selectedModule(2)
                     viewModel.loader()
-                    navController.navigate(NavigationRoutes.InCourse.route)
+                    navController.navigate(NavigationRoutes.InCourse.route) {
+                        launchSingleTop = true
+                    }
                 }
         ) {
             ModuleCardContent2(m2Progress)
@@ -102,7 +106,9 @@ fun HomeContent(
                 .clickable {
                     viewModel.selectedModule(3)
                     viewModel.loader()
-                    navController.navigate(NavigationRoutes.InCourse.route)
+                    navController.navigate(NavigationRoutes.InCourse.route) {
+                        launchSingleTop = true
+                    }
                 }
         ) {
             ModuleCardContent3(m3Progress)

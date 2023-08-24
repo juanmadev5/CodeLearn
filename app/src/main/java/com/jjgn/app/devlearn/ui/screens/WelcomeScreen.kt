@@ -54,7 +54,11 @@ fun WelcomeScreen(navController: NavController = LocalNavigationController.curre
             )
             Spacer(Modifier.padding(top = paddingValue4))
             IconButton(
-                onClick = { navController.navigate(NavigationRoutes.Courses.route) },
+                onClick = {
+                    navController.navigate(NavigationRoutes.Courses.route) {
+                        launchSingleTop = true
+                    }
+                },
                 Modifier
                     .size(IC_BTN_SIZE)
                     .clip(RoundedCornerShape(defaultClipSize))

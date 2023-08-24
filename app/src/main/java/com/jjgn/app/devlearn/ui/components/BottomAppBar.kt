@@ -29,6 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
+import com.jjgn.app.devlearn.ui.B_A_BTN_H
+import com.jjgn.app.devlearn.ui.B_A_H
+import com.jjgn.app.devlearn.ui.B_A_PADD
+import com.jjgn.app.devlearn.ui.B_A_W
+import com.jjgn.app.devlearn.ui.defaultClipSize
+import com.jjgn.app.devlearn.ui.paddingValue1
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -49,13 +55,13 @@ fun BottomBar(
         Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .clip(RoundedCornerShape(14.dp))
-            .padding(start = 8.dp, end = 8.dp)
+            .clip(RoundedCornerShape(defaultClipSize))
+            .padding(start = paddingValue1, end = paddingValue1)
     ) {
         Row(
             Modifier
                 .fillMaxSize()
-                .padding(start = 20.dp, end = 20.dp),
+                .padding(start = B_A_PADD, end = B_A_PADD),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -64,8 +70,8 @@ fun BottomBar(
                     viewModel.prevPage()
                 },
                 Modifier
-                    .height(48.dp)
-                    .width(140.dp),
+                    .height(B_A_H)
+                    .width(B_A_W),
                 enabled = buttonPrevState
             ) {
                 Icon(
@@ -85,7 +91,7 @@ fun BottomBar(
                     }
                 },
                 Modifier
-                    .height(48.dp)
+                    .height(B_A_BTN_H)
                     .wrapContentWidth()
             ) {
                 Text(

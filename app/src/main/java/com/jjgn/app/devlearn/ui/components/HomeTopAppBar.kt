@@ -58,7 +58,9 @@ fun HomeTopAppBar(
                     .wrapContentWidth()
                     .clip(RoundedCornerShape(14.dp))
                     .clickable {
-                        navController.navigate(NavigationRoutes.Courses.route)
+                        navController.navigate(NavigationRoutes.Courses.route) {
+                            launchSingleTop = true
+                        }
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -70,7 +72,11 @@ fun HomeTopAppBar(
                 )
             }
             IconButton(
-                onClick = { navController.navigate(NavigationRoutes.Info.route) },
+                onClick = {
+                    navController.navigate(NavigationRoutes.Info.route) {
+                        launchSingleTop = true
+                    }
+                },
                 Modifier
                     .wrapContentSize()
                     .clip(RoundedCornerShape(14.dp))

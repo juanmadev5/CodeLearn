@@ -194,7 +194,9 @@ fun IndexScreen(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clickable {
-                    navController.navigate(NavigationRoutes.AppInfo.route)
+                    navController.navigate(NavigationRoutes.AppInfo.route) {
+                        launchSingleTop = true
+                    }
                 }
         ) {
             Column(

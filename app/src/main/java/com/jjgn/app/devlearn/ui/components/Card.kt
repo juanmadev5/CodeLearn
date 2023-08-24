@@ -64,7 +64,9 @@ fun CourseCard(
                     }
                 }
                 viewModel.loader()
-                navController.navigate(NavigationRoutes.Home.route)
+                navController.navigate(NavigationRoutes.Home.route) {
+                    launchSingleTop = true
+                }
             }
     ) {
         ConstraintLayout(Modifier.fillMaxSize()) {
