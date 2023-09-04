@@ -37,19 +37,19 @@ import javax.inject.Inject
  * ViewModel principal de la aplicacion, se encarga de guardar y restaurar los datos,
  * muestra la informacion de acuerdo al curso y modulo seleccionado, controla la
  * paginacion y controla el zoom del texto.
- * Algunas cosas estan en [DefaultData] y se implementan aqui para tener
+ * Algunas metodos estan en [DefaultData] y se implementan aqui para tener
  * mas ordenado y que el codigo sea mas entendible.
  * Varios componentes que usa este ViewModel estan separados en distintos archivos.
  * */
 class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
+
+    lateinit var ds: DataStore<Preferences>
 
     override var lName = "default"
 
     override var tlPages: Int = 0
 
     private val _currentState = MutableLiveData<Current>()
-
-    lateinit var ds: DataStore<Preferences>
 
     val currentState: LiveData<Current>
         get() = _currentState
