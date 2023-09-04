@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.ui.C_BOTTOM_PADDING
 import com.jjgn.app.devlearn.ui.C_TOP_IMAGE
@@ -61,7 +62,7 @@ fun CourseSelectorScreen(viewModel: AppViewModel = AccessInstance()) {
             fontSize = C_TOP_TEXT_SIZE,
             textAlign = TextAlign.Left
         )
-        viewModel.cList.forEachIndexed { index, _ ->
+        App.cList.forEachIndexed { index, _ ->
             CourseCard(index)
             Spacer(Modifier.padding(paddingValue1))
         }

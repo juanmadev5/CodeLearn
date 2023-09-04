@@ -12,7 +12,6 @@ import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.controller.moduleCurrentPageController
 import com.jjgn.app.devlearn.controller.onNextPageController
 import com.jjgn.app.devlearn.controller.onPrevPageController
-import com.jjgn.app.devlearn.data.DefaultData
 import com.jjgn.app.devlearn.data.dRestorer
 import com.jjgn.app.devlearn.data.dSaver
 import com.jjgn.app.devlearn.data.gCurrentState
@@ -37,17 +36,11 @@ import javax.inject.Inject
  * ViewModel principal de la aplicacion, se encarga de guardar y restaurar los datos,
  * muestra la informacion de acuerdo al curso y modulo seleccionado, controla la
  * paginacion y controla el zoom del texto.
- * Algunas metodos estan en [DefaultData] y se implementan aqui para tener
- * mas ordenado y que el codigo sea mas entendible.
  * Varios componentes que usa este ViewModel estan separados en distintos archivos.
  * */
-class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
+class AppViewModel @Inject constructor() : ViewModel() {
 
     lateinit var ds: DataStore<Preferences>
-
-    override var lName = "default"
-
-    override var tlPages: Int = 0
 
     private val _currentState = MutableLiveData<Current>()
 
@@ -125,7 +118,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            sCurrentState(newState, ds, cStateValue)
+            sCurrentState(newState, ds, App.cStateValue)
         }
     }
 
@@ -134,7 +127,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * */
     private suspend fun loadState() {
         runBlocking {
-            _currentState.value = gCurrentState(ds, cStateValue)
+            _currentState.value = gCurrentState(ds, App.cStateValue)
         }
     }
 
@@ -151,7 +144,7 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * */
     fun nextPage() {
         onNextPageController(_currentMState, mPage)
-        if (_currentPage.value < tlPages) {
+        if (_currentPage.value < App.tlPages) {
             _currentPage.value = _currentPage.value.plus(1)
             loader()
         }
@@ -169,8 +162,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * Funcion que carga el total de paginas de cada modulo y obtiene el texto que se debe mostrar.
      * */
     fun loader() {
-        tlPages = getTotalPages(_currentState, _currentMState, tPages)
-        lName = getLangName(_currentState)
+        App.tlPages = getTotalPages(_currentState, _currentMState, tPages)
+        App.lName = getLangName(_currentState)
         _information.value = getTextToShow(_currentState, _currentPage, _currentMState)
     }
 
@@ -207,8 +200,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * */
     fun dataSaver() {
         viewModelScope.launch(Dispatchers.IO) {
-            dSaver(ds, mPage, mCurrentPage, isSelectedFirstC)
-            zStateSaver(ds, zValue, textSize)
+            dSaver(ds, mPage, App.mCurrentPage, isSelectedFirstC)
+            zStateSaver(ds, App.zValue, textSize)
         }
     }
 
@@ -217,8 +210,8 @@ class AppViewModel @Inject constructor() : ViewModel(), DefaultData {
      * */
     private fun dataRestorer() {
         viewModelScope.launch(Dispatchers.IO) {
-            dRestorer(ds, mPage, mCurrentPage, isSelectedFirstC)
-            zStateRestorer(ds, zValue, textSize)
+            dRestorer(ds, mPage, App.mCurrentPage, isSelectedFirstC)
+            zStateRestorer(ds, App.zValue, textSize)
         }
     }
 }

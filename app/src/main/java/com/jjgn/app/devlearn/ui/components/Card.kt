@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
 import com.jjgn.app.devlearn.states.Current
@@ -38,7 +39,7 @@ fun CourseCard(
     viewModel: AppViewModel = AccessInstance(),
     navController: NavController = LocalNavigationController.current
 ) {
-    val title = viewModel.cList[index]
+    val title = App.cList[index]
     Card(
         Modifier
             .fillMaxWidth()
@@ -72,7 +73,7 @@ fun CourseCard(
         ConstraintLayout(Modifier.fillMaxSize()) {
             val (cTitle, cDesc, cLogo) = createRefs()
             Image(
-                painter = painterResource(id = viewModel.cLogo[index]),
+                painter = painterResource(id = App.cLogo[index]),
                 "",
                 Modifier
                     .constrainAs(cLogo) {
@@ -91,7 +92,7 @@ fun CourseCard(
                 fontSize = TXT_SIZE
             )
             Text(
-                text = stringResource(viewModel.cDescription[index]),
+                text = stringResource(App.cDescription[index]),
                 Modifier
                     .constrainAs(cDesc) {
                         start.linkTo(parent.start, PADD1)

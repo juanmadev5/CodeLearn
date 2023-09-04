@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
@@ -45,7 +46,7 @@ fun ModuleCardContent1(
                 .align(Alignment.CenterHorizontally)
         )
         Text(
-            text = stringResource(R.string.basicsOf) + viewModel.lName,
+            text = stringResource(R.string.basicsOf) + App.lName,
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp
         )

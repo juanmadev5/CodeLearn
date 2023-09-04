@@ -3,6 +3,7 @@ package com.jjgn.app.devlearn.controller
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
@@ -19,7 +20,7 @@ fun ButtonController(
 ) {
     LaunchedEffect(viewModel.cPageValue) {
         viewModel.cPageValue.collect { currentPage ->
-            buttonNextState.value = currentPage < viewModel.tlPages
+            buttonNextState.value = currentPage < App.tlPages
             buttonPrevState.value = currentPage > 1
         }
     }

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
@@ -65,7 +66,7 @@ fun HomeTopAppBar(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = viewModel.lName,
+                    text = App.lName,
                     Modifier.padding(start = 18.dp, end = 18.dp),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
