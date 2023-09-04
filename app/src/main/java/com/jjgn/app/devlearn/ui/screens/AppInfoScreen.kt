@@ -32,12 +32,12 @@ import com.jjgn.app.devlearn.ui.AP_BOX_SIZE
 import com.jjgn.app.devlearn.ui.AP_DEV_IC
 import com.jjgn.app.devlearn.ui.AP_DEV_IC_P
 import com.jjgn.app.devlearn.ui.AP_IC2_S
-import com.jjgn.app.devlearn.ui.AP_IMG
 import com.jjgn.app.devlearn.ui.AP_P_S
 import com.jjgn.app.devlearn.ui.AP_SPADD
 import com.jjgn.app.devlearn.ui.AP_TXT2_SIZE
 import com.jjgn.app.devlearn.ui.AP_TXT_LNH
 import com.jjgn.app.devlearn.ui.AP_TXT_SIZE
+import com.jjgn.app.devlearn.ui.defaultClipSize
 import com.jjgn.app.devlearn.ui.paddingValue1
 import com.jjgn.app.devlearn.ui.paddingValue2
 import com.jjgn.app.devlearn.ui.paddingValue4
@@ -105,12 +105,13 @@ fun AppInfoScreen() {
                 text = "Aplicación construida con Jetpack Compose, el kit de herramientas moderno de Android para compilar IU nativas.",
                 fontSize = AP_TXT2_SIZE
             )
+            Spacer(modifier = Modifier.padding(paddingValue1))
             Image(
-                painter = painterResource(id = R.drawable.undraw_android_jr64),
+                painter = painterResource(id = R.drawable.jetpackcompose),
                 contentDescription = "",
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .size(AP_IMG)
+                    .clip(RoundedCornerShape(defaultClipSize))
             )
             Spacer(modifier = Modifier.padding(top = paddingValue1))
         }

@@ -66,7 +66,7 @@ val AP_P_S = 12.dp
 val AP_DEV_IC = 36.dp
 val AP_DEV_IC_P = 5.dp
 val AP_SPADD = 18.dp
-val AP_IMG = 200.dp
+val AP_IMG = 400.dp
 val AP_IC2_S = 46.dp
 
 // AwaitScreen
