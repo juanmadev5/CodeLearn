@@ -1,7 +1,7 @@
 <resources>
     <!--usar &#10; para bajar a la siguiente linea.-->
 
-    <string name="app_name">Dev Learn</string>
+    <string name="app_name">Code Learn</string>
     <string name="defaultStr"> </string>
 
     <string name="pgStringsErr1">updatePageStrings function error</string>
