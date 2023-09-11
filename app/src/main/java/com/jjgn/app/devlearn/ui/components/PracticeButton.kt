@@ -12,7 +12,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -43,21 +42,21 @@ fun PracticeButton(
         Current.KT -> {
             when (appViewModel.currentMState.value) {
                 Module.KTM1 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         3, 7, 14, 18, 19, 27 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.KTM2 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         4, 6 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.KTM3 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         11 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
@@ -71,21 +70,21 @@ fun PracticeButton(
         Current.JS -> {
             when (appViewModel.currentMState.value) {
                 Module.JSM1 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         3, 7, 13 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.JSM2 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         2, 8 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.JSM3 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         else -> isEnabled.value = false
                     }
                 }
@@ -101,20 +100,20 @@ fun PracticeButton(
         Current.JV -> {
             when (appViewModel.currentMState.value) {
                 Module.JVM1 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         3, 14 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.JVM2 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.JVM3 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         1 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
@@ -127,21 +126,21 @@ fun PracticeButton(
         Current.PY -> {
             when (appViewModel.currentMState.value) {
                 Module.PYM1 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         2, 6, 12 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.PYM2 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         1 -> isEnabled.value = true
                         else -> isEnabled.value = false
                     }
                 }
 
                 Module.PYM3 -> {
-                    when (appViewModel.cPageValue.collectAsState().value) {
+                    when (appViewModel.cPageValue.value) {
                         else -> isEnabled.value = false
                     }
                 }

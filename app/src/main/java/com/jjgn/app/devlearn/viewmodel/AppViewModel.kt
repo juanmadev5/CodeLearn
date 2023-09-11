@@ -1,6 +1,8 @@
 package com.jjgn.app.devlearn.viewmodel
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -27,7 +29,6 @@ import com.jjgn.app.devlearn.states.Module
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -51,51 +52,28 @@ class AppViewModel @Inject constructor() : ViewModel() {
     val currentMState: LiveData<Module>
         get() = _currentMState
 
-    private val _currentPage = MutableStateFlow(1)
+    private val _currentPage = mutableIntStateOf(1)
 
-    val cPageValue: MutableStateFlow<Int>
+    val cPageValue: MutableState<Int>
         get() = _currentPage
 
-    private val _information = mutableStateOf("")
+    private var _information = mutableStateOf("")
 
     val information: State<String>
         get() = _information
 
-    val textSize = MutableStateFlow(App.DEFAULT_TEXT_SIZE)
+    var textSize = mutableIntStateOf(App.DEFAULT_TEXT_SIZE)
 
     // lista donde se almacena la pagina actual del modulo.
-    var mPage = mutableListOf(
-        1,// KTM1 0
-        1,// KTM2 1
-        1,// KTM3 2
-        1,// JVM1 3
-        1,// JVM2 4
-        1,// JVM3 5
-        1,// JSM1 6
-        1,// JSM2 7
-        1,// JSM3 8
-        1,// PYM1 9
-        1,// PYM2 10
-        1,// PYM3 11
-        1 // NM 12
-    )
+    // la lista contiene un total de 13 elementos, todos inicializados en 1
+    val mPage = MutableList(13) { 1 }
 
     // lista donde se guarda la cantidad de paginas que tiene cada modulo.
-    val tPages = mutableListOf(
-        1,// KTM1 0
-        1,// KTM2 1
-        1,// KTM3 2
-        1,// JVM1 3
-        1,// JVM2 4
-        1,// JVM3 5
-        1,// JSM1 6
-        1,// JSM2 7
-        1,// JSM3 8
-        1,// PYM1 9
-        1,// PYM2 10
-        1,// PYM3 11
-        1 // NM 12
-    )
+    // la lista contiene un total de 13 elementos, todos inicializados en 1
+    val tPages = MutableList(13) { 1 }
+
+    // si la aplicacion al ser iniciado por primera vez se selecciono un curso
+    // se cambia a true, de lo contrario en falso.
     val isSelectedFirstC = mutableStateOf(App.IS_SELECTED_FIRST)
 
     /**
@@ -144,16 +122,16 @@ class AppViewModel @Inject constructor() : ViewModel() {
      * */
     fun nextPage() {
         onNextPageController(_currentMState, mPage)
-        if (_currentPage.value < App.tlPages) {
-            _currentPage.value = _currentPage.value.plus(1)
+        if (_currentPage.intValue < App.tlPages) {
+            _currentPage.intValue = _currentPage.intValue + 1
             loader()
         }
     }
 
     fun prevPage() {
         onPrevPageController(_currentMState, mPage)
-        if (_currentPage.value > 1) {
-            _currentPage.value = _currentPage.value - 1
+        if (_currentPage.intValue > 1) {
+            _currentPage.intValue = _currentPage.intValue - 1
             loader()
         }
     }

@@ -18,10 +18,9 @@ fun ButtonController(
     buttonPrevState: MutableState<Boolean>,
     viewModel: AppViewModel = AccessInstance()
 ) {
-    LaunchedEffect(viewModel.cPageValue) {
-        viewModel.cPageValue.collect { currentPage ->
-            buttonNextState.value = currentPage < App.tlPages
-            buttonPrevState.value = currentPage > 1
-        }
+    LaunchedEffect(viewModel.cPageValue.value) {
+        val currentPage = viewModel.cPageValue.value
+        buttonNextState.value = currentPage < App.tlPages
+        buttonPrevState.value = currentPage > 1
     }
 }

@@ -14,13 +14,11 @@ class App : Application() {
         const val DS_MANAGER_DELAY = 2000L
         const val ANIMATED_VISIBILITY_DELAY = 1000
         const val DEFAULT_TEXT_SIZE = 16
-
-        val cStateValue = "current_state"
-        val zValue = "zoom_value"
-        val mCurrentPage = "current_page-"
+        const val cStateValue = "current_state"
+        const val zValue = "zoom_value"
+        const val mCurrentPage = "current_page-"
         var lName = "default"
         var tlPages = 0
-
         val cList = listOf(
             "Kotlin",
             "Java",
@@ -39,6 +37,5 @@ class App : Application() {
             R.drawable.javascript_39404,
             R.drawable.python_logo_only
         )
-
     }
 }

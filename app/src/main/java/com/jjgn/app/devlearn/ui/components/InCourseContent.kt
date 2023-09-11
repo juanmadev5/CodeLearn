@@ -12,7 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,8 +36,8 @@ fun InCourseContent(
     buttonPrevState: Boolean,
     viewModel: AppViewModel = AccessInstance()
 ) {
-    val page by viewModel.cPageValue.collectAsState()
-    val txtSize by viewModel.textSize.collectAsState()
+    val page by viewModel.cPageValue
+    val txtSize by viewModel.textSize
     val textSizeState = remember { mutableStateOf(false) }
     Scaffold(
         Modifier

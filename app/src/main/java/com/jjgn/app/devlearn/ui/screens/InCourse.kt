@@ -2,16 +2,16 @@ package com.jjgn.app.devlearn.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.jjgn.app.devlearn.controller.ButtonController
 import com.jjgn.app.devlearn.ui.components.InCourseContent
 
 @Composable
 fun InCourseScreen() {
-    val buttonNextState = remember {
+    val buttonNextState = rememberSaveable {
         mutableStateOf(false)
     }
-    val buttonPrevState = remember {
+    val buttonPrevState = rememberSaveable {
         mutableStateOf(false)
     }
     InCourseContent(

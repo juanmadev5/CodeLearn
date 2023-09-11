@@ -1,15 +1,15 @@
 package com.jjgn.app.devlearn.controller
 
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.MutableLiveData
 import com.jjgn.app.devlearn.states.Module
-import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * Esta funcion establece el indice en la matriz que se debe usar para la paginacion.
  * Cada modulo de cada curso utiliza un indice en la matriz.
  * */
 fun moduleCurrentPageController(
-    currentPage: MutableStateFlow<Int>,
+    currentPage: MutableState<Int>,
     currentMState: MutableLiveData<Module>,
     cModulesCurrentPage: MutableList<Int>
 ) {
