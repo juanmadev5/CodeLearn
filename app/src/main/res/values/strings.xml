@@ -4,18 +4,15 @@
     <string name="app_name">Code Learn</string>
     <string name="defaultStr"> </string>
 
-    <string name="pgStringsErr1">updatePageStrings function error</string>
-
     <string name="ktDesc">Lenguaje de programación moderno y conciso para la plataforma Java. Destaca por su seguridad de tipo y capacidad de interoperabilidad.</string>
     <string name="jvDesc">Lenguaje de programación popular y ampliamente utilizado. Es orientado a objetos y se caracteriza por su portabilidad y escalabilidad.</string>
     <string name="jsDesc">Lenguaje de programación interpretado, utilizado principalmente para el desarrollo web. Permite la interacción dinámica con los elementos de una página.</string>
     <string name="pyDesc">Lenguaje de programación versátil y fácil de aprender. Se utiliza en una amplia gama de aplicaciones, desde desarrollo web hasta análisis de datos.</string>
     <string name="welcome">Bienvenido!</string>
     <string name="welcomeDesc">Welcome text</string>
-    <string name="courseindex">Course index</string>
     <string name="languageIcon">language icon</string>
-    <string name="basicsOf">"Conceptos basicos de "</string>
-    <string name="cardDesc1">Aprenda sobres lo basico como las variables y como se declaran, los tipos de datos, los operadores y las estructuras de control.</string>
+    <string name="basicsOf">"Conceptos básicos de "</string>
+    <string name="cardDesc1">Aprenda sobres lo básico como las variables y como se declaran, los tipos de datos, los operadores y las estructuras de control.</string>
     <string name="fnArray">Funciones y arreglos</string>
     <string name="fnArrayDesc">Aprende a usar las funciones y las listas.</string>
     <string name="unlockmodule2">Termina el módulo 1 para seguir.</string>
@@ -36,8 +33,18 @@
     <string name="incorrect">"Incorrecto. "</string>
     <string name="result">"Resultado: "</string>
     <string name="expected">"Se esperaba: "</string>
-    <string name="oop">Programacion orientada a objetos</string>
-    <string name="oop_desc">Aprende sobre la famosa programacion orientada a objetos, el paradigma de programacion mas importante del mundo de la programacion.</string>
+    <string name="oop">Programación orientada a objetos</string>
+    <string name="oop_desc">Aprende sobre la famosa programación orientada a objetos, el paradigma de programación mas importante del mundo de la programación.</string>
+    <string name="courses">Cursos</string>
+    <string name="index">Índice</string>
+    <string name="app_icon">app icon</string>
+    <string name="app_info">Información de la aplicación</string>
+    <string name="app_developer">app developer</string>
+    <string name="developer">Desarrollador: JM Dev</string>
+    <string name="build_description">Aplicación construida con Jetpack Compose, el kit de herramientas moderno de Android para compilar IU nativas.</string>
+    <string name="app_components">Componentes de la aplicación</string>
+    <string name="app_info_icon">app info icon</string>
+    <string name="course_index">Índice del curso</string>
 
 
 </resources>

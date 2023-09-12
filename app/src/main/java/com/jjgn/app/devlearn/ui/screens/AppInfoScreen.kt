@@ -47,15 +47,15 @@ fun AppInfoScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = paddingValue2, start = paddingValue2, end = paddingValue2)
+            .padding(start = paddingValue2, end = paddingValue2)
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(Modifier.padding(top = paddingValue4))
         Text(
-            text = "Informacion de la aplicación",
+            text = stringResource(R.string.app_info),
             fontSize = AP_TXT_SIZE,
             fontWeight = FontWeight.Light,
-            lineHeight = AP_TXT_LNH
+            lineHeight = AP_TXT_LNH,
+            modifier = Modifier.padding(top = paddingValue4)
         )
         Spacer(Modifier.padding(top = paddingValue4))
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -67,14 +67,14 @@ fun AppInfoScreen() {
             ) {
                 Icon(
                     painterResource(id = R.drawable.app_icon_foreground),
-                    contentDescription = "app icon",
+                    contentDescription = stringResource(R.string.app_icon),
                     Modifier.fillMaxSize(),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
             Spacer(Modifier.padding(start = AP_P_S))
             Text(
-                text = stringResource(id = R.string.app_name) + " v1.5",
+                text = stringResource(id = R.string.app_name) + " v1.0",
                 fontSize = AP_TXT2_SIZE
             )
         }
@@ -84,14 +84,14 @@ fun AppInfoScreen() {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = Icons.Filled.LogoDev,
-                contentDescription = "app developer",
+                contentDescription = stringResource(R.string.app_developer),
                 Modifier
                     .size(AP_DEV_IC)
                     .padding(start = AP_DEV_IC_P)
             )
             Spacer(Modifier.padding(start = AP_SPADD))
             Text(
-                text = "Desarrollador: JM Dev",
+                text = stringResource(R.string.developer),
                 fontSize = AP_TXT2_SIZE
             )
         }
@@ -102,7 +102,7 @@ fun AppInfoScreen() {
                 .fillMaxWidth()
                 .wrapContentHeight()) {
             Text(
-                text = "Aplicación construida con Jetpack Compose, el kit de herramientas moderno de Android para compilar IU nativas.",
+                text = stringResource(R.string.build_description),
                 fontSize = AP_TXT2_SIZE
             )
             Spacer(modifier = Modifier.padding(paddingValue1))
@@ -120,14 +120,14 @@ fun AppInfoScreen() {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = Icons.Filled.SettingsApplications,
-                contentDescription = "app developer",
+                contentDescription = stringResource(id = R.string.app_developer),
                 Modifier
                     .size(AP_IC2_S)
                     .padding(start = paddingValue2)
             )
             Spacer(Modifier.padding(start = paddingValue2))
             Text(
-                text = "Componentes de la aplicación",
+                text = stringResource(R.string.app_components),
                 fontSize = AP_TXT2_SIZE
             )
         }
@@ -150,6 +150,5 @@ fun AppInfoScreen() {
             fontSize = AP_TXT2_SIZE
         )
         Spacer(modifier = Modifier.padding(paddingValue1))
-
     }
 }

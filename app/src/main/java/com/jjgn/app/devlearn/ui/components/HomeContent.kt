@@ -22,15 +22,15 @@ import com.jjgn.app.devlearn.states.Current
 import com.jjgn.app.devlearn.ui.H_SPACER
 import com.jjgn.app.devlearn.ui.defaultClipSize
 import com.jjgn.app.devlearn.ui.paddingValue1
-import com.jjgn.app.devlearn.ui.paddingValue2
 import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun HomeContent(
-    viewModel: AppViewModel = AccessInstance(),
-    navController: NavController = LocalNavigationController.current
-) {
+fun HomeContent() {
+
+    val navController: NavController = LocalNavigationController.current
+    val viewModel: AppViewModel = AccessInstance()
+
     val m1Progress = remember {
         when (viewModel.currentState.value) {
             is Current.KT -> viewModel.mPage[0]
@@ -65,7 +65,6 @@ fun HomeContent(
             .verticalScroll(rememberScrollState())
     ) {
         HomeTopAppBar()
-        Spacer(Modifier.padding(top = paddingValue2))
         Card(
             Modifier
                 .fillMaxWidth()

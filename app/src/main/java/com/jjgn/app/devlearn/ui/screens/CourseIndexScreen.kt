@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -41,10 +42,9 @@ import com.jjgn.app.devlearn.viewmodel.AccessInstance
 import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun IndexScreen(
-    appViewModel: AppViewModel = AccessInstance(),
-    navController: NavController = LocalNavigationController.current
-) {
+fun IndexScreen() {
+    val appViewModel: AppViewModel = AccessInstance()
+    val navController: NavController = LocalNavigationController.current
     val courseIndex = when (appViewModel.currentState.value) {
         Current.KT -> {
             """
@@ -167,18 +167,18 @@ fun IndexScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(top = paddingValue2, start = paddingValue2, end = paddingValue2)
+            .padding(start = paddingValue2, end = paddingValue2)
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(modifier = Modifier.padding(top = paddingValue3))
         Image(
             painter = painterResource(id = R.drawable.undraw_diary_re_4jpc__1_),
             contentDescription = "",
             modifier = Modifier
                 .size(CI_IMG_SIZE)
+                .padding(top = paddingValue3)
         )
         Text(
-            text = "Índice del curso",
+            text = stringResource(R.string.course_index),
             Modifier.padding(top = paddingValue4),
             fontSize = 32.sp,
             fontWeight = FontWeight.Light
@@ -210,13 +210,13 @@ fun IndexScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Informacion de la aplicacion",
+                        text = stringResource(id = R.string.app_info),
                         fontSize = CI_TXT2_SIZE,
                         fontWeight = FontWeight.Bold
                     )
                     Icon(
                         imageVector = Icons.Filled.Info,
-                        contentDescription = "app info icon",
+                        contentDescription = stringResource(R.string.app_info_icon),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }

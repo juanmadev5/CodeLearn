@@ -1,5 +1,6 @@
 package com.jjgn.app.devlearn.controller
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -10,13 +11,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -50,14 +49,16 @@ val LocalNavigationController = staticCompositionLocalOf<NavController> {
  * Se accede al controlador desde [LocalNavigationController]
  * */
 @Composable
-fun ViewController(
-    viewModel: AppViewModel = AccessInstance(),
-    navController: NavHostController = rememberNavController(),
-    loading: MutableState<Boolean> = remember { mutableStateOf(true) },
-    route: String = if (
-        viewModel.isSelectedFirstC.value
+fun ViewController() {
+
+    val viewModel = AccessInstance<AppViewModel>()
+    val navController = rememberNavController()
+    val loading = remember { mutableStateOf(true) }
+    val route = if (
+    viewModel.isSelectedFirstC.value
     ) NavigationRoutes.Home.route else NavigationRoutes.Welcome.route
-) {
+    val animationSpec = 400
+
     LaunchedEffect(true) {
         delay(App.AWAIT_CONTROLLER_DELAY)
         loading.value = false
@@ -75,27 +76,51 @@ fun ViewController(
                 CompositionLocalProvider(LocalNavigationController provides navController) {
                     NavHost(
                         navController = navController,
-                        startDestination = route
+                        startDestination = route,
+                        enterTransition = {
+                            slideIntoContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                                animationSpec = tween(animationSpec)
+                            )
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                                animationSpec = tween(animationSpec)
+                            )
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                                animationSpec = tween(animationSpec)
+                            )
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                                animationSpec = tween(animationSpec)
+                            )
+                        }
                     ) {
-                        composable(NavigationRoutes.Welcome.route) {
+                        composable(route = NavigationRoutes.Welcome.route) {
                             WelcomeScreen()
                         }
-                        composable(NavigationRoutes.Home.route) {
+                        composable(route = NavigationRoutes.Home.route) {
                             HomeScreen()
                         }
-                        composable(NavigationRoutes.Courses.route) {
+                        composable(route = NavigationRoutes.Courses.route) {
                             CourseSelectorScreen()
                         }
-                        composable(NavigationRoutes.InCourse.route) {
+                        composable(route = NavigationRoutes.InCourse.route) {
                             InCourseScreen()
                         }
-                        composable(NavigationRoutes.Practice.route) {
+                        composable(route = NavigationRoutes.Practice.route) {
                             PracticeScreen()
                         }
-                        composable(NavigationRoutes.Info.route) {
+                        composable(route = NavigationRoutes.Info.route) {
                             IndexScreen()
                         }
-                        composable(NavigationRoutes.AppInfo.route) {
+                        composable(route = NavigationRoutes.AppInfo.route) {
                             AppInfoScreen()
                         }
                     }

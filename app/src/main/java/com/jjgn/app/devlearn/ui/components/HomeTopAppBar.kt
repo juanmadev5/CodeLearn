@@ -5,18 +5,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,19 +31,15 @@ import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.controller.LocalNavigationController
 import com.jjgn.app.devlearn.controller.NavigationRoutes
-import com.jjgn.app.devlearn.viewmodel.AccessInstance
-import com.jjgn.app.devlearn.viewmodel.AppViewModel
 
 @Composable
-fun HomeTopAppBar(
-    viewModel: AppViewModel = AccessInstance(),
-    navController: NavController = LocalNavigationController.current
-) {
+fun HomeTopAppBar() {
+    val navController: NavController = LocalNavigationController.current
     Column(
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth()
-            .padding(top = 8.dp)
+            .padding(top = 16.dp, bottom = 20.dp)
     ) {
         Row(
             Modifier
@@ -57,40 +52,83 @@ fun HomeTopAppBar(
                 Modifier
                     .height(60.dp)
                     .wrapContentWidth()
-                    .clip(RoundedCornerShape(14.dp))
-                    .clickable {
-                        navController.navigate(NavigationRoutes.Courses.route) {
-                            launchSingleTop = true
-                        }
-                    },
+                    .clip(RoundedCornerShape(14.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = App.lName,
                     Modifier.padding(start = 18.dp, end = 18.dp),
-                    fontSize = 18.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold
                 )
             }
-            IconButton(
-                onClick = {
-                    navController.navigate(NavigationRoutes.Info.route) {
-                        launchSingleTop = true
-                    }
-                },
-                Modifier
-                    .wrapContentSize()
-                    .clip(RoundedCornerShape(14.dp))
-                    .padding(end = 10.dp)
+            Box(
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Filled.MoreVert,
-                    stringResource(R.string.courseindex),
-                    Modifier
-                        .size(36.dp)
-                        .padding(4.dp),
-                    tint = MaterialTheme.colorScheme.primary
-                )
+               Row(
+                   horizontalArrangement = Arrangement.SpaceBetween,
+                   verticalAlignment = Alignment.CenterVertically
+               ) {
+                   Box(
+                       Modifier
+                           .height(60.dp)
+                           .wrapContentWidth()
+                           .clip(RoundedCornerShape(14.dp))
+                           .clickable {
+                               navController.navigate(NavigationRoutes.Courses.route) {
+                                   launchSingleTop = true
+                               }
+                           },
+                       contentAlignment = Alignment.Center
+                   ) {
+                       Row(
+                           Modifier.padding(start = 8.dp, end = 8.dp),
+                           verticalAlignment = Alignment.CenterVertically
+                       ) {
+                           Icon(
+                               imageVector = Icons.Filled.FormatListBulleted,
+                               contentDescription = stringResource(R.string.courses),
+                               tint = MaterialTheme.colorScheme.primary
+                           )
+                           Text(
+                               text = stringResource(R.string.courses),
+                               Modifier.padding(start = 8.dp),
+                               fontSize = 16.sp,
+                               fontWeight = FontWeight.SemiBold
+                           )
+                       }
+                   }
+                   Spacer(modifier = Modifier.padding(start = 8.dp))
+                   Box(
+                       Modifier
+                           .height(60.dp)
+                           .wrapContentWidth()
+                           .clip(RoundedCornerShape(14.dp))
+                           .clickable {
+                               navController.navigate(NavigationRoutes.Info.route) {
+                                   launchSingleTop = true
+                               }
+                           },
+                       contentAlignment = Alignment.Center
+                   ) {
+                       Row(
+                           Modifier.padding(start = 8.dp, end = 8.dp),
+                           verticalAlignment = Alignment.CenterVertically
+                       ) {
+                           Icon(
+                               imageVector = Icons.Filled.MoreVert,
+                               stringResource(R.string.index),
+                               tint = MaterialTheme.colorScheme.primary
+                           )
+                           Text(
+                               text = stringResource(R.string.index),
+                               Modifier.padding(start = 8.dp),
+                               fontSize = 16.sp,
+                               fontWeight = FontWeight.SemiBold
+                           )
+                       }
+                   }
+               }
             }
         }
     }
