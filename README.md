@@ -1,9 +1,9 @@
-# CodeLearn
+# Code Learn
 Aplicación para aprender a programar de forma offline y 100% gratuito! 🎊
 
 Aprende lenguajes de programación como Kotlin, Java, Javascript o Python 🥳
 
-Aplicación súper ligera! Todo en un paquete de solo 2MB 🥳
+Aplicación súper ligera! Todo en un paquete de solo 3MB 🥳
 
 
 
