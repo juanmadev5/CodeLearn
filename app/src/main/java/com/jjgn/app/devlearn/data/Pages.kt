@@ -1,16 +1,16 @@
 package com.jjgn.app.devlearn.data
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.jjgn.app.devlearn.states.Current
-import com.jjgn.app.devlearn.states.Module
+import com.jjgn.app.devlearn.data.course.Current
+import com.jjgn.app.devlearn.data.course.module.Module
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * Esta funcion recupera el total de paginas de cada modulo correspondiente a cada curso.
  * */
 fun getTotalPages(
     currentState: MutableLiveData<Current>,
-    currentMState: LiveData<Module>,
+    currentMState: MutableStateFlow<Module>,
     cModulesTPages: MutableList<Int>
 ): Int {
     val pagesList = listOf(

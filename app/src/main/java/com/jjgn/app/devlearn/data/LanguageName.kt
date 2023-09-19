@@ -1,7 +1,7 @@
 package com.jjgn.app.devlearn.data
 
 import androidx.lifecycle.MutableLiveData
-import com.jjgn.app.devlearn.states.Current
+import com.jjgn.app.devlearn.data.course.Current
 
 /**
  * Esta funcion se encarga de retornar el nombre del lenguaje a mostrar en Home

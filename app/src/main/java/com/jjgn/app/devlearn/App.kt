@@ -31,7 +31,7 @@ class App : Application() {
             R.string.jsDesc,
             R.string.pyDesc
         )
-        val cLogo =  listOf(
+        val cLogo = listOf(
             R.drawable.kotlin_full_color_logo_mark_rgb,
             R.drawable.java_logo_1,
             R.drawable.javascript_39404,

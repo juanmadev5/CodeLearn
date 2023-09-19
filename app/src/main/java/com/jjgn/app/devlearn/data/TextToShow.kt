@@ -2,12 +2,13 @@ package com.jjgn.app.devlearn.data
 
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.MutableLiveData
-import com.jjgn.app.devlearn.courses.jsCourse
-import com.jjgn.app.devlearn.courses.jvCourse
-import com.jjgn.app.devlearn.courses.ktCourse
-import com.jjgn.app.devlearn.courses.pyCourse
-import com.jjgn.app.devlearn.states.Current
-import com.jjgn.app.devlearn.states.Module
+import com.jjgn.app.devlearn.data.course.Current
+import com.jjgn.app.devlearn.data.course.jsCourse
+import com.jjgn.app.devlearn.data.course.jvCourse
+import com.jjgn.app.devlearn.data.course.ktCourse
+import com.jjgn.app.devlearn.data.course.module.Module
+import com.jjgn.app.devlearn.data.course.pyCourse
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * Funcion encargada de establecer el texto en pantalla correspondiente al curso
@@ -16,7 +17,7 @@ import com.jjgn.app.devlearn.states.Module
 fun getTextToShow(
     currentState: MutableLiveData<Current>,
     currentPage: MutableState<Int>,
-    currentMState: MutableLiveData<Module>
+    currentMState: MutableStateFlow<Module>
 ): String {
     return when (currentState.value) {
         is Current.KT -> ktCourse(currentPage.value, currentMState)
