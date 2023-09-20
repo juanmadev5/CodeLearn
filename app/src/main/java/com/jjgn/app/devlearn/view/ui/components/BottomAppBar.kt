@@ -33,6 +33,8 @@ import com.jjgn.app.devlearn.view.ui.B_A_H
 import com.jjgn.app.devlearn.view.ui.B_A_PADD
 import com.jjgn.app.devlearn.view.ui.B_A_W
 import com.jjgn.app.devlearn.view.ui.controller.LocalNavigationController
+import com.jjgn.app.devlearn.view.ui.controller.nextPage
+import com.jjgn.app.devlearn.view.ui.controller.prevPage
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
 import com.jjgn.app.devlearn.view.ui.paddingValue1
 import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
@@ -73,7 +75,7 @@ fun BottomBar(
         ) {
             Button(
                 onClick = {
-                    viewModel.prevPage()
+                    prevPage(appViewModel = viewModel)
                 },
                 Modifier
                     .height(B_A_H)
@@ -93,7 +95,7 @@ fun BottomBar(
                     if (!buttonNextState) {
                         navController.popBackStack()
                     } else {
-                        viewModel.nextPage()
+                        nextPage(appViewModel = viewModel)
                     }
                 },
                 Modifier

@@ -11,21 +11,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jjgn.app.devlearn.App
+import com.jjgn.app.devlearn.data.DataManager
 import com.jjgn.app.devlearn.data.course.Current
 import com.jjgn.app.devlearn.data.course.module.Module
 import com.jjgn.app.devlearn.data.course.module.getCurrentModule
-import com.jjgn.app.devlearn.data.dataRestorer
-import com.jjgn.app.devlearn.data.dataSaver
-import com.jjgn.app.devlearn.data.getCurrentState
 import com.jjgn.app.devlearn.data.getLangName
 import com.jjgn.app.devlearn.data.getTextToShow
 import com.jjgn.app.devlearn.data.getTotalPages
-import com.jjgn.app.devlearn.data.setCurrentState
-import com.jjgn.app.devlearn.data.zoomStateRestorer
-import com.jjgn.app.devlearn.data.zoomStateSaver
 import com.jjgn.app.devlearn.view.ui.controller.moduleCurrentPageController
-import com.jjgn.app.devlearn.view.ui.controller.onNextPageController
-import com.jjgn.app.devlearn.view.ui.controller.onPrevPageController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -33,7 +26,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
 /**
  * ViewModel principal de la aplicacion, se encarga de guardar y restaurar los datos,
@@ -41,7 +33,9 @@ import javax.inject.Inject
  * paginacion y controla el zoom del texto.
  * Varios componentes que usa este ViewModel estan separados en distintos archivos.
  * */
-class AppViewModel @Inject constructor() : ViewModel() {
+class AppViewModel : ViewModel() {
+
+    lateinit var dataManager: DataManager
 
     lateinit var dataStore: DataStore<Preferences>
 
@@ -81,7 +75,7 @@ class AppViewModel @Inject constructor() : ViewModel() {
     /**
      * Funcion iniciador del ViewModel
      * */
-    fun starter() {
+    fun onCreate() {
         viewModelScope.launch {
             loadState()
         }
@@ -98,7 +92,7 @@ class AppViewModel @Inject constructor() : ViewModel() {
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            setCurrentState(newState, dataStore, App.cStateValue)
+            dataManager.setCurrentState(newState, dataStore, App.cStateValue)
         }
     }
 
@@ -107,7 +101,7 @@ class AppViewModel @Inject constructor() : ViewModel() {
      * */
     private suspend fun loadState() {
         runBlocking {
-            _currentState.value = getCurrentState(dataStore, App.cStateValue)
+            _currentState.value = dataManager.getCurrentState(dataStore, App.cStateValue)
         }
     }
 
@@ -117,25 +111,6 @@ class AppViewModel @Inject constructor() : ViewModel() {
     fun selectedModule(moduleSelected: Int) {
         getCurrentModule(moduleSelected, _currentState, _currentMState)
         moduleCurrentPageController(_currentPage, _currentMState, modulePage)
-    }
-
-    /**
-     * Funciones que se encargan de avanzar o retroceder de pagina.
-     * */
-    fun nextPage() {
-        onNextPageController(_currentMState, modulePage)
-        if (_currentPage.intValue < App.tlPages) {
-            _currentPage.intValue = _currentPage.intValue + 1
-            loader()
-        }
-    }
-
-    fun prevPage() {
-        onPrevPageController(_currentMState, modulePage)
-        if (_currentPage.intValue > 1) {
-            _currentPage.intValue = _currentPage.intValue - 1
-            loader()
-        }
     }
 
     /**
@@ -149,7 +124,7 @@ class AppViewModel @Inject constructor() : ViewModel() {
 
     /**
      * Funcion encargada de comprobar que se haya seleccionado un curso, de esta manera evita estar
-     * ejecutando [dataSaver] de forma innecesaria.
+     * ejecutando dataSaver de forma innecesaria.
      * */
     private fun dataSManager() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -179,9 +154,15 @@ class AppViewModel @Inject constructor() : ViewModel() {
      *  Funcion encargada de guardar las paginas en las que el usuario se queda y el estado del zoom del texto.
      * */
     fun dataSaver() {
-        viewModelScope.launch(Dispatchers.IO) {
-            dataSaver(dataStore, modulePage, App.mCurrentPage, isSelectedFirstC)
-            zoomStateSaver(dataStore, App.zValue, textSize)
+        viewModelScope.launch {
+            dataManager.dataSaver(
+                dataStore,
+                modulePage,
+                App.mCurrentPage,
+                isSelectedFirstC,
+                App.zValue,
+                textSize
+            )
         }
     }
 
@@ -189,9 +170,15 @@ class AppViewModel @Inject constructor() : ViewModel() {
      * Funcion encargada de restaurar las paginas en las que el usuario estuvo por ultima vez y el estado del zoom del texto.
      * */
     private fun dataRestorer() {
-        viewModelScope.launch(Dispatchers.IO) {
-            dataRestorer(dataStore, modulePage, App.mCurrentPage, isSelectedFirstC)
-            zoomStateRestorer(dataStore, App.zValue, textSize)
+        viewModelScope.launch {
+            dataManager.dataRestorer(
+                dataStore,
+                modulePage,
+                App.mCurrentPage,
+                isSelectedFirstC,
+                App.zValue,
+                textSize
+            )
         }
     }
 }

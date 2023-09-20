@@ -1,4 +1,7 @@
-@file:OptIn(ExperimentalComposeUiApi::class, ExperimentalComposeUiApi::class)
+@file:OptIn(
+    ExperimentalComposeUiApi::class, ExperimentalComposeUiApi::class,
+    ExperimentalComposeUiApi::class
+)
 
 package com.jjgn.app.devlearn.data.course.moduletask
 
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.view.ui.viewmodel.TestViewModel
 
+@ExperimentalComposeUiApi
 @Composable
 fun PythonM1Task1(
     testViewModel: TestViewModel,
@@ -120,6 +124,7 @@ fun PythonM1Task1(
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 fun PythonM1Task2(
     testViewModel: TestViewModel,
