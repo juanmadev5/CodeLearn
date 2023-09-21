@@ -19,6 +19,7 @@ import com.jjgn.app.devlearn.data.getLangName
 import com.jjgn.app.devlearn.data.getTextToShow
 import com.jjgn.app.devlearn.data.getTotalPages
 import com.jjgn.app.devlearn.view.ui.controller.moduleCurrentPageController
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -26,6 +27,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 /**
  * ViewModel principal de la aplicacion, se encarga de guardar y restaurar los datos,
@@ -33,12 +35,13 @@ import kotlinx.coroutines.runBlocking
  * paginacion y controla el zoom del texto.
  * Varios componentes que usa este ViewModel estan separados en distintos archivos.
  * */
-class AppViewModel : ViewModel() {
 
-    lateinit var dataManager: DataManager
-
-    lateinit var dataStore: DataStore<Preferences>
-
+@HiltViewModel
+class AppViewModel @Inject constructor(
+    private val dataStore: DataStore<Preferences>,
+    private val dataManager: DataManager
+) : ViewModel() {
+    
     private val _currentState = MutableLiveData<Current>()
 
     val currentState: LiveData<Current>
