@@ -15,7 +15,7 @@
         tools:targetApi="tiramisu"
         android:enableOnBackInvokedCallback="true">
         <activity
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:name=".view.ApplicationActivity"
             android:exported="true"
             android:theme="@style/Theme.DevLearn">

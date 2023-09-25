@@ -14,9 +14,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.LogoDev
 import androidx.compose.material.icons.filled.SettingsApplications
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,6 +39,7 @@ import com.jjgn.app.devlearn.view.ui.AP_SPADD
 import com.jjgn.app.devlearn.view.ui.AP_TXT2_SIZE
 import com.jjgn.app.devlearn.view.ui.AP_TXT_LNH
 import com.jjgn.app.devlearn.view.ui.AP_TXT_SIZE
+import com.jjgn.app.devlearn.view.ui.controller.LocalNavigationController
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
 import com.jjgn.app.devlearn.view.ui.paddingValue1
 import com.jjgn.app.devlearn.view.ui.paddingValue2
@@ -44,24 +47,37 @@ import com.jjgn.app.devlearn.view.ui.paddingValue4
 
 @Composable
 fun AppInfoScreen() {
+    val navController = LocalNavigationController.current
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(
-                start = paddingValue2,
-                end = paddingValue2
-            )
             .verticalScroll(rememberScrollState())
     ) {
+        IconButton(onClick = {
+            navController.popBackStack()
+        }) {
+            Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")
+        }
         Text(
             text = stringResource(R.string.app_info),
             fontSize = AP_TXT_SIZE,
             fontWeight = FontWeight.Light,
             lineHeight = AP_TXT_LNH,
-            modifier = Modifier.padding(top = paddingValue4)
+            modifier = Modifier.padding(
+                top = paddingValue4,
+                start = paddingValue2,
+                end = paddingValue2
+            )
         )
         Spacer(Modifier.padding(top = paddingValue4))
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = paddingValue2,
+                    end = paddingValue2
+                ), verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 modifier = Modifier
                     .size(AP_BOX_SIZE)
@@ -84,7 +100,14 @@ fun AppInfoScreen() {
         Spacer(modifier = Modifier.padding(top = paddingValue2))
 
 
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = paddingValue2,
+                    end = paddingValue2
+                ), verticalAlignment = Alignment.CenterVertically
+        ) {
             Icon(
                 imageVector = Icons.Filled.LogoDev,
                 contentDescription = stringResource(R.string.app_developer),
@@ -104,6 +127,10 @@ fun AppInfoScreen() {
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
+                .padding(
+                    start = paddingValue2,
+                    end = paddingValue2
+                )
         ) {
             Text(
                 text = stringResource(R.string.build_description),
@@ -121,7 +148,14 @@ fun AppInfoScreen() {
         }
 
 
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = paddingValue2,
+                    end = paddingValue2
+                ), verticalAlignment = Alignment.CenterVertically
+        ) {
             Icon(
                 imageVector = Icons.Filled.SettingsApplications,
                 contentDescription = stringResource(id = R.string.app_developer),
@@ -151,7 +185,11 @@ fun AppInfoScreen() {
                 - Material Icons Extended v1.4.3
                 - Compose ConstraintLayout v1.0.1
             """.trimIndent(),
-            fontSize = AP_TXT2_SIZE
+            fontSize = AP_TXT2_SIZE,
+            modifier = Modifier.padding(
+                start = paddingValue2,
+                end = paddingValue2
+            )
         )
         Spacer(modifier = Modifier.padding(paddingValue1))
     }

@@ -14,9 +14,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
@@ -160,35 +163,55 @@ fun IndexScreen() {
     Column(
         Modifier
             .fillMaxSize()
-            .padding(
-                start = com.jjgn.app.devlearn.view.ui.paddingValue2,
-                end = com.jjgn.app.devlearn.view.ui.paddingValue2
-            )
             .verticalScroll(rememberScrollState())
     ) {
+        IconButton(
+            onClick = {
+                navController.popBackStack()
+            },
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")
+        }
         Image(
             painter = painterResource(id = R.drawable.undraw_diary_re_4jpc__1_),
             contentDescription = "",
             modifier = Modifier
                 .size(com.jjgn.app.devlearn.view.ui.CI_IMG_SIZE)
-                .padding(top = com.jjgn.app.devlearn.view.ui.paddingValue3)
+                .padding(
+                    top = com.jjgn.app.devlearn.view.ui.paddingValue3,
+                    start = com.jjgn.app.devlearn.view.ui.paddingValue2,
+                    end = com.jjgn.app.devlearn.view.ui.paddingValue2
+                )
         )
         Text(
             text = stringResource(R.string.course_index),
-            Modifier.padding(top = com.jjgn.app.devlearn.view.ui.paddingValue4),
+            Modifier.padding(
+                top = com.jjgn.app.devlearn.view.ui.paddingValue4,
+                start = com.jjgn.app.devlearn.view.ui.paddingValue2,
+                end = com.jjgn.app.devlearn.view.ui.paddingValue2
+            ),
             fontSize = 32.sp,
             fontWeight = FontWeight.Light
         )
         Spacer(modifier = Modifier.padding(com.jjgn.app.devlearn.view.ui.paddingValue2))
         Text(
             text = courseIndex,
-            fontSize = com.jjgn.app.devlearn.view.ui.CI_TXT_SIZE
+            fontSize = com.jjgn.app.devlearn.view.ui.CI_TXT_SIZE,
+            modifier = Modifier.padding(
+                start = com.jjgn.app.devlearn.view.ui.paddingValue2,
+                end = com.jjgn.app.devlearn.view.ui.paddingValue2
+            )
         )
         Spacer(Modifier.padding(com.jjgn.app.devlearn.view.ui.paddingValue2))
         Card(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
+                .padding(
+                    start = com.jjgn.app.devlearn.view.ui.paddingValue2,
+                    end = com.jjgn.app.devlearn.view.ui.paddingValue2
+                )
                 .clickable {
                     navController.navigate(NavigationRoutes.AppInfo.route) {
                         launchSingleTop = true
