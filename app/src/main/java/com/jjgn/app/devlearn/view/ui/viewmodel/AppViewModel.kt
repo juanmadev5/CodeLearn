@@ -11,14 +11,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jjgn.app.devlearn.App
+import com.jjgn.app.devlearn.data.CourseDataManager
 import com.jjgn.app.devlearn.data.DataManager
 import com.jjgn.app.devlearn.data.course.Current
 import com.jjgn.app.devlearn.data.course.module.Module
-import com.jjgn.app.devlearn.data.course.module.getCurrentModule
-import com.jjgn.app.devlearn.data.getLangName
-import com.jjgn.app.devlearn.data.getTextToShow
-import com.jjgn.app.devlearn.data.getTotalPages
-import com.jjgn.app.devlearn.view.ui.controller.moduleCurrentPageController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -26,7 +22,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 /**
@@ -39,9 +34,10 @@ import javax.inject.Inject
 @HiltViewModel
 class AppViewModel @Inject constructor(
     private val dataStore: DataStore<Preferences>,
-    private val dataManager: DataManager
+    private val dataManager: DataManager,
+    private val courseDataManager: CourseDataManager
 ) : ViewModel() {
-    
+
     private val _currentState = MutableLiveData<Current>()
 
     val currentState: LiveData<Current>
@@ -80,7 +76,11 @@ class AppViewModel @Inject constructor(
      * */
     fun onCreate() {
         viewModelScope.launch {
-            loadState()
+            courseDataManager.loadState(
+                _currentState,
+                dataManager,
+                dataStore
+            )
         }
         loader()
         if (_currentState.value != null) {
@@ -100,29 +100,21 @@ class AppViewModel @Inject constructor(
     }
 
     /**
-     * Funcion encargada de cargar el ultimo curso seleccionado.
-     * */
-    private suspend fun loadState() {
-        runBlocking {
-            _currentState.value = dataManager.getCurrentState(dataStore, App.cStateValue)
-        }
-    }
-
-    /**
      * Funcion encargada de actualizar el estado del modulo seleccionado.
      * */
     fun selectedModule(moduleSelected: Int) {
-        getCurrentModule(moduleSelected, _currentState, _currentMState)
-        moduleCurrentPageController(_currentPage, _currentMState, modulePage)
+        courseDataManager.getCurrentModule(moduleSelected, _currentState, _currentMState)
+        courseDataManager.moduleCurrentPage(_currentPage, _currentMState, modulePage)
     }
 
     /**
      * Funcion que carga el total de paginas de cada modulo y obtiene el texto que se debe mostrar.
      * */
     fun loader() {
-        App.tlPages = getTotalPages(_currentState, _currentMState, totalPage)
-        App.lName = getLangName(_currentState)
-        _information.value = getTextToShow(_currentState, _currentPage, _currentMState)
+        App.tlPages = courseDataManager.getTotalPages(_currentState, _currentMState, totalPage)
+        App.lName = courseDataManager.getLangName(_currentState)
+        _information.value =
+            courseDataManager.getTextToShow(_currentState, _currentPage, _currentMState)
     }
 
     /**

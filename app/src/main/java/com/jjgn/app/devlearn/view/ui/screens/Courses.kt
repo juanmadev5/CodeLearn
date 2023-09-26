@@ -1,13 +1,14 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.jjgn.app.devlearn.view.ui.screens
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,9 +18,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -63,74 +64,86 @@ fun CourseSelectorScreen() {
 
     when (orientation.orientation) {
         Configuration.ORIENTATION_PORTRAIT -> {
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(defaultClipSize))
-                    .verticalScroll(rememberScrollState())
             ) {
-                Image(
-                    painter = painterResource(R.drawable.undraw_selection_re_ycpo__1_),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(C_TOP_IMAGE)
-                        .padding(top = C_TOP_PADDING)
-                        .align(Alignment.CenterHorizontally)
-                )
-                Text(
-                    text = stringResource(R.string.selectCourse),
-                    Modifier
-                        .padding(
-                            top = C_TOP_PADDING,
-                            start = paddingValue2,
-                            bottom = C_BOTTOM_PADDING
-                        )
-                        .fillMaxWidth(),
-                    fontSize = C_TOP_TEXT_SIZE1,
-                    textAlign = TextAlign.Left
-                )
-                App.cList.forEachIndexed { index, _ ->
-                    CourseCard(index)
+
+                item {
+                    Image(
+                        painter = painterResource(R.drawable.undraw_selection_re_ycpo__1_),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(C_TOP_IMAGE)
+                            .padding(top = C_TOP_PADDING)
+                    )
+                }
+
+                item {
+                    Text(
+                        text = stringResource(R.string.selectCourse),
+                        Modifier
+                            .padding(
+                                top = C_TOP_PADDING,
+                                start = paddingValue2,
+                                bottom = C_BOTTOM_PADDING
+                            )
+                            .fillMaxWidth(),
+                        fontSize = C_TOP_TEXT_SIZE1,
+                        textAlign = TextAlign.Left
+                    )
+                }
+
+                items(App.cList.size) {
+                    CourseCard(index = it)
                     Spacer(Modifier.padding(paddingValue1))
                 }
+
             }
         }
+
         Configuration.ORIENTATION_LANDSCAPE -> {
-            Row(
+            LazyRow(
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(defaultClipSize))
-                    .horizontalScroll(rememberScrollState()),
+                    .clip(RoundedCornerShape(defaultClipSize)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    modifier = Modifier.wrapContentSize().padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        modifier = Modifier.wrapContentSize()
+
+                item {
+                    Box(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            text = stringResource(R.string.selectCourse),
-                            Modifier.fillMaxWidth(),
-                            fontSize = C_TOP_TEXT_SIZE1,
-                            textAlign = TextAlign.Left
-                        )
-                        Image(
-                            painter = painterResource(R.drawable.undraw_selection_re_ycpo__1_),
-                            contentDescription = "",
-                            modifier = Modifier.size(C_TOP_IMAGE)
-                        )
+                        Column(
+                            modifier = Modifier.wrapContentSize()
+                        ) {
+                            Text(
+                                text = stringResource(R.string.selectCourse),
+                                Modifier.fillMaxWidth(),
+                                fontSize = C_TOP_TEXT_SIZE1,
+                                textAlign = TextAlign.Left
+                            )
+                            Image(
+                                painter = painterResource(R.drawable.undraw_selection_re_ycpo__1_),
+                                contentDescription = "",
+                                modifier = Modifier.size(C_TOP_IMAGE)
+                            )
+                        }
                     }
                 }
-                App.cList.forEachIndexed { index, _ ->
-                    CourseCard(index)
+                items(App.cList.size) {
+                    CourseCard(index = it)
                     Spacer(Modifier.padding(paddingValue1))
                 }
             }
         }
     }
 }
+
 @Composable
 fun CourseCard(
     index: Int,

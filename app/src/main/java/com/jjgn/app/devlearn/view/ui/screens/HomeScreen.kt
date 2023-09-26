@@ -4,19 +4,15 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -106,129 +102,129 @@ fun HomeContent() {
 
     when (orientation.orientation) {
         Configuration.ORIENTATION_PORTRAIT -> {
-            Column(
+            LazyColumn(
                 modifier = Modifier
-                    .verticalScroll(rememberScrollState())
                     .fillMaxSize()
             ) {
-                HomeTopAppBar()
-                Card(
-                    Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clip(RoundedCornerShape(defaultClipSize))
-                        .clickable {
-                            viewModel.selectedModule(1)
-                            viewModel.loader()
-                            navController.navigate(NavigationRoutes.InCourse.route) {
-                                launchSingleTop = true
+                item { HomeTopAppBar() }
+                item {
+                    Card(
+                        Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(defaultClipSize))
+                            .clickable {
+                                viewModel.selectedModule(1)
+                                viewModel.loader()
+                                navController.navigate(NavigationRoutes.InCourse.route) {
+                                    launchSingleTop = true
+                                }
                             }
-                        }
-                ) {
-                    ModuleCardContent1(m1Progress)
+                    ) {
+                        ModuleCardContent1(m1Progress)
+                    }
                 }
-                Spacer(Modifier.padding(top = H_SPACER))
-                Card(
-                    Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clip(RoundedCornerShape(defaultClipSize))
-                        .clickable {
-                            viewModel.selectedModule(2)
-                            viewModel.loader()
-                            navController.navigate(NavigationRoutes.InCourse.route) {
-                                launchSingleTop = true
+                item {
+                    Spacer(Modifier.padding(top = H_SPACER))
+                    Card(
+                        Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(defaultClipSize))
+                            .clickable {
+                                viewModel.selectedModule(2)
+                                viewModel.loader()
+                                navController.navigate(NavigationRoutes.InCourse.route) {
+                                    launchSingleTop = true
+                                }
                             }
-                        }
-                ) {
-                    ModuleCardContent2(m2Progress)
+                    ) {
+                        ModuleCardContent2(m2Progress)
+                    }
                 }
-                Spacer(Modifier.padding(top = H_SPACER))
-                Card(
-                    Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clip(RoundedCornerShape(defaultClipSize))
-                        .clickable {
-                            viewModel.selectedModule(3)
-                            viewModel.loader()
-                            navController.navigate(NavigationRoutes.InCourse.route) {
-                                launchSingleTop = true
+                item {
+                    Spacer(Modifier.padding(top = H_SPACER))
+                    Card(
+                        Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(defaultClipSize))
+                            .clickable {
+                                viewModel.selectedModule(3)
+                                viewModel.loader()
+                                navController.navigate(NavigationRoutes.InCourse.route) {
+                                    launchSingleTop = true
+                                }
                             }
-                        }
-                ) {
-                    ModuleCardContent3(m3Progress)
+                    ) {
+                        ModuleCardContent3(m3Progress)
+                    }
+                    Spacer(modifier = Modifier.padding(paddingValue1))
                 }
-                Spacer(modifier = Modifier.padding(paddingValue1))
             }
-
         }
 
         Configuration.ORIENTATION_LANDSCAPE -> {
-            Column(
+            LazyRow(
                 modifier = Modifier.fillMaxSize()
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .horizontalScroll(rememberScrollState())
-                ) {
-                    HomeTopAppBar()
-                    Row(
-                        modifier = Modifier
-                            .wrapContentSize()
+                item { HomeTopAppBar() }
+                item {
+                    Card(
+                        Modifier
+                            .width(500.dp)
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(defaultClipSize))
+                            .clickable {
+                                viewModel.selectedModule(1)
+                                viewModel.loader()
+                                navController.navigate(NavigationRoutes.InCourse.route) {
+                                    launchSingleTop = true
+                                }
+                            }
                     ) {
-                        Card(
-                            Modifier
-                                .width(500.dp)
-                                .wrapContentHeight()
-                                .clip(RoundedCornerShape(defaultClipSize))
-                                .clickable {
-                                    viewModel.selectedModule(1)
-                                    viewModel.loader()
-                                    navController.navigate(NavigationRoutes.InCourse.route) {
-                                        launchSingleTop = true
-                                    }
-                                }
-                        ) {
-                            ModuleCardContent1(m1Progress)
-                        }
-                        Spacer(Modifier.padding(H_SPACER))
-                        Card(
-                            Modifier
-                                .width(360.dp)
-                                .wrapContentHeight()
-                                .clip(RoundedCornerShape(defaultClipSize))
-                                .clickable {
-                                    viewModel.selectedModule(2)
-                                    viewModel.loader()
-                                    navController.navigate(NavigationRoutes.InCourse.route) {
-                                        launchSingleTop = true
-                                    }
-                                }
-                        ) {
-                            ModuleCardContent2(m2Progress)
-                        }
-                        Spacer(Modifier.padding(H_SPACER))
-                        Card(
-                            Modifier
-                                .width(520.dp)
-                                .wrapContentHeight()
-                                .clip(RoundedCornerShape(defaultClipSize))
-                                .clickable {
-                                    viewModel.selectedModule(3)
-                                    viewModel.loader()
-                                    navController.navigate(NavigationRoutes.InCourse.route) {
-                                        launchSingleTop = true
-                                    }
-                                }
-                        ) {
-                            ModuleCardContent3(m3Progress)
-                        }
-                        Spacer(modifier = Modifier.padding(paddingValue1))
+                        ModuleCardContent1(m1Progress)
                     }
+                    Spacer(Modifier.padding(H_SPACER))
                 }
 
+                item {
+                    Card(
+                        Modifier
+                            .width(360.dp)
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(defaultClipSize))
+                            .clickable {
+                                viewModel.selectedModule(2)
+                                viewModel.loader()
+                                navController.navigate(NavigationRoutes.InCourse.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                    ) {
+                        ModuleCardContent2(m2Progress)
+                    }
+                    Spacer(Modifier.padding(H_SPACER))
+                }
+
+                item {
+                    Card(
+                        Modifier
+                            .width(520.dp)
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(defaultClipSize))
+                            .clickable {
+                                viewModel.selectedModule(3)
+                                viewModel.loader()
+                                navController.navigate(NavigationRoutes.InCourse.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                    ) {
+                        ModuleCardContent3(m3Progress)
+                    }
+                    Spacer(modifier = Modifier.padding(paddingValue1))
+                }
             }
         }
     }
