@@ -1,4 +1,4 @@
-package com.jjgn.app.devlearn.view.ui.viewmodel
+package com.jjgn.app.devlearn.view.ui.viewmodel.core
 
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable

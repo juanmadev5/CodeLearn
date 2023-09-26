@@ -35,7 +35,7 @@ import androidx.navigation.NavController
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.view.ui.controller.LocalNavigationController
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 import kotlinx.coroutines.delay
 

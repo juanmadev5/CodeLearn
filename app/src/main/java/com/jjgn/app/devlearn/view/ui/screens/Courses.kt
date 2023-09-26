@@ -52,7 +52,7 @@ import com.jjgn.app.devlearn.view.ui.controller.NavigationRoutes
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
 import com.jjgn.app.devlearn.view.ui.paddingValue1
 import com.jjgn.app.devlearn.view.ui.paddingValue2
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.view.ui.C_TOP_TEXT_SIZE as C_TOP_TEXT_SIZE1
 

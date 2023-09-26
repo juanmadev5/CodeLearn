@@ -32,7 +32,7 @@ import com.jjgn.app.devlearn.view.ui.components.PracticeButton
 import com.jjgn.app.devlearn.view.ui.components.TopBar
 import com.jjgn.app.devlearn.view.ui.paddingValue1
 import com.jjgn.app.devlearn.view.ui.paddingValue5
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.view.ui.viewmodel.TestViewModel
 

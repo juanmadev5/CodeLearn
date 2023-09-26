@@ -40,7 +40,7 @@ import com.jjgn.app.devlearn.view.ui.controller.NavigationRoutes
 import com.jjgn.app.devlearn.view.ui.paddingValue2
 import com.jjgn.app.devlearn.view.ui.paddingValue3
 import com.jjgn.app.devlearn.view.ui.paddingValue4
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 
 @Composable

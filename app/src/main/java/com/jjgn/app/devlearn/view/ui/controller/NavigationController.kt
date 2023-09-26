@@ -29,7 +29,7 @@ import com.jjgn.app.devlearn.view.ui.screens.IndexScreen
 import com.jjgn.app.devlearn.view.ui.screens.PracticeScreen
 import com.jjgn.app.devlearn.view.ui.screens.WelcomeScreen
 import com.jjgn.app.devlearn.view.ui.theme.DevLearnTheme
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 import kotlinx.coroutines.delay
 

@@ -37,7 +37,7 @@ import com.jjgn.app.devlearn.view.ui.controller.nextPage
 import com.jjgn.app.devlearn.view.ui.controller.prevPage
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
 import com.jjgn.app.devlearn.view.ui.paddingValue1
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 
 @Composable

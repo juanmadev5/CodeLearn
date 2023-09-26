@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.data.course.Current
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 
 @Composable

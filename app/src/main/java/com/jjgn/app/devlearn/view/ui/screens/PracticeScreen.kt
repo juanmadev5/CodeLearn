@@ -54,7 +54,7 @@ import com.jjgn.app.devlearn.view.ui.components.Container8
 import com.jjgn.app.devlearn.view.ui.components.Container9
 import com.jjgn.app.devlearn.view.ui.controller.LocalNavigationController
 import com.jjgn.app.devlearn.view.ui.paddingValue1
-import com.jjgn.app.devlearn.view.ui.viewmodel.AccessInstance
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
 import com.jjgn.app.devlearn.view.ui.viewmodel.TestViewModel
 
