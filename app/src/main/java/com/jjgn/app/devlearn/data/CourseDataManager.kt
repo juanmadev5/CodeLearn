@@ -30,7 +30,6 @@ class CourseDataManager @Inject constructor() {
         }
     }
 
-
     /**
      * Funcion encargada de establecer el texto en pantalla correspondiente al curso
      * seleccionado.
@@ -247,5 +246,4 @@ class CourseDataManager @Inject constructor() {
             else -> currentPage.value
         }
     }
-
 }
