@@ -23,28 +23,27 @@ import javax.inject.Singleton
  * Todas las funciones que usen [DataStore] se encuentran aqui.
  * */
 @Singleton
-class DataManager @Inject constructor() {
+class DataManager @Inject constructor(
+    private val dataStore: DataStore<Preferences>
+) {
 
     /**
      * Funcion encargada de guardar datos como la ultima pagina en la que el usuario
      * se quedo en cada curso y el zoom que el usuario configuro.
      * */
     suspend fun dataSaver(
-        dataStore: DataStore<Preferences>,
         mPage: MutableList<Int>,
-        mCurrentPage: String,
         isSelectedFirstC: MutableState<Boolean>,
-        zValue: String,
         textSize: MutableState<Int>
     ) {
         coroutineScope {
             launch(Dispatchers.IO) {
                 dataStore.edit { preferences ->
                     for (i in mPage.indices) {
-                        preferences[intPreferencesKey("${mCurrentPage}$i")] = mPage[i]
+                        preferences[intPreferencesKey("${App.mCurrentPage}$i")] = mPage[i]
                     }
                     preferences[booleanPreferencesKey(App.IS_SELECTED_KEY)] = isSelectedFirstC.value
-                    preferences[intPreferencesKey(zValue)] = textSize.value
+                    preferences[intPreferencesKey(App.zValue)] = textSize.value
                 }
             }
         }
@@ -56,21 +55,19 @@ class DataManager @Inject constructor() {
      * se quedo en cada curso y el zoom que el usuario configuro.
      * */
     suspend fun dataRestorer(
-        dataStore: DataStore<Preferences>,
         mPage: MutableList<Int>,
-        mCurrentPage: String,
         isSelectedFirstC: MutableState<Boolean>,
-        zValue: String,
         textSize: MutableState<Int>
     ) {
         coroutineScope {
             launch(Dispatchers.IO) {
                 val preferences = dataStore.data.first()
                 val restoredList = mutableListOf<Int>()
-                val restoredValue = preferences[intPreferencesKey(zValue)] ?: App.DEFAULT_TEXT_SIZE
+                val restoredValue =
+                    preferences[intPreferencesKey(App.zValue)] ?: App.DEFAULT_TEXT_SIZE
 
                 for (i in mPage.indices) {
-                    val value = preferences[intPreferencesKey("${mCurrentPage}$i")] ?: 1
+                    val value = preferences[intPreferencesKey("${App.mCurrentPage}$i")] ?: 1
                     restoredList.add(value)
                 }
 
@@ -90,7 +87,6 @@ class DataManager @Inject constructor() {
      * */
     suspend fun setCurrentState(
         newState: Current,
-        dataStore: DataStore<Preferences>,
         cStateValue: String
     ) {
         val currentStateKey = stringPreferencesKey(cStateValue)
@@ -104,7 +100,6 @@ class DataManager @Inject constructor() {
      * al iniciar la aplicacion.
      * */
     suspend fun getCurrentState(
-        dataStore: DataStore<Preferences>,
         cStateValue: String,
     ): Current? {
         val currentStateKey = stringPreferencesKey(cStateValue)

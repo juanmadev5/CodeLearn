@@ -15,11 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.data.course.Current
-import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 
 @Composable
 fun ModuleCardContent1(
@@ -42,11 +41,11 @@ fun ModuleCardContent1(
             painter = painterResource(id = R.drawable.undraw_code_thinking_re_gka2),
             stringResource(R.string.languageIcon),
             Modifier
-                .size(200.dp)
+                .size(160.dp)
                 .align(Alignment.CenterHorizontally)
         )
         Text(
-            text = stringResource(R.string.basicsOf) + App.lName,
+            text = stringResource(R.string.basicsOf) + viewModel.courseDataManager.getLangName(viewModel.currentState),
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp
         )
@@ -84,7 +83,7 @@ fun ModuleCardContent2(
             painter = painterResource(id = R.drawable.undraw_proud_coder_re_exuy),
             stringResource(R.string.languageIcon),
             Modifier
-                .size(200.dp)
+                .size(160.dp)
                 .align(Alignment.CenterHorizontally)
         )
         Text(
@@ -124,7 +123,7 @@ fun ModuleCardContent3(
             painter = painterResource(id = R.drawable.undraw_software_engineer_re_tnjc),
             stringResource(R.string.languageIcon),
             Modifier
-                .size(200.dp)
+                .size(160.dp)
                 .align(Alignment.CenterHorizontally)
         )
         Text(

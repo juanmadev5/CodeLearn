@@ -4,14 +4,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.data.CourseDataManager
+import com.jjgn.app.devlearn.data.CourseRepository
 import com.jjgn.app.devlearn.data.DataManager
 import com.jjgn.app.devlearn.data.course.Current
 import com.jjgn.app.devlearn.data.course.module.Module
@@ -33,9 +32,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppViewModel @Inject constructor(
-    private val dataStore: DataStore<Preferences>,
     private val dataManager: DataManager,
-    private val courseDataManager: CourseDataManager
+    private val courseRepository: CourseRepository,
+    val courseDataManager: CourseDataManager
 ) : ViewModel() {
 
     private val _currentState = MutableLiveData<Current>()
@@ -78,8 +77,7 @@ class AppViewModel @Inject constructor(
         viewModelScope.launch {
             courseDataManager.loadState(
                 _currentState,
-                dataManager,
-                dataStore
+                dataManager
             )
         }
         loader()
@@ -95,7 +93,7 @@ class AppViewModel @Inject constructor(
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            dataManager.setCurrentState(newState, dataStore, App.cStateValue)
+            dataManager.setCurrentState(newState, App.cStateValue)
         }
     }
 
@@ -112,9 +110,8 @@ class AppViewModel @Inject constructor(
      * */
     fun loader() {
         App.tlPages = courseDataManager.getTotalPages(_currentState, _currentMState, totalPage)
-        App.lName = courseDataManager.getLangName(_currentState)
         _information.value =
-            courseDataManager.getTextToShow(_currentState, _currentPage, _currentMState)
+            courseRepository.getTextToShow(_currentState, _currentPage, _currentMState)
     }
 
     /**
@@ -124,7 +121,7 @@ class AppViewModel @Inject constructor(
     private fun dataSManager() {
         viewModelScope.launch(Dispatchers.IO) {
             if (_currentState.value == null) {
-                delay(App.DS_MANAGER_DELAY)
+                delay(2000L)
                 dataSManager()
             } else {
                 autoDataSaver()
@@ -151,11 +148,8 @@ class AppViewModel @Inject constructor(
     fun dataSaver() {
         viewModelScope.launch {
             dataManager.dataSaver(
-                dataStore,
                 modulePage,
-                App.mCurrentPage,
                 isSelectedFirstC,
-                App.zValue,
                 textSize
             )
         }
@@ -167,11 +161,8 @@ class AppViewModel @Inject constructor(
     private fun dataRestorer() {
         viewModelScope.launch {
             dataManager.dataRestorer(
-                dataStore,
                 modulePage,
-                App.mCurrentPage,
                 isSelectedFirstC,
-                App.zValue,
                 textSize
             )
         }

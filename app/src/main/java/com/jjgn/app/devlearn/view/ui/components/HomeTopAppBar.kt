@@ -30,16 +30,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.view.ui.controller.LocalNavigationController
 import com.jjgn.app.devlearn.view.ui.controller.NavigationRoutes
+import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 
 @SuppressLint("SwitchIntDef")
 @Composable
 fun HomeTopAppBar() {
     val navController: NavController = LocalNavigationController.current
     val orientation = LocalConfiguration.current
+    val viewModel: AppViewModel = AccessInstance()
 
     Column(
         modifier = Modifier
@@ -64,7 +66,7 @@ fun HomeTopAppBar() {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = App.lName,
+                            text = viewModel.courseDataManager.getLangName(viewModel.currentState),
                             Modifier.padding(start = 18.dp, end = 18.dp),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.SemiBold
@@ -151,7 +153,7 @@ fun HomeTopAppBar() {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = App.lName,
+                        text = viewModel.courseDataManager.getLangName(viewModel.currentState),
                         Modifier.padding(start = 18.dp, end = 18.dp),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold

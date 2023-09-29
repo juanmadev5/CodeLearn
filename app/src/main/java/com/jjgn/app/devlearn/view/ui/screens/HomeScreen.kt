@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.R
 import com.jjgn.app.devlearn.data.course.Current
 import com.jjgn.app.devlearn.view.ui.H_SPACER
@@ -42,8 +41,8 @@ import com.jjgn.app.devlearn.view.ui.controller.LocalNavigationController
 import com.jjgn.app.devlearn.view.ui.controller.NavigationRoutes
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
 import com.jjgn.app.devlearn.view.ui.paddingValue1
-import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -250,7 +249,7 @@ fun BackHandler(
         if (c == 1) {
             appViewModel.viewModelScope.launch {
                 snackbarHostState.showSnackbar(msg)
-                delay(App.BACKHANDLER_DELAY)
+                delay(2000L)
                 snackbarHostState.currentSnackbarData?.dismiss()
                 c = 0
             }
