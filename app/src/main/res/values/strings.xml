@@ -2,7 +2,6 @@
     <!--usar &#10; para bajar a la siguiente linea.-->
 
     <string name="app_name">Code Learn</string>
-    <string name="defaultStr"> </string>
 
     <string name="ktDesc">Lenguaje de programación moderno y conciso para la plataforma Java. Destaca por su seguridad de tipo y capacidad de interoperabilidad.</string>
     <string name="jvDesc">Lenguaje de programación popular y ampliamente utilizado. Es orientado a objetos y se caracteriza por su portabilidad y escalabilidad.</string>
@@ -15,8 +14,6 @@
     <string name="cardDesc1">Aprenda sobres lo básico como las variables y como se declaran, los tipos de datos, los operadores y las estructuras de control.</string>
     <string name="fnArray">Funciones y arreglos</string>
     <string name="fnArrayDesc">Aprende a usar las funciones y las listas.</string>
-    <string name="unlockmodule2">Termina el módulo 1 para seguir.</string>
-    <string name="unlockm3">Termina el módulo 2 para seguir.</string>
     <string name="pressTwice">Presione dos veces para salir</string>
     <string name="selectCourse">Seleccione un curso</string>
     <string name="fontSize">"Tamaño de letra "</string>
@@ -28,7 +25,6 @@
     <string name="next_page">Next page</string>
     <string name="exam">Práctica</string>
     <string name="go_home">Continuar</string>
-    <string name="verify">Verificar</string>
     <string name="correct">"Correcto. "</string>
     <string name="incorrect">"Incorrecto. "</string>
     <string name="result">"Resultado: "</string>

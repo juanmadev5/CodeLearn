@@ -1,4 +1,4 @@
-package com.jjgn.app.devlearn.data
+package com.jjgn.app.devlearn.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
