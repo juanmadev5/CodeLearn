@@ -3,7 +3,6 @@ package com.jjgn.app.devlearn.data
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.jjgn.app.devlearn.App
 import com.jjgn.app.devlearn.data.course.Current
 import com.jjgn.app.devlearn.data.course.module.Module
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +19,7 @@ class CourseDataManager @Inject constructor() {
         dataManager: DataManager
     ) {
         runBlocking {
-            currentState.value = dataManager.getCurrentState(App.cStateValue)
+            currentState.value = dataManager.getCurrentState()
         }
     }
 

@@ -86,10 +86,9 @@ class DataManager @Inject constructor(
      * Funcion encargada de establecer el curso que el usuario selecciono.
      * */
     suspend fun setCurrentState(
-        newState: Current,
-        cStateValue: String
+        newState: Current
     ) {
-        val currentStateKey = stringPreferencesKey(cStateValue)
+        val currentStateKey = stringPreferencesKey(App.cStateValue)
         dataStore.edit { preferences ->
             preferences[currentStateKey] = newState.javaClass.simpleName
         }
@@ -99,10 +98,8 @@ class DataManager @Inject constructor(
      * Funcion encargada de restaurar el ultimo curso seleccionado por el usuario
      * al iniciar la aplicacion.
      * */
-    suspend fun getCurrentState(
-        cStateValue: String,
-    ): Current? {
-        val currentStateKey = stringPreferencesKey(cStateValue)
+    suspend fun getCurrentState(): Current? {
+        val currentStateKey = stringPreferencesKey(App.cStateValue)
         val preferences = dataStore.data.first()
         return when (preferences[currentStateKey]) {
             Current.PY.javaClass.simpleName -> Current.PY

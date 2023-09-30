@@ -93,7 +93,7 @@ class AppViewModel @Inject constructor(
     fun setCurrentState(newState: Current) {
         _currentState.value = newState
         viewModelScope.launch(Dispatchers.IO) {
-            dataManager.setCurrentState(newState, App.cStateValue)
+            dataManager.setCurrentState(newState)
         }
     }
 
