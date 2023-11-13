@@ -52,8 +52,8 @@ import com.jjgn.app.devlearn.view.ui.controller.NavigationRoutes
 import com.jjgn.app.devlearn.view.ui.defaultClipSize
 import com.jjgn.app.devlearn.view.ui.paddingValue1
 import com.jjgn.app.devlearn.view.ui.paddingValue2
-import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.viewmodel.AppViewModel
+import com.jjgn.app.devlearn.view.ui.viewmodel.core.AccessInstance
 import com.jjgn.app.devlearn.view.ui.C_TOP_TEXT_SIZE as C_TOP_TEXT_SIZE1
 
 @SuppressLint("SwitchIntDef")
@@ -71,13 +71,18 @@ fun CourseSelectorScreen() {
             ) {
 
                 item {
-                    Image(
-                        painter = painterResource(R.drawable.undraw_selection_re_ycpo__1_),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(C_TOP_IMAGE)
-                            .padding(top = C_TOP_PADDING)
-                    )
+                    Box(
+                        modifier = Modifier.wrapContentHeight().fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.undraw_selection_re_ycpo__1_),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(C_TOP_IMAGE)
+                                .padding(top = C_TOP_PADDING)
+                        )
+                    }
                 }
 
                 item {

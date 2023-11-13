@@ -16,8 +16,6 @@ import com.jjgn.app.devlearn.data.course.Current
 import com.jjgn.app.devlearn.data.course.module.Module
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -84,7 +82,6 @@ class AppViewModel @Inject constructor(
         if (_currentState.value != null) {
             dataRestorer()
         }
-        dataSManager()
     }
 
     /**
@@ -112,34 +109,6 @@ class AppViewModel @Inject constructor(
         App.tlPages = courseDataManager.getTotalPages(_currentState, _currentMState, totalPage)
         _information.value =
             courseRepository.getTextToShow(_currentState, _currentPage, _currentMState)
-    }
-
-    /**
-     * Funcion encargada de comprobar que se haya seleccionado un curso, de esta manera evita estar
-     * ejecutando dataSaver de forma innecesaria.
-     * */
-    private fun dataSManager() {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (_currentState.value == null) {
-                delay(2000L)
-                dataSManager()
-            } else {
-                autoDataSaver()
-            }
-        }
-    }
-
-    private suspend fun autoDataSaver() {
-        coroutineScope {
-            val dataSaveJob = launch {
-                dataSaver()
-            }
-            dataSaveJob.start()
-            if (!dataSaveJob.isActive) {
-                delay(5000)
-            }
-            dataSManager()
-        }
     }
 
     /**
